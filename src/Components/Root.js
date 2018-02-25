@@ -12,6 +12,7 @@ const initialState = {
 };
 window.store = createStore(initialState);
 
+
 const Root = () => (
   <StoreProvider store={window.store}>
     <Router>

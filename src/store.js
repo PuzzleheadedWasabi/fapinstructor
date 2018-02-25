@@ -1,7 +1,6 @@
 import watch from "./watch";
 
-let subscriberCount = 0;
-const subscribers = {};
+const subscribers = [];
 
 /**
  * Observe for any changes in the store
@@ -10,15 +9,14 @@ const subscribe = callback => {
   if (typeof callback !== "function") {
     console.error("subscribe expected a function, received", callback);
   }
-  subscribers[subscriberCount++] = callback;
-  return subscriberCount;
+  return subscribers.push(callback);
 };
 
 /**
  * Stop observing for change in the store
  */
 const unsubscribe = id => {
-  delete subscribers[id];
+  delete subscribers[id - 1];
 };
 
 /**
@@ -26,8 +24,8 @@ const unsubscribe = id => {
  */
 const createStore = initialState =>
   watch(initialState, () => {
-    Object.keys(subscribers).forEach(subscriberKey => {
-      subscribers[subscriberKey]();
+    subscribers.forEach(callback => {
+      callback();
     });
   });
 

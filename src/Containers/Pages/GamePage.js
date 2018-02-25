@@ -1,20 +1,29 @@
 import React from "react";
 import connect from "../../hoc/connect";
-import executeAction from "../../engine/executeAction";
-import a from "../../actions/a";
+import GameEngine from "../../engine/GameEngine"
+import executeAction from "../../engine/executeAction"
+
+const engine = new GameEngine();
 
 class GamePage extends React.Component {
-  handleClick() {
-    executeAction(a);
+  componentDidMount() {
+    engine.start();
+  }
+
+  componentWillUnmount(){
+    engine.stop();
   }
 
   render() {
-    const { executing } = this.props;
+    const { executing, actionTriggers } = this.props;
 
     return (
       <div>
-        GamePage<br />executing:{executing.toString()}
-        <button onClick={this.handleClick}>Click</button>
+        executing:{executing.toString()}
+        <br />
+        {actionTriggers && actionTriggers.map((trigger, index) => (
+          <button key={index} onClick={() => executeAction(trigger)}>{trigger.label}</button>
+        ))}
       </div>
     );
   }
