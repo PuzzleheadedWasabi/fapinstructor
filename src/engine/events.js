@@ -89,7 +89,6 @@ setInterval(() => {
       actionTriggers.forEach(trigger => {
         console.log(trigger.label);
       });
-
       execute(actionTriggers[0]);
     }
   }
