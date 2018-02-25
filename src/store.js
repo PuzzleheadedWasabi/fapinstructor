@@ -1,4 +1,4 @@
-import watch from "./watch";
+import watchObject from "./utils/watchObject";
 
 const subscribers = [];
 
@@ -23,7 +23,7 @@ const unsubscribe = id => {
  * Create the applications store with the initialState
  */
 const createStore = initialState =>
-  watch(initialState, () => {
+  watchObject(initialState, () => {
     subscribers.forEach(callback => {
       callback();
     });

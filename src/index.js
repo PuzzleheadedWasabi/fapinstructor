@@ -7,6 +7,11 @@ import "./polyfills/performance";
 import "./index.css";
 import Root from "./Components/Root";
 
+const AudioContext = window.AudioContext || window.webkitAudioContext;
+if (window.AudioContext) {
+  window.myAudioContext = new AudioContext();
+}
+
 Raven.config("https://75a8117570924a2eb142da7e40a17968@sentry.io/204785", {
   release: "2.0.0"
 }).install();

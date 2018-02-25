@@ -1,37 +1,38 @@
 import GameLoop from "./GameLoop";
-import executeAction from "./executeAction"
-import actions from "../actions/actions"
-import a from "../actions/a"
+import executeAction from "./executeAction";
+import actions from "../actions";
+import { loadFiles } from "../audio";
+// import playAudioFile from "./playAudioFile";
 
 class GameEngine {
   constructor() {
     this.loop = new GameLoop();
     this.loop.start();
-    this.actions = new actions(this.generateAction);
+    this.subscriberId = null;
+    this.audioFiles = null;
   }
 
   start() {
-    this.id = this.loop.subscribe(this.run);
+    loadFiles().then(audioFiles => {
+      this.audioFiles = audioFiles;
+    });
+    this.subscriberId = this.loop.subscribe(this.run);
   }
 
   stop() {
-    this.loop.unsubscribe(this.id);
+    this.loop.unsubscribe(this.subscriberId);
   }
 
-  generateAction() {
-    return a;
-  }
-
-  run = (progress) => {
+  run = progress => {
     this.update(progress);
-  }
+  };
 
   update(progress) {
     const { store } = window;
 
     // Don't execute new actions if a command is already executing or if any triggers are awaiting
     if (!store.executing && !store.actionTriggers) {
-      const { value: action, done } = this.actions.next();
+      const { value: action, done } = actions.next();
 
       if (!done) {
         executeAction(action);

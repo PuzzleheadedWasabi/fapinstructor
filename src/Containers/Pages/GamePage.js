@@ -1,7 +1,7 @@
 import React from "react";
 import connect from "../../hoc/connect";
-import GameEngine from "../../engine/GameEngine"
-import executeAction from "../../engine/executeAction"
+import GameEngine from "../../engine/GameEngine";
+import executeAction from "../../engine/executeAction";
 
 const engine = new GameEngine();
 
@@ -10,7 +10,7 @@ class GamePage extends React.Component {
     engine.start();
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     engine.stop();
   }
 
@@ -21,9 +21,12 @@ class GamePage extends React.Component {
       <div>
         executing:{executing.toString()}
         <br />
-        {actionTriggers && actionTriggers.map((trigger, index) => (
-          <button key={index} onClick={() => executeAction(trigger)}>{trigger.label}</button>
-        ))}
+        {actionTriggers &&
+          actionTriggers.map((trigger, index) => (
+            <button key={index} onClick={() => executeAction(trigger)}>
+              {trigger.label}
+            </button>
+          ))}
       </div>
     );
   }
