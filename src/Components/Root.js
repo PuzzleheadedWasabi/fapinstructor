@@ -9,10 +9,9 @@ import { createStore } from "../store";
 const initialState = {
   actionTriggers: null,
   executing: false,
-  strokeSpeed: 2
+  strokeSpeed: 3
 };
 window.store = createStore(initialState);
-
 
 const Root = () => (
   <StoreProvider store={window.store}>

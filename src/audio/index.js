@@ -1,28 +1,28 @@
-import fetchAudioFile from "../api/fetchAudioFile";
-import tick from "./tick.mp3";
-import cum from "./cum.mp3";
-import start_stroking_again from "./start_stroking_again.wav";
-import denied from "./denied.mp3";
-import edge from "./edge.mp3";
-import ruined from "./ruined.mp3";
-import card from "./card.wav";
-import keep_stroking from "./keep_stroking.mp3";
-import ruinitforme from "./ruinitforme.mp3";
+import { fetchAudioFile } from "../engine/AudioEngine";
+import tick from "../audio/tick.mp3";
+import cum from "../audio/cum.mp3";
+import start_stroking_again from "../audio/start_stroking_again.wav";
+import denied from "../audio/denied.mp3";
+import edge from "../audio/edge.mp3";
+import ruined from "../audio/ruined.mp3";
+import card from "../audio/card.wav";
+import keep_stroking from "../audio/keep_stroking.mp3";
+import ruinitforme from "../audio/ruinitforme.mp3";
 
 /**
  * Loads the buffers of the import audio files into memory and
  * returns a promise which resolves to a hash object
  */
-const loadFiles = async () => ({
-  Tick: await fetchAudioFile(tick),
-  Cum: await fetchAudioFile(cum),
-  StarStrokingAgain: await fetchAudioFile(start_stroking_again),
-  Denied: await fetchAudioFile(denied),
-  Edge: await fetchAudioFile(edge),
-  Ruined: await fetchAudioFile(ruined),
-  Card: await fetchAudioFile(card),
-  KeepStroking: await fetchAudioFile(keep_stroking),
-  RuinItForMe: await fetchAudioFile(ruinitforme)
-});
+const audioLibrary = {
+  Tick: fetchAudioFile(tick),
+  Cum: fetchAudioFile(cum),
+  StarStrokingAgain: fetchAudioFile(start_stroking_again),
+  Denied: fetchAudioFile(denied),
+  Edge: fetchAudioFile(edge),
+  Ruined: fetchAudioFile(ruined),
+  Card: fetchAudioFile(card),
+  KeepStroking: fetchAudioFile(keep_stroking),
+  RuinItForMe: fetchAudioFile(ruinitforme)
+};
 
-export { loadFiles };
+export default audioLibrary;

@@ -1,8 +1,8 @@
 import GameLoop from "./GameLoop";
 import executeAction from "./executeAction";
 import actions from "../actions";
-import { loadFiles } from "../audio";
-import playAudioFile from "./playAudioFile";
+import play from "./AudioEngine";
+import audioLibrary from "../audio";
 
 const actionPlayer = progress => {
   const { store } = window;
@@ -23,7 +23,7 @@ const strokePlayer = progress => {
 
   if (strokeSpeed > 0) {
     if (lastTick > 1 / strokeSpeed * 1000) {
-      window.audio.play("tick");
+      play(audioLibrary.Tick);
 
       if (this.soundPlayed) {
         this.soundPlayed();
@@ -40,10 +40,6 @@ class GameEngine {
     this.loop = new GameLoop();
     this.loop.start();
     this.subscriberId = null;
-
-    loadFiles().then(audioFiles => {
-      this.audioFiles = audioFiles;
-    });
   }
 
   start() {

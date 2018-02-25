@@ -22,7 +22,7 @@ const unsubscribe = id => {
 /**
  * Create the applications store with the initialState
  */
-const createStore = initialState =>
+const createStore = (initialState = {}) =>
   watchObject(initialState, () => {
     subscribers.forEach(callback => {
       callback();
