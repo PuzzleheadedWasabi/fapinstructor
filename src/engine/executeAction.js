@@ -1,3 +1,5 @@
+import interrupt from "./interrupt";
+
 /**
  * Executes the specified action
  *
@@ -10,15 +12,21 @@
  * | - execution completes overtime   |
  * +----------------------------------+
  * @param {A function that returns null or a promise} action
+ * @param {If an action is already executing, should it be interrupted} shouldInterrupt
  */
-const executeAction = action => {
+const executeAction = (action, shouldInterrupt) => {
   const { store } = window;
 
   if (typeof action !== "function") {
-    throw new Error(`action is not a function, ${action}`)
+    throw new Error(`action is not a function, ${action}`);
   }
   if (store.executing) {
-    throw new Error(`cannot execute a new action when the previous one isn't complete, ${action}`);
+    if (!shouldInterrupt) {
+      throw new Error(
+        `cannot execute a new action when the previous one isn't complete, ${action}`
+      );
+    }
+    interrupt();
   }
 
   store.actionTriggers = null;

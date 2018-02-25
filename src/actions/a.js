@@ -1,3 +1,5 @@
+import { interruptible } from "../engine/interrupt";
+
 const a = async () => {
   const triggerA = async () => {
     console.log("promise-trigger-a");
@@ -12,12 +14,13 @@ const a = async () => {
   console.log("promise-a");
 
   await new Promise(resolve => {
-    setTimeout(() => {
-      console.log("delayed execute resolved");
-      resolve();
-    }, 1000);
+    interruptible(
+      setTimeout(() => {
+        console.log("delayed execute");
+        resolve();
+      }, 5000)
+    );
   });
-  console.log("after delayed execute");
   return [triggerA, triggerB];
 };
 

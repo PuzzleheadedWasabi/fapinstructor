@@ -14,12 +14,20 @@ class GamePage extends React.Component {
     engine.stop();
   }
 
+  handleInterruptTest() {
+    executeAction(async () => {
+      console.log("test");
+    }, true);
+  }
+
   render() {
     const { executing, actionTriggers } = this.props;
 
     return (
       <div>
         executing:{executing.toString()}
+        <br />
+        <button onClick={this.handleInterruptTest}>InterruptTest</button>
         <br />
         {actionTriggers &&
           actionTriggers.map((trigger, index) => (
