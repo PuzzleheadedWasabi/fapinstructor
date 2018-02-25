@@ -6,10 +6,11 @@ import interrupt from "./interrupt";
  * +----------------------------------+
  * |      Supports the following      |
  * +----------------------------------+
- * | - action executed immediately    |
- * | - action is executed on trigger  |
- * | - execution completes instantly  |
- * | - execution completes overtime   |
+ * | -action executed immediately     |
+ * | -action is executed on trigger   |
+ * | -execution completes instantly   |
+ * | -execution completes overtime    |
+ * | -actions can be interrupted      |
  * +----------------------------------+
  * @param {A function that returns null or a promise} action
  * @param {If an action is already executing, should it be interrupted} shouldInterrupt

@@ -42,4 +42,4 @@ const fetchManyPics = (id, imageType, offset = 0, images = [], recursiveCounter 
   });
 };
 
-export fetchManyPics;
+export default fetchManyPics;

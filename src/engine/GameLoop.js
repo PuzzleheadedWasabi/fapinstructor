@@ -1,22 +1,9 @@
-import Visibility from "./Visibility";
-
 class GameLoop {
   constructor() {
     this.subscribers = [];
     this.lastRender = 0;
-    this.visible = new Visibility(this.handleVisibility.bind(this));
-    this.fallback = false;
     this.running = false;
-
     this.loop = this.loop.bind(this);
-  }
-
-  handleVisibility(isVisible) {
-    this.fallback = !isVisible;
-
-    if (this.fallback) {
-      setTimeout(() => this.loop(window.performance.now()), 0);
-    }
   }
 
   start() {
@@ -47,7 +34,7 @@ class GameLoop {
       });
 
       this.lastRender = timestamp;
-      if (!this.fallback) {
+      if (!window.visible) {
         requestAnimationFrame(this.loop);
       } else {
         setTimeout(() => this.loop(window.performance.now()), 0);

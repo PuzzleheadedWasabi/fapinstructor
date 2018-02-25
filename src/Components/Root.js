@@ -8,7 +8,8 @@ import { createStore } from "../store";
 
 const initialState = {
   actionTriggers: null,
-  executing: false
+  executing: false,
+  strokeSpeed: 2
 };
 window.store = createStore(initialState);
 

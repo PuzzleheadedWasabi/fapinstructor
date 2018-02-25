@@ -4,6 +4,7 @@ import Raven from "raven-js";
 import registerServiceWorker from "./registerServiceWorker";
 import "./polyfills/endsWith";
 import "./polyfills/performance";
+import "./utils/visibility";
 import "./index.css";
 import Root from "./Components/Root";
 
