@@ -1,17 +1,15 @@
 import React from "react";
 import connect from "../../hoc/connect";
-import GameEngine from "../../engine/GameEngine";
+import { startGame, stopGame } from "../../game";
 import executeAction from "../../engine/executeAction";
-
-const engine = new GameEngine();
 
 class GamePage extends React.Component {
   componentDidMount() {
-    engine.start();
+    startGame();
   }
 
   componentWillUnmount() {
-    engine.stop();
+    stopGame();
   }
 
   handleInterruptTest() {

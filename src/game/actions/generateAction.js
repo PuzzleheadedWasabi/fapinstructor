@@ -1,4 +1,4 @@
-import a from "../actions/a";
+import a from "./a";
 
 const generateAction = () => {
   return a;

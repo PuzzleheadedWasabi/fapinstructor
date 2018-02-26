@@ -1,4 +1,4 @@
-import { fetchAudioFile } from "../engine/AudioEngine";
+import { fetchAudioFile } from "../engine/audio";
 import tick from "../audio/tick.mp3";
 import cum from "../audio/cum.mp3";
 import start_stroking_again from "../audio/start_stroking_again.wav";

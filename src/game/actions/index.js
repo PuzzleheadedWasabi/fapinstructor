@@ -1,4 +1,4 @@
-import actionIterator from "../engine/actionIterator";
+import actionIterator from "../../engine/actionIterator";
 import generateAction from "./generateAction";
 
 /**
