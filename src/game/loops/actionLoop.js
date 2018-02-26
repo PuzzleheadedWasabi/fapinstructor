@@ -1,6 +1,6 @@
 import actions from "../actions";
-import store from "../../store";
-import executeAction from "../../engine/executeAction";
+import store from "store";
+import executeAction from "engine/executeAction";
 
 export default progress => {
   // Don't execute new actions if a command is already executing or if any triggers are awaiting

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { subscribe, unsubscribe } from "../store";
+import { subscribe, unsubscribe } from "store";
 
 /**
  * Passes the store into the React context.

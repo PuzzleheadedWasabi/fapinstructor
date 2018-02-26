@@ -1,6 +1,6 @@
-import store from "../../store";
-import play from "../../engine/audio";
-import audioLibrary from "../../audio";
+import store from "store";
+import play from "engine/audio";
+import audioLibrary from "audio";
 
 let lastTick = 0;
 

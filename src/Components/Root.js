@@ -1,10 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import ConfigPage from "../Containers/Pages/ConfigPage";
-import ChangeLogPage from "../Containers/Pages/ChangeLogPage";
-import GamePage from "../Containers/Pages/GamePage";
-import StoreProvider from "../Containers/StoreProvider";
-import store from "../store";
+import ConfigPage from "Containers/Pages/ConfigPage";
+import ChangeLogPage from "Containers/Pages/ChangeLogPage";
+import GamePage from "Containers/Pages/GamePage";
+import StoreProvider from "Containers/StoreProvider";
+import store from "store";
 
 const initialValues = {
   actionTriggers: null,

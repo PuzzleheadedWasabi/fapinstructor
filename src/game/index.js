@@ -1,7 +1,7 @@
 /**
  * The entry point to kick start and configure the game
  */
-import { subscribe, unsubscribe } from "../engine/loop";
+import { subscribe, unsubscribe } from "engine/loop";
 import actionLoop from "./loops/actionLoop";
 import strokerLoop from "./loops/strokerLoop";
 

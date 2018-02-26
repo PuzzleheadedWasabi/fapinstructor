@@ -1,5 +1,5 @@
-import { interruptible } from "../../engine/interrupt";
-// import play from "../engine/audio";
+import { interruptible } from "engine/interrupt";
+// import play from "engine/audio";
 // import audioLibrary from "../audio";
 
 const a = async () => {

@@ -1,7 +1,7 @@
 import React from "react";
 import connect from "../../hoc/connect";
 import { startGame, stopGame } from "../../game";
-import executeAction from "../../engine/executeAction";
+import executeAction from "engine/executeAction";
 
 class GamePage extends React.Component {
   componentDidMount() {
