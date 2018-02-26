@@ -14,10 +14,14 @@ import Checkbox from "material-ui/Checkbox";
 import Grid from "material-ui/Grid";
 import Select from "material-ui/Select";
 import { MenuItem } from "material-ui/Menu";
+import Tooltip from 'material-ui/Tooltip';
 
 const styles = theme => ({
   control: {
     width: "100%"
+  },
+  button: {
+    marginRight: theme.spacing.unit
   }
 });
 
@@ -73,7 +77,8 @@ class ConfigPage extends React.Component {
     edgeCooldown: 5, // sec
     slowestStrokeSpeed: 0.25, // sec
     fastestStrokeSpeed: 5, // sec
-    initalGripStrength: GripStrength.Normal
+    initalGripStrength: GripStrength.Normal,
+    copyToolTipOpen: false,
   };
 
   handleChange = name => event => {
@@ -85,6 +90,12 @@ class ConfigPage extends React.Component {
   handleCheckChange = name => (event, checked) => {
     this.setState({ [name]: checked });
   };
+
+  handleGenerateLink = () => {
+    this.setState({
+      copyToolTipOpen: true
+    })
+  }
 
   render() {
     const { classes } = this.props;
@@ -362,9 +373,25 @@ class ConfigPage extends React.Component {
           />
         </Group>
         <Group title="Tasks">Tasks</Group>
-        <Button variant="raised" color="primary" onClick={this.handleComplete}>
+        <Button variant="raised" color="primary" className={classes.button} onClick={this.handleComplete}>
           Start
         </Button>
+        <Tooltip
+          id="generate-link-tooltip"
+          title="Copied to Clipboard"
+          leaveDelay={300}
+          open={this.state.copyToolTipOpen}
+          onClose={() => {
+            this.setState({
+              copyToolTipOpen: false
+            })
+          }}
+          placement="bottom"
+        >
+          <Button variant="raised" color="secondary" className={classes.button} onClick={this.handleGenerateLink}>
+            Generate Link
+          </Button>
+        </Tooltip>
       </div>
     );
   }
