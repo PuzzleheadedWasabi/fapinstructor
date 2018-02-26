@@ -1,4 +1,5 @@
 import React from "react";
+import { Base64 } from "js-base64";
 import Typography from "material-ui/Typography";
 import { withStyles } from "material-ui/styles";
 import Button from "material-ui/Button";
@@ -16,6 +17,7 @@ import Select from "material-ui/Select";
 import { MenuItem } from "material-ui/Menu";
 import Tooltip from 'material-ui/Tooltip';
 import store from "store";
+import copyToClipboard from "utils/copyToClipboard";
 import { GripStrength, GripStrengthEnum } from "game/enums/GripStrength"
 
 const styles = theme => ({
@@ -38,11 +40,6 @@ const Group = ({ title, children }) => (
   </div>
 );
 
-// list of actions
-// configuration of actions
-// labels of actions
-// probability of actions
-
 class ConfigPage extends React.Component {
   state = {
     copyToolTipOpen: false,
@@ -56,10 +53,17 @@ class ConfigPage extends React.Component {
     store.config[name] = checked;
   };
 
+  generateLink() {
+    const encodedValues = Base64.encodeURI(JSON.stringify(store.config))
+    const url = `${window.location.host}/game/${encodedValues}`;
+    return url;
+  }
+
   handleGenerateLink = () => {
     this.setState({
       copyToolTipOpen: true
     });
+    copyToClipboard(this.generateLink());
   }
 
   render() {
