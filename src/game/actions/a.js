@@ -3,6 +3,8 @@ import { interruptible } from "engine/interrupt";
 // import audioLibrary from "../audio";
 
 const a = async () => {
+  console.log("new action - a");
+
   const triggerA = async () => {
     console.log("trigger-a");
   };
@@ -12,8 +14,6 @@ const a = async () => {
     console.log("trigger-b");
   };
   triggerB.label = "Trigger B";
-
-  console.log("new action - a");
 
   await new Promise(resolve => {
     interruptible(
@@ -28,5 +28,6 @@ const a = async () => {
   console.log('waiting for trigger to execute')
   return [triggerA, triggerB];
 };
+a.label = "Task A";
 
 export default a;

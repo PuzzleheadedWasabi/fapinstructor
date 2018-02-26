@@ -1,17 +1,12 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import ConfigPage from "Containers/Pages/ConfigPage";
 import ChangeLogPage from "Containers/Pages/ChangeLogPage";
 import GamePage from "Containers/Pages/GamePage";
 import StoreProvider from "Containers/StoreProvider";
-import store from "store";
 
-const initialValues = {
-  strokeSpeed: 3
-};
-Object.assign(store, initialValues);
-
-const Root = () => (
+const Root = ({ store }) => (
   <StoreProvider store={store}>
     <Router>
       <div>
@@ -23,5 +18,9 @@ const Root = () => (
     </Router>
   </StoreProvider>
 );
+
+Root.propTypes = {
+  store: PropTypes.object.isRequired
+}
 
 export default Root;
