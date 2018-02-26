@@ -1,6 +1,6 @@
 import React from "react";
 import connect from "../../hoc/connect";
-import { startGame, stopGame } from "../../game";
+import { startGame, stopGame } from "game";
 import executeAction from "engine/executeAction";
 
 class GamePage extends React.Component {
@@ -19,7 +19,7 @@ class GamePage extends React.Component {
   }
 
   render() {
-    const { executing, actionTriggers } = this.props;
+    const { executing, actionTriggers } = this.props.engine;
 
     return (
       <div>

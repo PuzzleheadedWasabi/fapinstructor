@@ -1,6 +1,11 @@
 import store from "store";
 import interrupt from "./interrupt";
 
+store.engine = {
+  actionTriggers: null,
+  executing: false
+};
+
 /**
  * Executes the specified action
  *
@@ -17,10 +22,12 @@ import interrupt from "./interrupt";
  * @param {If an action is already executing, should it be interrupted} shouldInterrupt
  */
 const executeAction = (action, shouldInterrupt) => {
+  const { engine } = store;
+
   if (typeof action !== "function") {
     throw new Error(`action is not a function, ${action}`);
   }
-  if (store.executing) {
+  if (engine.executing) {
     if (!shouldInterrupt) {
       throw new Error(
         `cannot execute a new action when the previous one isn't complete, ${action}`
@@ -29,18 +36,18 @@ const executeAction = (action, shouldInterrupt) => {
     interrupt();
   }
 
-  store.actionTriggers = null;
-  store.executing = true;
+  engine.actionTriggers = null;
+  engine.executing = true;
 
   return action().then(trigger => {
     if (trigger) {
       if (Array.isArray(trigger)) {
-        store.actionTriggers = trigger;
+        engine.actionTriggers = trigger;
       } else {
-        store.actionTriggers = Array.of(trigger);
+        engine.actionTriggers = Array.of(trigger);
       }
     }
-    store.executing = false;
+    engine.executing = false;
   });
 };
 

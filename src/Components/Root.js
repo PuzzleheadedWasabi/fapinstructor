@@ -7,8 +7,6 @@ import StoreProvider from "Containers/StoreProvider";
 import store from "store";
 
 const initialValues = {
-  actionTriggers: null,
-  executing: false,
   strokeSpeed: 3
 };
 Object.assign(store, initialValues);
