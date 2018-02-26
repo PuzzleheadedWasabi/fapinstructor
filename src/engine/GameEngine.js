@@ -3,10 +3,9 @@ import executeAction from "./executeAction";
 import actions from "../actions";
 import play from "./AudioEngine";
 import audioLibrary from "../audio";
+import store from "../store";
 
 const actionPlayer = progress => {
-  const { store } = window;
-
   // Don't execute new actions if a command is already executing or if any triggers are awaiting
   if (!store.executing && !store.actionTriggers) {
     const { value: action, done } = actions.next();
@@ -19,7 +18,7 @@ const actionPlayer = progress => {
 
 let lastTick = 0;
 const strokePlayer = progress => {
-  const { store: { strokeSpeed } } = window;
+  const { strokeSpeed } = store;
 
   if (strokeSpeed > 0) {
     if (lastTick > 1 / strokeSpeed * 1000) {

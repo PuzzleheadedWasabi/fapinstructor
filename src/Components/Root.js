@@ -4,17 +4,17 @@ import ConfigPage from "../Containers/Pages/ConfigPage";
 import ChangeLogPage from "../Containers/Pages/ChangeLogPage";
 import GamePage from "../Containers/Pages/GamePage";
 import StoreProvider from "../Containers/StoreProvider";
-import { createStore } from "../store";
+import store from "../store";
 
-const initialState = {
+const initialValues = {
   actionTriggers: null,
   executing: false,
   strokeSpeed: 3
 };
-window.store = createStore(initialState);
+Object.assign(store, initialValues);
 
 const Root = () => (
-  <StoreProvider store={window.store}>
+  <StoreProvider store={store}>
     <Router>
       <div>
         <Route exact path="/" component={ConfigPage} />

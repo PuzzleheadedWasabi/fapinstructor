@@ -9,10 +9,6 @@ import card from "../audio/card.wav";
 import keep_stroking from "../audio/keep_stroking.mp3";
 import ruinitforme from "../audio/ruinitforme.mp3";
 
-/**
- * Loads the buffers of the import audio files into memory and
- * returns a promise which resolves to a hash object
- */
 const audioLibrary = {
   Tick: fetchAudioFile(tick),
   Cum: fetchAudioFile(cum),

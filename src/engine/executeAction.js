@@ -1,3 +1,4 @@
+import store from "../store";
 import interrupt from "./interrupt";
 
 /**
@@ -16,8 +17,6 @@ import interrupt from "./interrupt";
  * @param {If an action is already executing, should it be interrupted} shouldInterrupt
  */
 const executeAction = (action, shouldInterrupt) => {
-  const { store } = window;
-
   if (typeof action !== "function") {
     throw new Error(`action is not a function, ${action}`);
   }

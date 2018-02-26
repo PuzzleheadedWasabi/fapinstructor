@@ -1,5 +1,6 @@
 import watchObject from "./utils/watchObject";
 
+const store = {};
 const subscribers = [];
 
 /**
@@ -20,13 +21,13 @@ const unsubscribe = id => {
 };
 
 /**
- * Create the applications store with the initialState
+ * Wrap the store in an observable proxy
  */
-const createStore = (initialState = {}) =>
-  watchObject(initialState, () => {
-    subscribers.forEach(callback => {
-      callback();
-    });
+const observableStore = watchObject(store, () => {
+  subscribers.forEach(callback => {
+    callback();
   });
+});
 
-export { createStore, subscribe, unsubscribe };
+export { subscribe, unsubscribe };
+export default observableStore;
