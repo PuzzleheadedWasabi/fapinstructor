@@ -23,7 +23,6 @@ class ErrorBoundary extends React.Component {
     const { error } = this.state;
 
     if (error) {
-      debugger;
       return (
         <div>
           <h1>Something went wrong.</h1>
