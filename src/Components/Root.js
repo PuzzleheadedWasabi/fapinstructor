@@ -12,8 +12,8 @@ const Root = ({ store }) => (
       <div>
         <Route exact path="/" component={ConfigPage} />
         <Route exact path="/changelog" component={ChangeLogPage} />
-        <Route exact path="/game" component={GamePage} />
-        {/*<Route exact path="/game/:config" component={GamePage} />*/}
+        {/*<Route exact path="/game" component={GamePage} />*/}
+        <Route exact path="/game/:config" component={GamePage} />
       </div>
     </Router>
   </StoreProvider>

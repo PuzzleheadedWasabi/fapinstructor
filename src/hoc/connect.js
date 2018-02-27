@@ -11,7 +11,7 @@ const connect = WrappedComponent =>
     };
 
     render() {
-       return <WrappedComponent {...this.context.store} />;
+       return <WrappedComponent {...this.props} {...this.context.store} />;
     }
   };
 
