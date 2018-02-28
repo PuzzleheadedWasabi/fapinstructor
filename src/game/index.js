@@ -4,12 +4,18 @@
 import { subscribe, unsubscribe } from "engine/loop";
 import actionLoop from "./loops/actionLoop";
 import strokerLoop from "./loops/strokerLoop";
+import probabilityLoop from "./loops/probabilityLoop";
 
 let loops = [];
 
+const addLoops = (...loops) => {
+  loops.forEach(loop => {
+    loops.push(subscribe(loop));
+  })
+}
+
 const startGame = () => {
-  loops.push(subscribe(actionLoop));
-  loops.push(subscribe(strokerLoop));
+  addLoops(actionLoop, strokerLoop, probabilityLoop)
 };
 
 const stopGame = () => {

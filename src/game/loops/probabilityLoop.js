@@ -1,25 +1,21 @@
-import actions from "../actions";
 import store from "store";
-import executeAction from "engine/executeAction";
+import moment from "moment";
+import elapsedGameTime from "../utils/elapsedGameTime";
 
-let lastProbabilityUpdate = 0;
-
-const increaseProbability = () => {
-  const { probability, config: { maxTime } } = getState();
-  store.probability = (store.probability + 1 / maxTime)
+store.game = {
+  probability: 0,
+  startTime: new moment()
 }
 
+let lastUpdate = 0;
 export default progress => {
-  if (store.probability) {
-    // increase the probability every minute
-    if (lastProbabilityUpdate >= 60000) {
-      props.increaseProbability();
-      lastProbabilityUpdate = 0;
-    } else {
-      lastProbabilityUpdate += progress;
-    }
+  const { config: { maximumGameTime } } = store;
+
+  // increase the probability every 10 seconds to avoid too many rerenders
+  if (lastUpdate >= 10000) {
+    store.game.probability = (elapsedGameTime("seconds") / (maximumGameTime * 60)) * 100
+    lastUpdate = 0;
+  } else {
+    lastUpdate += progress;
   }
 };
-
-
-
