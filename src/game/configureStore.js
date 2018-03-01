@@ -7,6 +7,6 @@ export default () => {
     startTime: new moment(),
     shownSlides: 0,
     pictures: [],
-    pictureIndex: 0
+    pictureIndex: -1
   }
 }

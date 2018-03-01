@@ -3,10 +3,10 @@ import uniq from "lodash.uniq";
 import store from "store";
 import fetchManyPics from "api/fetchTumblrPics"
 
-let lastSlideChange = 0;
+let lastSlideChange = -1;
 
 export default progress => {
-  if (lastSlideChange >= store.config.slideDuration * 1000) {
+  if (lastSlideChange >= store.config.slideDuration * 1000 || lastSlideChange === -1) {
     nextSlide();
     lastSlideChange = 0;
   } else {
@@ -29,6 +29,8 @@ const nextSlide = async () => {
   // load more pictures when close to running out
   if (5 > pictures.length - store.game.pictureIndex) {
     await fetchPictures();
+  console.log('slideLoop')
+
   }
 }
 
