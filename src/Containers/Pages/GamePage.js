@@ -45,12 +45,6 @@ class GamePage extends React.Component {
     stopGame();
   }
 
-  handleInterruptTest() {
-    executeAction(async () => {
-      console.log("test");
-    }, true);
-  }
-
   render() {
     if (!this.props.game || this.props.game.pictures.length === 0) {
       return (
