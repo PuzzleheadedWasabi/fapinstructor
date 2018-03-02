@@ -15,6 +15,31 @@ const a = async () => {
   };
   triggerB.label = "Trigger B";
 
+  const triggerC = async () => {
+    console.log("trigger-c");
+  };
+  triggerC.label = "Trigger C";
+
+  const triggerD = async () => {
+    console.log("trigger-d");
+  };
+  triggerD.label = "Trigger D";
+
+  const triggerE = async () => {
+    console.log("trigger-e");
+  };
+  triggerE.label = "Trigger E";
+
+  const triggerF = async () => {
+    console.log("trigger-f");
+  };
+  triggerF.label = "Trigger F";
+
+  const triggerG = async () => {
+    console.log("trigger-g");
+  };
+  triggerG.label = "Trigger G";
+
   await new Promise(resolve => {
     interruptible(
       setTimeout(() => {
@@ -25,8 +50,8 @@ const a = async () => {
     );
   });
 
-  console.log('waiting for trigger to execute')
-  return [triggerA, triggerB];
+  console.log("waiting for trigger to execute");
+  return [triggerA, triggerB, triggerC, triggerD, triggerE, triggerF, triggerG];
 };
 a.label = "Task A";
 

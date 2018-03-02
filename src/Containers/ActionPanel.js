@@ -1,6 +1,7 @@
 import React from "react";
 import { withStyles } from "material-ui/styles";
 import Button from "material-ui/Button";
+import Typography from 'material-ui/Typography';
 import connect from "hoc/connect";
 import executeAction from "engine/executeAction";
 
@@ -11,18 +12,23 @@ const styles = theme => ({
     bottom: 0,
     width: "100vw"
   },
+  static: {
+    position: "absolute",
+    zIndex: 99,
+    right: 0,
+  },
   triggers: {
     display: "flex",
+    flexWrap: "wrap",
     justifyContent: "center"
   }
 });
 
 const ActionPanel = ({ classes, engine: { actionTriggers } }) => (
   <div>
-    <div className={classes.root}>
+    <div className={classes.static}>
       <Button
-        variant="raised"
-        color="primary"
+        color="secondary"
         size="large"
         style={{ margin: 10 }}
         onClick={() => {
