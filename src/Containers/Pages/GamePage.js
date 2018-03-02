@@ -74,15 +74,4 @@ class GamePage extends React.Component {
   }
 }
 
-// <div style={{ display: 'absolute'}}>
-// executing:{executing.toString()}
-// <button onClick={this.handleInterruptTest}>InterruptTest</button>
-// </div>
-// {actionTriggers &&
-// actionTriggers.map((trigger, index) => (
-//   <button key={index} onClick={() => executeAction(trigger)}>
-//     {trigger.label}
-//   </button>
-// ))}
-
 export default withStyles(styles)(connect(GamePage));
