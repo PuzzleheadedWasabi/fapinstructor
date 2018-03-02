@@ -3,7 +3,6 @@ import { Base64 } from "js-base64";
 import { withStyles } from "material-ui/styles";
 import connect from "hoc/connect";
 import { startGame, stopGame } from "game";
-import executeAction from "engine/executeAction";
 import store from "store";
 import CustomError from "utils/CustomError";
 import ImagePlayer from "Components/ImagePlayer";
