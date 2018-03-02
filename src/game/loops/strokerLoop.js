@@ -5,7 +5,7 @@ import audioLibrary from "audio";
 let lastStroke = 0;
 
 export default progress => {
-  const { strokeSpeed } = store;
+  const { strokeSpeed } = store.game;
 
   if (strokeSpeed > 0) {
     if (lastStroke > 1 / strokeSpeed * 1000) {
