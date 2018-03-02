@@ -35,11 +35,26 @@ const Label = ({ value }) => (
 
 class StatusPanel extends React.Component {
   state = {
-    open: true
+    open: true,
+    strokeSpeedUnit: "seconds"
+  };
+
+  handleSwitchStrokeSpeedUnit = () => {
+    let strokeSpeedUnit;
+
+    if (this.state.strokeSpeedUnit === "minutes") {
+      strokeSpeedUnit = "seconds";
+    } else {
+      strokeSpeedUnit = "minutes";
+    }
+
+    this.setState({
+      strokeSpeedUnit
+    });
   };
 
   render() {
-    const { open } = this.state;
+    const { open, strokeSpeedUnit } = this.state;
     const { classes, game: { strokeSpeed, gripStrength } } = this.props;
 
     return (
@@ -61,12 +76,27 @@ class StatusPanel extends React.Component {
           <div className={classes.labels}>
             <div style={{ marginRight: 10 }}>
               <Label value="Elapsed Time (min)" />
-              <Label value="Stroke Speed (s)" />
+              <div onClick={this.handleSwitchStrokeSpeedUnit}>
+                <Label
+                  value={`Stroke Speed (${
+                    strokeSpeedUnit === "minutes" ? "min" : "sec"
+                  })`}
+                />
+              </div>
               <Label value="Stroke Grip" />
             </div>
             <div>
               <Label value={elapsedGameTime("minutes")} />
-              <Label value={round(strokeSpeed, 2)} />
+              <div onClick={this.handleSwitchStrokeSpeedUnit}>
+                <Label
+                  value={round(
+                    strokeSpeedUnit === "minutes"
+                      ? strokeSpeed * 60
+                      : strokeSpeed,
+                    2
+                  )}
+                />
+              </div>
               <Label value={GripStrengthString[gripStrength]} />
             </div>
           </div>
