@@ -9,8 +9,18 @@ import CustomError from "utils/CustomError";
 import ImagePlayer from "Components/ImagePlayer";
 import StatusPanel from "Containers/StatusPanel";
 import ActionPanel from "Containers/ActionPanel";
+import { CircularProgress } from "material-ui/Progress";
 
-const styles = theme => ({});
+const styles = theme => ({
+  progress: {
+    position: "absolute",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: '100vw',
+    height: '100vh'
+  }
+});
 
 class GamePage extends React.Component {
   constructor(props) {
@@ -43,7 +53,11 @@ class GamePage extends React.Component {
 
   render() {
     if (!this.props.game || this.props.game.pictures.length === 0) {
-      return <div>Loading...</div>;
+      return (
+        <div className={this.props.classes.progress}>
+          <CircularProgress color="secondary" size={100} thickness={2} />
+        </div>
+      );
     }
 
     const { game: { pictures, pictureIndex } } = this.props;
