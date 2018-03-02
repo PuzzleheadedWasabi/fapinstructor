@@ -19,7 +19,7 @@ import { MenuItem } from "material-ui/Menu";
 import Tooltip from "material-ui/Tooltip";
 import store from "store";
 import copyToClipboard from "utils/copyToClipboard";
-import { GripStrength, GripStrengthEnum } from "game/enums/GripStrength";
+import { GripStrengthString, GripStrengthEnum } from "game/enums/GripStrength";
 
 const styles = theme => ({
   control: {
@@ -332,7 +332,7 @@ class ConfigPage extends React.Component {
                 >
                   {Object.keys(GripStrengthEnum).map(key => (
                     <MenuItem key={key} value={GripStrengthEnum[key]}>
-                      {GripStrength[GripStrengthEnum[key]]}
+                      {GripStrengthString[GripStrengthEnum[key]]}
                     </MenuItem>
                   ))}
                 </Select>
