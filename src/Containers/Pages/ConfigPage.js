@@ -86,7 +86,6 @@ class ConfigPage extends React.Component {
       <div>
         <div
           style={{
-            backgroundColor: "black",
             backgroundImage: `url(${HeaderImage})`,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",

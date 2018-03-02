@@ -57,7 +57,7 @@ class GamePage extends React.Component {
 
     return (
       <div
-        style={{ height: "100vh", width: "100vw", backgroundColor: "black" }}
+        style={{ height: "100vh", width: "100vw" }}
       >
         <StatusPanel />
         <ActionPanel />
