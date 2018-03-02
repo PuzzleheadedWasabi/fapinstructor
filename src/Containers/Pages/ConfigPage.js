@@ -327,8 +327,8 @@ class ConfigPage extends React.Component {
               <FormControl className={classes.control}>
                 <InputLabel>Initial Grip Strength</InputLabel>
                 <Select
-                  value={store.config.initalGripStrength}
-                  onChange={this.handleChange("initalGripStrength")}
+                  value={store.config.initialGripStrength}
+                  onChange={this.handleChange("initialGripStrength")}
                 >
                   {Object.keys(GripStrengthEnum).map(key => (
                     <MenuItem key={key} value={GripStrengthEnum[key]}>

@@ -21,7 +21,7 @@ const defaultConfig = {
   edgeCooldown: 5, // sec
   slowestStrokeSpeed: 0.25, // sec
   fastestStrokeSpeed: 5, // sec
-  initalGripStrength: GripStrengthEnum.Normal,
+  initialGripStrength: GripStrengthEnum.Normal,
 };
 
 export default () => {

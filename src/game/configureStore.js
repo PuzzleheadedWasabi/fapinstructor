@@ -9,6 +9,7 @@ export default () => {
     shownSlides: 0,
     pictures: [],
     pictureIndex: -1,
-    strokeSpeed: calculateStartingStrokeSpeed()
+    strokeSpeed: calculateStartingStrokeSpeed(),
+    gripStrength: store.config.initialGripStrength
   };
 };
