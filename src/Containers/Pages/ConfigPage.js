@@ -1,5 +1,6 @@
 import React from "react";
 import { Base64 } from "js-base64";
+import { withRouter } from "react-router-dom";
 import Typography from "material-ui/Typography";
 import { withStyles } from "material-ui/styles";
 import Button from "material-ui/Button";
@@ -15,10 +16,10 @@ import Checkbox from "material-ui/Checkbox";
 import Grid from "material-ui/Grid";
 import Select from "material-ui/Select";
 import { MenuItem } from "material-ui/Menu";
-import Tooltip from 'material-ui/Tooltip';
+import Tooltip from "material-ui/Tooltip";
 import store from "store";
 import copyToClipboard from "utils/copyToClipboard";
-import { GripStrength, GripStrengthEnum } from "game/enums/GripStrength"
+import { GripStrength, GripStrengthEnum } from "game/enums/GripStrength";
 
 const styles = theme => ({
   control: {
@@ -42,7 +43,7 @@ const Group = ({ title, children }) => (
 
 class ConfigPage extends React.Component {
   state = {
-    copyToolTipOpen: false,
+    copyToolTipOpen: false
   };
 
   handleChange = name => event => {
@@ -53,9 +54,15 @@ class ConfigPage extends React.Component {
     store.config[name] = checked;
   };
 
-  generateLink() {
-    const encodedValues = Base64.encodeURI(JSON.stringify(store.config))
-    const url = `${window.location.host}/game/${encodedValues}`;
+  generateLink(isAbsolute = true) {
+    const encodedValues = Base64.encodeURI(JSON.stringify(store.config));
+
+    let url = "";
+    if (isAbsolute) {
+      url = window.location.host;
+    }
+    url += `/game/${encodedValues}`;
+
     return url;
   }
 
@@ -64,7 +71,11 @@ class ConfigPage extends React.Component {
       copyToolTipOpen: true
     });
     copyToClipboard(this.generateLink());
-  }
+  };
+
+  handleStart = () => {
+    this.props.history.push(this.generateLink(false));
+  };
 
   render() {
     const { classes } = this.props;
@@ -342,7 +353,12 @@ class ConfigPage extends React.Component {
           />
         </Group>
         <Group title="Tasks">Tasks</Group>
-        <Button variant="raised" color="primary" className={classes.button} onClick={this.handleComplete}>
+        <Button
+          variant="raised"
+          color="primary"
+          className={classes.button}
+          onClick={this.handleStart}
+        >
           Start
         </Button>
         <Tooltip
@@ -353,11 +369,16 @@ class ConfigPage extends React.Component {
           onClose={() => {
             this.setState({
               copyToolTipOpen: false
-            })
+            });
           }}
           placement="bottom"
         >
-          <Button variant="raised" color="secondary" className={classes.button} onClick={this.handleGenerateLink}>
+          <Button
+            variant="raised"
+            color="secondary"
+            className={classes.button}
+            onClick={this.handleGenerateLink}
+          >
             Generate Link
           </Button>
         </Tooltip>
@@ -366,4 +387,4 @@ class ConfigPage extends React.Component {
   }
 }
 
-export default withStyles(styles)(ConfigPage);
+export default withStyles(styles)(withRouter(ConfigPage));

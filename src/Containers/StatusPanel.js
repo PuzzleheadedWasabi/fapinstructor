@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { withStyles } from "material-ui/styles";
 import connect from "hoc/connect";
 
@@ -17,7 +16,5 @@ const styles = theme => ({
 const StatusPanel = ({ classes }) => (
   <div className={classes.root}>This is a test</div>
 );
-
-StatusPanel.propTypes = {};
 
 export default withStyles(styles)(connect(StatusPanel));

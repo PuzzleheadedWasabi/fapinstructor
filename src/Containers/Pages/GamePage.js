@@ -9,7 +9,6 @@ import CustomError from "utils/CustomError";
 import ImagePlayer from "Components/ImagePlayer";
 import StatusPanel from "Containers/StatusPanel";
 import ActionPanel from "Containers/ActionPanel";
-import InterruptActionPanel from "Containers/InterruptActionPanel";
 
 const styles = theme => ({});
 
@@ -47,10 +46,7 @@ class GamePage extends React.Component {
       return <div>Loading...</div>;
     }
 
-    const {
-      engine: { executing, actionTriggers },
-      game: { pictures, pictureIndex }
-    } = this.props;
+    const { game: { pictures, pictureIndex } } = this.props;
 
     return (
       <div
@@ -58,7 +54,6 @@ class GamePage extends React.Component {
       >
         <StatusPanel />
         <ActionPanel />
-        <InterruptActionPanel />
         <ImagePlayer url={pictures[pictureIndex]} />
       </div>
     );
