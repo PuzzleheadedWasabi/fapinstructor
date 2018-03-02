@@ -7,6 +7,8 @@ import elapsedGameTime from "game/utils/elapsedGameTime";
 import { round } from "utils/math";
 import { GripStrengthString } from "game/enums/GripStrength";
 import logo from "images/logo.svg";
+import DownIcon from "material-ui-icons/ArrowDropDown";
+import UpIcon from "material-ui-icons/ArrowDropUp";
 
 const styles = theme => ({
   root: {
@@ -42,18 +44,17 @@ class StatusPanel extends React.Component {
 
     return (
       <div className={classes.root}>
-        <div
-          className={classes.header}
-          onClick={() => this.setState({ open: !open })}
-        >
+        <div className={classes.header}>
           <Button
             color="inherit"
             style={{ textTransform: "none", width: "100%" }}
+            onClick={() => this.setState({ open: !open })}
           >
             <img style={{ width: 25, marginRight: 10 }} src={logo} alt="Logo" />
             <Typography color="inherit" variant="body2">
               Fap Instructor
             </Typography>
+            {open ? <DownIcon /> : <UpIcon />}
           </Button>
         </div>
         {open && (
