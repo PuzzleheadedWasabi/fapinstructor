@@ -1,7 +1,6 @@
 import React from "react";
 import { withStyles } from "material-ui/styles";
 import Button from "material-ui/Button";
-import Typography from 'material-ui/Typography';
 import connect from "hoc/connect";
 import executeAction from "engine/executeAction";
 
