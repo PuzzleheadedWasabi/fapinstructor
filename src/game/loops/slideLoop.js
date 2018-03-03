@@ -1,19 +1,18 @@
 import shuffle from "lodash.shuffle";
 import uniq from "lodash.uniq";
 import store from "store";
-import fetchManyPics from "api/fetchTumblrPics"
+import fetchManyPics from "api/fetchTumblrPics";
 
 let lastSlideChange = -1;
+let isPaused = false;
 
-export default progress => {
-  if (lastSlideChange >= store.config.slideDuration * 1000 || lastSlideChange === -1) {
-    nextSlide();
-    lastSlideChange = 0;
-  } else {
-    lastSlideChange += progress;
-  }
+const pauseSlides = () => {
+  isPaused = true;
 };
 
+const playSlides = () => {
+  isPaused = false;
+};
 
 const nextSlide = async () => {
   const { pictures } = store.game;
@@ -29,26 +28,40 @@ const nextSlide = async () => {
   // load more pictures when close to running out
   if (5 > pictures.length - store.game.pictureIndex) {
     await fetchPictures();
-  console.log('slideLoop')
-
   }
-}
+};
 
 const fetchPictures = () => {
   const { tumblrId, tumblrOffset } = store.config;
 
   return fetchManyPics(
-      tumblrId,
-      { pictures: store.config.pictures, gifs: store.config.gifs },
-      tumblrOffset
-    ).then(({ images, offset }) => {
-      let shuffledPictures = uniq(shuffle(images));
+    tumblrId,
+    { pictures: store.config.pictures, gifs: store.config.gifs },
+    tumblrOffset
+  ).then(({ images, offset }) => {
+    let shuffledPictures = uniq(shuffle(images));
 
-      store.game.pictures = [...store.game.pictures, ...shuffledPictures];
-      store.config.tumblrOffset = offset;
+    store.game.pictures = [...store.game.pictures, ...shuffledPictures];
+    store.config.tumblrOffset = offset;
 
-      if (images.length === 0) {
-        store.game.pictureIndex = 0;
-      }
+    if (images.length === 0) {
+      store.game.pictureIndex = 0;
+    }
   });
 };
+
+export default progress => {
+  if (!isPaused) {
+    if (
+      lastSlideChange >= store.config.slideDuration * 1000 ||
+      lastSlideChange === -1
+    ) {
+      nextSlide();
+      lastSlideChange = 0;
+    } else {
+      lastSlideChange += progress;
+    }
+  }
+};
+
+export { playSlides, pauseSlides, nextSlide };

@@ -1,22 +1,26 @@
 import { interruptible } from "engine/interrupt";
 // import play from "engine/audio";
 // import audioLibrary from "../audio";
+import { playSlides, pauseSlides, nextSlide } from "game/loops/slideLoop";
 
 const a = async () => {
   console.log("new action - a");
 
   const triggerA = async () => {
     console.log("trigger-a");
+    pauseSlides();
   };
   triggerA.label = "Trigger A";
 
   const triggerB = async () => {
     console.log("trigger-b");
+    playSlides();
   };
   triggerB.label = "Trigger B";
 
   const triggerC = async () => {
     console.log("trigger-c");
+    nextSlide();
   };
   triggerC.label = "Trigger C";
 

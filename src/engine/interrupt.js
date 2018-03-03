@@ -4,10 +4,10 @@ const interruptible = id => {
   interruptibles.push(id);
 };
 
-// not really required unless a interruptable wants to become uninterruptable during execution
-// const removeInterruptible = id => {
-//   delete interruptibles[id - 1];
-// };
+// Makes an interruptable action into an uninterruptable action
+const removeInterruptible = id => {
+  delete interruptibles[id - 1];
+};
 
 const interrupt = () => {
   interruptibles.forEach(id => {
@@ -17,5 +17,5 @@ const interrupt = () => {
   interruptibles = [];
 };
 
-export { interruptible };
+export { interruptible, removeInterruptible };
 export default interrupt;
