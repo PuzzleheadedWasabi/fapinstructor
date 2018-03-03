@@ -21,7 +21,6 @@ import Tooltip from "material-ui/Tooltip";
 import store from "store";
 import copyToClipboard from "utils/copyToClipboard";
 import { GripStrengthString, GripStrengthEnum } from "game/enums/GripStrength";
-import HeaderImage from "images/header.jpg";
 
 const styles = theme => ({
   control: {
@@ -83,37 +82,30 @@ class ConfigPage extends React.Component {
     const { classes } = this.props;
 
     return (
-      <div>
+      <div
+        style={{
+          background: "linear-gradient(#D02558,black 40%)"
+        }}
+      >
         <div
           style={{
-            backgroundImage: `url(${HeaderImage})`,
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center",
-            height: "20vh"
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "flex-end",
+            color: "#FFF",
+            padding: 20
           }}
         >
-          <div
-            style={{
-              background: "rgba(0, 0, 0, 0.7)",
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "flex-end"
-            }}
+          <Typography
+            variant="display3"
+            color="inherit"
+            style={{ fontFamily: "'Damion', cursive" }}
           >
-            <Typography
-              variant="display3"
-              color="secondary"
-              style={{ fontFamily: "'Damion', cursive" }}
-            >
-              Fap Instructor
-            </Typography>
-          </div>
+            Fap Instructor
+          </Typography>
         </div>
-
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <Paper style={{ padding: 20, marginBottom: 20 }}>
+          <Paper style={{ padding: 20, marginBottom: 20, width: "90vw" }}>
             <Group title="Tumblr">
               <Grid container>
                 <Grid item xs={12}>
