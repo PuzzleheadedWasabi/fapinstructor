@@ -397,7 +397,7 @@ class ConfigPage extends React.Component {
               <Tooltip
                 id="generate-link-tooltip"
                 title="Copied to Clipboard"
-                leaveDelay={300}
+                leaveDelay={2000}
                 open={this.state.copyToolTipOpen}
                 onClose={() => {
                   this.setState({
