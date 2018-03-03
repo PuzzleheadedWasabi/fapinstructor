@@ -10,8 +10,8 @@ import slideLoop from "./loops/slideLoop";
 
 let loops = [];
 
-const addLoops = (...loops) => {
-  loops.forEach(loop => {
+const addLoops = (...newLoops) => {
+  newLoops.forEach(loop => {
     loops.push(subscribe(loop));
   })
 }

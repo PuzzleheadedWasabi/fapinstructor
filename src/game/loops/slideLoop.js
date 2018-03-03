@@ -3,8 +3,13 @@ import uniq from "lodash.uniq";
 import store from "store";
 import fetchManyPics from "api/fetchTumblrPics";
 
-let lastSlideChange = -1;
-let isPaused = false;
+let lastSlideChange;
+let isPaused;
+
+const onSubscribe = () => {
+  isPaused = false;
+  lastSlideChange = -1;
+};
 
 const pauseSlides = () => {
   isPaused = true;
@@ -50,7 +55,7 @@ const fetchPictures = () => {
   });
 };
 
-export default progress => {
+const slideLoop = progress => {
   if (!isPaused) {
     if (
       lastSlideChange >= store.config.slideDuration * 1000 ||
@@ -63,5 +68,7 @@ export default progress => {
     }
   }
 };
+slideLoop.onSubscribe = onSubscribe;
 
-export { playSlides, pauseSlides, nextSlide };
+export default slideLoop;
+export { onSubscribe, playSlides, pauseSlides, nextSlide };

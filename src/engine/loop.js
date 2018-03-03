@@ -21,6 +21,12 @@ const update = timestamp => {
 update(window.performance.now());
 
 const subscribe = callback => {
+  // If the loop callback has an onSubscribe event call it.
+  // Usually this is used to initialize default values
+  if (typeof callback.onSubscribe === "function") {
+    callback.onSubscribe();
+  }
+
   return subscribers.push(callback);
 };
 

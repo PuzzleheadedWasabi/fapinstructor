@@ -11,7 +11,6 @@ class ErrorBoundary extends React.Component {
       release: "2.0.0",
       maxUrlLength: 2000
     }).install();
-    console.log('raven config')
   }
 
   componentDidCatch(error, info) {
