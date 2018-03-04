@@ -5,7 +5,7 @@ import "./polyfills/endsWith";
 import "./polyfills/performance";
 import "./utils/visibility";
 import "./index.css";
-import Root from "./Components/Root";
+import Root from "./components/Root";
 import configureStore from "./configureStore";
 
 const store = configureStore();

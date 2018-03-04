@@ -12,8 +12,6 @@ import UpIcon from "material-ui-icons/ArrowDropUp";
 
 const styles = theme => ({
   root: {
-    position: "absolute",
-    zIndex: 99,
     padding: 5,
     background: "rgba(0, 0, 0, 0.6)"
   },

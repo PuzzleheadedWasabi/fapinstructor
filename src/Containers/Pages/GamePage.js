@@ -5,10 +5,9 @@ import connect from "hoc/connect";
 import { startGame, stopGame } from "game";
 import store from "store";
 import CustomError from "utils/CustomError";
-import ImagePlayer from "Components/ImagePlayer";
-import StatusPanel from "Containers/StatusPanel";
-import ActionPanel from "Containers/ActionPanel";
+import ImagePlayer from "components/ImagePlayer";
 import { CircularProgress } from "material-ui/Progress";
+import HUD from "containers/HUD";
 
 const styles = theme => ({
   progress: {
@@ -16,8 +15,8 @@ const styles = theme => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    width: '100vw',
-    height: '100vh'
+    width: "100vw",
+    height: "100vh"
   }
 });
 
@@ -56,11 +55,8 @@ class GamePage extends React.Component {
     const { game: { pictures, pictureIndex } } = this.props;
 
     return (
-      <div
-        style={{ height: "100vh", width: "100vw" }}
-      >
-        <StatusPanel />
-        <ActionPanel />
+      <div style={{ height: "100vh", width: "100vw" }}>
+        <HUD />
         <ImagePlayer url={pictures[pictureIndex]} />
       </div>
     );
