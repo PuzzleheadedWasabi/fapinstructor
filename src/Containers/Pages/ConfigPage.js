@@ -55,6 +55,10 @@ class ConfigPage extends React.Component {
     store.config[name] = checked;
   };
 
+  handleTaskCheckChange = name => (event, checked) => {
+    store.config.tasks[name] = checked;
+  };
+
   generateLink(isAbsolute = true) {
     const encodedValues = Base64.encodeURI(JSON.stringify(store.config));
 
@@ -384,7 +388,67 @@ class ConfigPage extends React.Component {
                 label="Disable Voice"
               />
             </Group>
-            <Group title="Tasks">Tasks</Group>
+            <Group title="Tasks">
+              <Grid item xs={12}>
+                <FormControl component="fieldset">
+                  <FormLabel component="legend">Speed</FormLabel>
+                  <FormGroup>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={store.config.tasks.doubleStrokes}
+                          onChange={this.handleTaskCheckChange("doubleStrokes")}
+                          value="doubleStrokes"
+                        />
+                      }
+                      label="Double Strokes"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={store.config.tasks.halfStrokes}
+                          onChange={this.handleTaskCheckChange("halfStrokes")}
+                          value="halfStrokes"
+                        />
+                      }
+                      label="Half Strokes"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={store.config.tasks.accelerationCycles}
+                          onChange={this.handleTaskCheckChange(
+                            "accelerationCycles"
+                          )}
+                          value="accelerationCycles"
+                        />
+                      }
+                      label="Acceleration Cycles"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={store.config.tasks.slowAndFast}
+                          onChange={this.handleTaskCheckChange("slowAndFast")}
+                          value="slowAndFast"
+                        />
+                      }
+                      label="Slow & Fast"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={store.config.tasks.clusterStrokes}
+                          onChange={this.handleTaskCheckChange("clusterStrokes")}
+                          value="clusterStrokes"
+                        />
+                      }
+                      label="Cluster Strokes"
+                    />
+                  </FormGroup>
+                </FormControl>
+              </Grid>
+            </Group>
             <div style={{ display: "flex", justifyContent: "center" }}>
               <Button
                 variant="raised"

@@ -1,5 +1,5 @@
 import store from "store";
-import { GripStrengthEnum } from "game/enums/GripStrength"
+import { GripStrengthEnum } from "game/enums/GripStrength";
 
 const defaultConfig = {
   tumblrId: "fapstergifs",
@@ -22,9 +22,16 @@ const defaultConfig = {
   slowestStrokeSpeed: 0.25, // sec
   fastestStrokeSpeed: 5, // sec
   initialGripStrength: GripStrengthEnum.Normal,
+  tasks: {
+    doubleStrokes: true,
+    halfStrokes: true,
+    accelerationCycles: true,
+    slowAndFast: true,
+    clusterStrokes: true
+  }
 };
 
 export default () => {
   store.config = defaultConfig;
   return store;
-}
+};
