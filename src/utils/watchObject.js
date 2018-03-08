@@ -8,8 +8,17 @@ const watchObject = (object, onChange) =>
     },
     set(target, key, value) {
       if (value && typeof value === "object") {
+        // watch the object
         target[key] = watchObject(value, onChange);
+
+        // check if any properties are objects and watch them as well
+        Object.keys(value).forEach(childKey => {
+          if (value[childKey] && typeof value[childKey] === "object") {
+            target[key][childKey] = watchObject(value[childKey], onChange);
+          }
+        });
       } else {
+        // scalar value property on object has changed
         target[key] = value;
       }
       onChange();
