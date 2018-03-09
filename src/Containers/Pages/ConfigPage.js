@@ -19,10 +19,17 @@ import Select from "material-ui/Select";
 import { MenuItem } from "material-ui/Menu";
 import Tooltip from "material-ui/Tooltip";
 import store from "store";
+import connect from "hoc/connect";
 import copyToClipboard from "utils/copyToClipboard";
 import { GripStrengthString, GripStrengthEnum } from "game/enums/GripStrength";
 import TaskList from "containers/TaskList";
 import Group from "components/Group";
+import { getRandomBoolean } from "utils/math";
+import ExpansionPanel, {
+  ExpansionPanelSummary,
+  ExpansionPanelDetails
+} from "material-ui/ExpansionPanel";
+import ExpandMoreIcon from "material-ui-icons/ExpandMore";
 
 const styles = theme => ({
   control: {
@@ -44,6 +51,14 @@ class ConfigPage extends React.Component {
 
   handleCheckChange = name => (event, checked) => {
     store.config[name] = checked;
+  };
+
+  handleTaskRandomize = (event) => {
+    Object.keys(store.config.tasks).forEach(task => {
+      store.config.tasks[task] = getRandomBoolean();
+    });
+
+    event.stopPropagation();
   };
 
   generateLink(isAbsolute = true) {
@@ -368,70 +383,84 @@ class ConfigPage extends React.Component {
               <FormControlLabel
                 control={
                   <Switch
-                    checked={store.config.disableVoice}
-                    onChange={this.handleCheckChange("disableVoice")}
-                    value="disableVoice"
+                    checked={store.config.enableVoice}
+                    onChange={this.handleCheckChange("enableVoice")}
+                    value="enableVoice"
                   />
                 }
-                label="Disable Voice"
+                label="Enable Voice"
               />
             </Group>
             <Group title="Tasks">
-              <Grid container>
-                <Grid item xs={4}>
-                  <TaskList
-                    title="Speed"
-                    tasks={{
-                      doubleStrokes: "Double Strokes",
-                      halfStrokes: "Half Strokes",
-                      accelerationCycles: "Acceleration Cycles",
-                      slowAndFast: "Slow & Fast",
-                      clusterStrokes: "Cluster Strokes"
-                    }}
-                  />
-                </Grid>
-                <Grid item xs={4}>
-                  <TaskList
-                    title="Style"
-                    tasks={{
-                      handSwapping: "Hand Swapping",
-                      headOnly: "Head Only",
-                      shaftOnly: "Shaft Only",
-                      gripAdjustments: "Grip Adjustments",
-                      overhandGrip: "Overhand Grip"
-                    }}
-                  />
-                </Grid>
-                <Grid item xs={4}>
-                  <TaskList
-                    title="Cock & Ball Torture"
-                    tasks={{
-                      bindCockBalls: "Bind Cock and Balls",
-                      rubberBands: "Rubber Bands",
-                      clothespins: "Clothespins",
-                      ballBeats: "Ball Beats",
-                      headPalming: "Head Palming",
-                      icyHot: "Icy Hot"
-                    }}
-                  />
-                </Grid>
-                <Grid item xs={4}>
-                  <TaskList
-                    title="Cum Eating"
-                    tasks={{
-                      precum: "Precum"
-                    }}
-                  />
-                </Grid>
-                <Grid item xs={4}>
-                  <TaskList
-                    title="Anal"
-                    tasks={{
-                      buttplug: "Butt Plug"
-                    }}
-                  />
-                </Grid>
-              </Grid>
+              <ExpansionPanel defaultExpanded>
+                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                  <Button
+                    variant="raised"
+                    color="primary"
+                    className={classes.button}
+                    onClick={this.handleTaskRandomize}
+                  >
+                    Randomize
+                  </Button>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails>
+                  <Grid container>
+                    <Grid item xs={4}>
+                      <TaskList
+                        title="Speed"
+                        tasks={{
+                          doubleStrokes: "Double Strokes",
+                          halfStrokes: "Half Strokes",
+                          accelerationCycles: "Acceleration Cycles",
+                          slowAndFast: "Slow & Fast",
+                          clusterStrokes: "Cluster Strokes"
+                        }}
+                      />
+                    </Grid>
+                    <Grid item xs={4}>
+                      <TaskList
+                        title="Style"
+                        tasks={{
+                          handSwapping: "Hand Swapping",
+                          headOnly: "Head Only",
+                          shaftOnly: "Shaft Only",
+                          gripAdjustments: "Grip Adjustments",
+                          overhandGrip: "Overhand Grip"
+                        }}
+                      />
+                    </Grid>
+                    <Grid item xs={4}>
+                      <TaskList
+                        title="Cock & Ball Torture"
+                        tasks={{
+                          bindCockBalls: "Bind Cock and Balls",
+                          rubberBands: "Rubber Bands",
+                          clothespins: "Clothespins",
+                          ballBeats: "Ball Beats",
+                          headPalming: "Head Palming",
+                          icyHot: "Icy Hot"
+                        }}
+                      />
+                    </Grid>
+                    <Grid item xs={4}>
+                      <TaskList
+                        title="Cum Eating"
+                        tasks={{
+                          precum: "Precum"
+                        }}
+                      />
+                    </Grid>
+                    <Grid item xs={4}>
+                      <TaskList
+                        title="Anal"
+                        tasks={{
+                          buttplug: "Butt Plug"
+                        }}
+                      />
+                    </Grid>
+                  </Grid>
+                </ExpansionPanelDetails>
+              </ExpansionPanel>
             </Group>
             <div style={{ display: "flex", justifyContent: "center" }}>
               <Button
@@ -471,4 +500,4 @@ class ConfigPage extends React.Component {
   }
 }
 
-export default withStyles(styles)(withRouter(ConfigPage));
+export default withStyles(styles)(withRouter(connect(ConfigPage)));

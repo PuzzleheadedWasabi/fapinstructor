@@ -11,9 +11,21 @@ import store from "store";
 import connect from "hoc/connect";
 
 class TaskList extends React.Component {
-  state = {
-    toggleAll: false
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      toggleAll: this.shouldToggle(props.config.tasks)
+    };
+  }
+
+  shouldToggle(tasks) {
+    return (
+      Object.keys(tasks)
+        .filter(task => Object.keys(this.props.tasks).includes(task))
+        .find(task => !tasks[task]) === undefined
+    );
+  }
 
   static propTypes = {
     title: PropTypes.string.isRequired,
@@ -24,13 +36,17 @@ class TaskList extends React.Component {
     this.setState({
       [event.target.value]: checked
     });
-    Object.keys(this.props.tasks).forEach(task =>
-      this.handleTaskCheck(task)(event, checked)
-    );
+    Object.keys(this.props.tasks).forEach(task => {
+      store.config.tasks[task] = checked;
+    });
   };
 
   handleTaskCheck = name => (event, checked) => {
     store.config.tasks[name] = checked;
+
+    this.setState({
+      toggleAll: this.shouldToggle(store.config.tasks)
+    });
   };
 
   render() {

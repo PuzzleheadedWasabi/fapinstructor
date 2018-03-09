@@ -7,7 +7,7 @@ const defaultConfig = {
   pictures: false,
   tumblrOffset: 0,
   slideDuration: 10, // sec
-  disableVoice: false,
+  enableVoice: true,
   finalOrgasmAllowed: true,
   finalOrgasmDenied: false,
   finalOrgasmRuined: false,

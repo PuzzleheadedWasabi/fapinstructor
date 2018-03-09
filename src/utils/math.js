@@ -3,7 +3,7 @@
  */
 export const round = (value, decimals) => {
   return Number(Math.round(value + "e" + decimals) + "e-" + decimals);
-}
+};
 
 /**
  * Returns a random integer between and including the specified min, max.
@@ -13,13 +13,18 @@ export const getRandomInclusiveInteger = (min, max) => {
 };
 
 /**
+ * Returns a random boolean
+ */
+export const getRandomBoolean = () => Math.random() >= 0.5;
+
+/**
  * Returns a random number between the specified values.
  * The returned value is no lower than (and may possibly equal) min,
  * and is less than (and not equal) max
  */
 export const getRandomArbitrary = (min, max) => {
   return Math.random() * (max - min) + min;
-}
+};
 
 /**
  * Clamps a number between the specified range.
