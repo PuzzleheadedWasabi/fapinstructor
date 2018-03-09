@@ -27,7 +27,20 @@ const defaultConfig = {
     halfStrokes: true,
     accelerationCycles: true,
     slowAndFast: true,
-    clusterStrokes: true
+    clusterStrokes: true,
+    handSwapping: true,
+    headOnly: true,
+    shaftOnly: true,
+    overhandGrip: true,
+    gripAdjustments: true,
+    bindCockBalls: true,
+    rubberBands: true,
+    clothespins: true,
+    ballBeats: true,
+    headPalming: true,
+    icyHot: true,
+    precum: true,
+    buttplug: true
   }
 };
 

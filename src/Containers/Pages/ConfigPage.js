@@ -13,7 +13,7 @@ import {
   FormGroup
 } from "material-ui/Form";
 import TextField from "material-ui/TextField";
-import Checkbox from "material-ui/Checkbox";
+import Switch from "material-ui/Switch";
 import Grid from "material-ui/Grid";
 import Select from "material-ui/Select";
 import { MenuItem } from "material-ui/Menu";
@@ -21,6 +21,8 @@ import Tooltip from "material-ui/Tooltip";
 import store from "store";
 import copyToClipboard from "utils/copyToClipboard";
 import { GripStrengthString, GripStrengthEnum } from "game/enums/GripStrength";
+import TaskList from "containers/TaskList";
+import Group from "components/Group";
 
 const styles = theme => ({
   control: {
@@ -30,17 +32,6 @@ const styles = theme => ({
     marginRight: theme.spacing.unit
   }
 });
-
-const Group = ({ title, children }) => (
-  <div style={{ marginBottom: 30 }}>
-    <div style={{ marginBottom: 15 }}>
-      <Typography variant="title" color="primary">
-        {title}
-      </Typography>
-    </div>
-    <div>{children}</div>
-  </div>
-);
 
 class ConfigPage extends React.Component {
   state = {
@@ -53,10 +44,6 @@ class ConfigPage extends React.Component {
 
   handleCheckChange = name => (event, checked) => {
     store.config[name] = checked;
-  };
-
-  handleTaskCheckChange = name => (event, checked) => {
-    store.config.tasks[name] = checked;
   };
 
   generateLink(isAbsolute = true) {
@@ -84,6 +71,7 @@ class ConfigPage extends React.Component {
 
   render() {
     const { classes } = this.props;
+    const { copyToolTipOpen } = this.state;
 
     return (
       <div
@@ -154,7 +142,7 @@ class ConfigPage extends React.Component {
                     <FormGroup>
                       <FormControlLabel
                         control={
-                          <Checkbox
+                          <Switch
                             checked={store.config.gifs}
                             onChange={this.handleCheckChange("gifs")}
                             value="gifs"
@@ -164,7 +152,7 @@ class ConfigPage extends React.Component {
                       />
                       <FormControlLabel
                         control={
-                          <Checkbox
+                          <Switch
                             checked={store.config.pictures}
                             onChange={this.handleCheckChange("pictures")}
                             value="pictures"
@@ -219,7 +207,7 @@ class ConfigPage extends React.Component {
                     <FormGroup>
                       <FormControlLabel
                         control={
-                          <Checkbox
+                          <Switch
                             checked={store.config.finalOrgasmAllowed}
                             onChange={this.handleCheckChange(
                               "finalOrgasmAllowed"
@@ -231,7 +219,7 @@ class ConfigPage extends React.Component {
                       />
                       <FormControlLabel
                         control={
-                          <Checkbox
+                          <Switch
                             checked={store.config.finalOrgasmDenied}
                             onChange={this.handleCheckChange(
                               "finalOrgasmDenied"
@@ -243,7 +231,7 @@ class ConfigPage extends React.Component {
                       />
                       <FormControlLabel
                         control={
-                          <Checkbox
+                          <Switch
                             checked={store.config.finalOrgasmRuined}
                             onChange={this.handleCheckChange(
                               "finalOrgasmRuined"
@@ -255,7 +243,7 @@ class ConfigPage extends React.Component {
                       />
                       <FormControlLabel
                         control={
-                          <Checkbox
+                          <Switch
                             checked={store.config.finalOrgasmRandom}
                             onChange={this.handleCheckChange(
                               "finalOrgasmRandom"
@@ -379,7 +367,7 @@ class ConfigPage extends React.Component {
             <Group title="Misc.">
               <FormControlLabel
                 control={
-                  <Checkbox
+                  <Switch
                     checked={store.config.disableVoice}
                     onChange={this.handleCheckChange("disableVoice")}
                     value="disableVoice"
@@ -389,64 +377,60 @@ class ConfigPage extends React.Component {
               />
             </Group>
             <Group title="Tasks">
-              <Grid item xs={12}>
-                <FormControl component="fieldset">
-                  <FormLabel component="legend">Speed</FormLabel>
-                  <FormGroup>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          checked={store.config.tasks.doubleStrokes}
-                          onChange={this.handleTaskCheckChange("doubleStrokes")}
-                          value="doubleStrokes"
-                        />
-                      }
-                      label="Double Strokes"
-                    />
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          checked={store.config.tasks.halfStrokes}
-                          onChange={this.handleTaskCheckChange("halfStrokes")}
-                          value="halfStrokes"
-                        />
-                      }
-                      label="Half Strokes"
-                    />
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          checked={store.config.tasks.accelerationCycles}
-                          onChange={this.handleTaskCheckChange(
-                            "accelerationCycles"
-                          )}
-                          value="accelerationCycles"
-                        />
-                      }
-                      label="Acceleration Cycles"
-                    />
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          checked={store.config.tasks.slowAndFast}
-                          onChange={this.handleTaskCheckChange("slowAndFast")}
-                          value="slowAndFast"
-                        />
-                      }
-                      label="Slow & Fast"
-                    />
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          checked={store.config.tasks.clusterStrokes}
-                          onChange={this.handleTaskCheckChange("clusterStrokes")}
-                          value="clusterStrokes"
-                        />
-                      }
-                      label="Cluster Strokes"
-                    />
-                  </FormGroup>
-                </FormControl>
+              <Grid container>
+                <Grid item xs={4}>
+                  <TaskList
+                    title="Speed"
+                    tasks={{
+                      doubleStrokes: "Double Strokes",
+                      halfStrokes: "Half Strokes",
+                      accelerationCycles: "Acceleration Cycles",
+                      slowAndFast: "Slow & Fast",
+                      clusterStrokes: "Cluster Strokes"
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={4}>
+                  <TaskList
+                    title="Style"
+                    tasks={{
+                      handSwapping: "Hand Swapping",
+                      headOnly: "Head Only",
+                      shaftOnly: "Shaft Only",
+                      gripAdjustments: "Grip Adjustments",
+                      overhandGrip: "Overhand Grip"
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={4}>
+                  <TaskList
+                    title="Cock & Ball Torture"
+                    tasks={{
+                      bindCockBalls: "Bind Cock and Balls",
+                      rubberBands: "Rubber Bands",
+                      clothespins: "Clothespins",
+                      ballBeats: "Ball Beats",
+                      headPalming: "Head Palming",
+                      icyHot: "Icy Hot"
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={4}>
+                  <TaskList
+                    title="Cum Eating"
+                    tasks={{
+                      precum: "Precum"
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={4}>
+                  <TaskList
+                    title="Anal"
+                    tasks={{
+                      buttplug: "Butt Plug"
+                    }}
+                  />
+                </Grid>
               </Grid>
             </Group>
             <div style={{ display: "flex", justifyContent: "center" }}>
@@ -462,7 +446,7 @@ class ConfigPage extends React.Component {
                 id="generate-link-tooltip"
                 title="Copied to Clipboard"
                 leaveDelay={2000}
-                open={this.state.copyToolTipOpen}
+                open={copyToolTipOpen}
                 onClose={() => {
                   this.setState({
                     copyToolTipOpen: false
