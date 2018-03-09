@@ -3,6 +3,7 @@ import { withStyles } from "material-ui/styles";
 import StatusPanel from "containers/StatusPanel";
 import TriggerPanel from "containers/TriggerPanel";
 import PersistentTriggerPanel from "containers/PersistentTriggerPanel";
+import NotificationManager from "containers/NotificationManager";
 
 const styles = theme => ({
   root: {
@@ -15,7 +16,7 @@ const styles = theme => ({
   middle: {
     display: "flex",
     width: "100vw",
-    height: "100%",
+    height: "100%"
   }
 });
 
@@ -32,13 +33,14 @@ const HUD = ({ classes }) => (
       >
         <div>
           <StatusPanel />
+          <PersistentTriggerPanel />
         </div>
-        <div />
+        <div>
+          <NotificationManager />
+        </div>
       </div>
     </div>
-    <div className={classes.middle}>
-      <PersistentTriggerPanel />
-    </div>
+    <div className={classes.middle} />
     <div>
       <TriggerPanel />
     </div>

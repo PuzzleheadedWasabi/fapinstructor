@@ -7,7 +7,7 @@ import { clamp, getRandomArbitrary } from "utils/math";
  * and increase the slowest, ensure it stays in the allowed
  * config range and then randomize it
  */
-export default () => {
+export const randomStartingSpeed = () => {
   const { slowestStrokeSpeed, fastestStrokeSpeed } = store.config;
 
   const minStrokeSpeed = clamp(
@@ -23,4 +23,14 @@ export default () => {
   const strokeSpeed = getRandomArbitrary(minStrokeSpeed, maxStrokeSpeed);
 
   return strokeSpeed;
+};
+
+export const setStrokeSpeed = newSpeed => {
+  const { slowestStrokeSpeed, fastestStrokeSpeed } = store.config;
+
+  store.game.strokeSpeed = clamp(
+    newSpeed,
+    slowestStrokeSpeed,
+    fastestStrokeSpeed
+  );
 };

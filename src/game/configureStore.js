@@ -1,6 +1,6 @@
 import store from "store";
 import moment from "moment";
-import calculateStartingStrokeSpeed from "./utils/calculateStartingStrokeSpeed";
+import { randomStartingSpeed } from "./utils/strokeSpeed";
 
 export default () => {
   store.game = {
@@ -9,7 +9,7 @@ export default () => {
     shownSlides: 0,
     pictures: [],
     pictureIndex: -1,
-    strokeSpeed: calculateStartingStrokeSpeed(),
+    strokeSpeed: randomStartingSpeed(),
     gripStrength: store.config.initialGripStrength
   };
 };

@@ -1,7 +1,7 @@
-import a from "./a";
+import doubleStrokes from "./doubleStrokes";
 
 const generateAction = () => {
-  return a;
+  return doubleStrokes;
 };
 
 export default generateAction;
