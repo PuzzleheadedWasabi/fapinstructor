@@ -17,8 +17,8 @@ const addLoops = (...newLoops) => {
 }
 
 const startGame = () => {
-  addLoops(actionLoop, strokerLoop, probabilityLoop, slideLoop)
   configureStore();
+  addLoops(actionLoop, strokerLoop, probabilityLoop, slideLoop)
 };
 
 const stopGame = () => {

@@ -29,5 +29,7 @@ const observableStore = watchObject(store, () => {
   });
 });
 
+window.store = observableStore;
+
 export { subscribe, unsubscribe };
 export default observableStore;
