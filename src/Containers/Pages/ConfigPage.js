@@ -410,7 +410,7 @@ class ConfigPage extends React.Component {
                         title="Speed"
                         tasks={{
                           doubleStrokes: "Double Strokes",
-                          halfStrokes: "Half Strokes",
+                          halvedStrokes: "Halved Strokes",
                           accelerationCycles: "Acceleration Cycles",
                           slowAndFast: "Slow & Fast",
                           clusterStrokes: "Cluster Strokes"

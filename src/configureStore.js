@@ -24,7 +24,7 @@ const defaultConfig = {
   initialGripStrength: GripStrengthEnum.Normal,
   tasks: {
     doubleStrokes: true,
-    halfStrokes: true,
+    halvedStrokes: true,
     accelerationCycles: true,
     slowAndFast: true,
     clusterStrokes: true,
