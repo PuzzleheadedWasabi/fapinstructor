@@ -1,25 +1,33 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Typography from "material-ui/Typography";
-import { CircularProgress } from "material-ui/Progress";
+import { LinearProgress } from "material-ui/Progress";
 import { withStyles } from "material-ui/styles";
 import Slide from "material-ui/transitions/Slide";
+import Icon from "material-ui-icons/Grade";
 
 const styles = theme => ({
+  root: {
+    background: "rgba(0, 0, 0, 0.8)",
+    margin: 5,
+    border: "1px solid #222",
+    borderTop: 0
+  },
   notification: {
     padding: "14px 24px",
-    minWidth: "20vw",
     color: "white",
-    borderRadius: "4px 4px 4px 4px",
-    background: "rgba(0, 0, 0, 0.8)",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 5,
-    marginRight: 5,
     cursor: "pointer",
     userSelect: "none",
     overflow: "hidden"
+  },
+  icon: {
+    marginRight: 5
+  },
+  progress: {
+    height: 1,
   }
 });
 
@@ -34,7 +42,10 @@ class Notification extends React.Component {
 
       if (progress > 100) {
         clearInterval(this.interval);
-        this.props.onDismiss(this.props.id);
+
+        setTimeout(() => {
+          this.props.onDismiss(this.props.id);
+        }, 500);
       } else {
         this.setState({ progress });
       }
@@ -51,17 +62,19 @@ class Notification extends React.Component {
 
     return (
       <Slide in={true} direction="right">
-        <div key={id} className={classes.notification} onClick={onDismiss}>
-          <Typography variant="body2" color="inherit" noWrap>
-            {title + id}
-          </Typography>
-          <CircularProgress
-            style={{ marginLeft: 10 }}
+        <div className={classes.root}>
+          <LinearProgress
             variant="determinate"
             value={progress}
+            className={classes.progress}
             color="secondary"
-            size={20}
           />
+          <div key={id} className={classes.notification} onClick={onDismiss}>
+            <Icon className={classes.icon} />
+            <Typography variant="body2" color="inherit" noWrap>
+              {title}
+            </Typography>
+          </div>
         </div>
       </Slide>
     );
