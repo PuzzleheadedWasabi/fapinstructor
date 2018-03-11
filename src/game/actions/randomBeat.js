@@ -2,19 +2,21 @@ import store from "store";
 import { interruptible } from "engine/interrupt";
 import createNotification from "engine/createNotification";
 import { setStrokeSpeed } from "game/utils/strokeSpeed";
+import { strokerRemoteControl } from "game/loops/strokerLoop";
 
-const accelerationCycles = async () => {
-  createNotification("Acceleration Cycles!");
+const randomBeat = async () => {
+  createNotification("Random Beat");
+  strokerRemoteControl.pause();
 
   await new Promise(resolve => {
     interruptible(
       setTimeout(() => {
-        console.log("delayed execute");
-        // play(audioLibrary.Ruined)
         resolve();
-      }, 2000)
+      }, 5000)
     );
   });
+
+  strokerRemoteControl.play();
 };
 
-export default accelerationCycles;
+export default randomBeat;

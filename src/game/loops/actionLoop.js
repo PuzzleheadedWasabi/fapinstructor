@@ -3,6 +3,7 @@ import store from "store";
 import executeAction from "engine/executeAction";
 
 let lastGeneratedAction = 0;
+
 export default progress => {
   if (lastGeneratedAction >= 1000) {
     const { executing, actionTriggers } = store.engine;

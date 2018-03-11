@@ -2,6 +2,7 @@ import store from "store";
 import { GripStrengthEnum } from "game/enums/GripStrength";
 
 const defaultConfig = {
+  version: 2.0,
   tumblrId: "fapstergifs",
   gifs: true,
   pictures: false,

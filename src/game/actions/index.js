@@ -3,10 +3,12 @@ import { getRandomInclusiveInteger } from "utils/math";
 import createProbability from "../utils/createProbability";
 import doubleStrokes from "./doubleStrokes";
 import halvedStrokes from "./halvedStrokes";
+import randomBeat from "./randomBeat";
 
 const actions = [
-  createProbability(halvedStrokes, 20),
-  createProbability(doubleStrokes, 20)
+  createProbability(halvedStrokes, 2),
+  createProbability(doubleStrokes, 2),
+  createProbability(randomBeat, 50)
 ];
 
 const generateAction = () => {
