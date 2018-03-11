@@ -23,6 +23,7 @@ class NotificationManager extends React.Component {
                 key={index}
                 id={index}
                 title={notification.title}
+                time={notification.time}
                 onDismiss={this.handleDismiss(index)}
               />
             )

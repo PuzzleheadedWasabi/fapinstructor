@@ -2,21 +2,21 @@ import store from "store";
 import { clamp, getRandomArbitrary } from "utils/math";
 
 /**
- * Calculates the starting stroke speed for a new game
+ * Generates a random stroke speed
  * We use the slowest & fastest stroke speeds, reduce the fastest
  * and increase the slowest, ensure it stays in the allowed
  * config range and then randomize it
  */
-export const randomStartingSpeed = () => {
+export const randomStrokeSpeed = ({ slow = 2, fast = 1.4 } = {}) => {
   const { slowestStrokeSpeed, fastestStrokeSpeed } = store.config;
 
   const minStrokeSpeed = clamp(
-    slowestStrokeSpeed * 2,
+    slowestStrokeSpeed * slow,
     slowestStrokeSpeed,
     fastestStrokeSpeed
   );
   const maxStrokeSpeed = clamp(
-    fastestStrokeSpeed / 1.4,
+    fastestStrokeSpeed / fast,
     slowestStrokeSpeed,
     fastestStrokeSpeed
   );
@@ -28,9 +28,10 @@ export const randomStartingSpeed = () => {
 export const setStrokeSpeed = newSpeed => {
   const { slowestStrokeSpeed, fastestStrokeSpeed } = store.config;
 
-  store.game.strokeSpeed = clamp(
-    newSpeed,
-    slowestStrokeSpeed,
-    fastestStrokeSpeed
-  );
+  let speed = 0;
+
+  if (newSpeed > 0) {
+    speed = clamp(newSpeed, slowestStrokeSpeed, fastestStrokeSpeed);
+  }
+  store.game.strokeSpeed = speed;
 };

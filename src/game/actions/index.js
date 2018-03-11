@@ -8,7 +8,7 @@ import randomBeat from "./randomBeat";
 const actions = [
   createProbability(halvedStrokes, 2),
   createProbability(doubleStrokes, 2),
-  createProbability(randomBeat, 50)
+  createProbability(randomBeat, 100)
 ];
 
 const generateAction = () => {

@@ -27,7 +27,7 @@ const styles = theme => ({
     marginRight: 5
   },
   progress: {
-    height: 1,
+    height: 3
   }
 });
 
@@ -37,6 +37,8 @@ class Notification extends React.Component {
   };
 
   componentDidMount() {
+    const time = this.props.time || 5000;
+
     this.interval = setInterval(() => {
       const progress = this.state.progress + 1;
 
@@ -49,7 +51,7 @@ class Notification extends React.Component {
       } else {
         this.setState({ progress });
       }
-    }, 50);
+    }, time / 100);
   }
 
   componentWillUnmount() {
@@ -57,18 +59,20 @@ class Notification extends React.Component {
   }
 
   render() {
-    const { classes, id, title, onDismiss } = this.props;
+    const { classes, id, title, onDismiss, time } = this.props;
     const { progress } = this.state;
 
     return (
       <Slide in={true} direction="right">
         <div className={classes.root}>
-          <LinearProgress
-            variant="determinate"
-            value={progress}
-            className={classes.progress}
-            color="secondary"
-          />
+          {time && (
+            <LinearProgress
+              variant="determinate"
+              value={progress}
+              className={classes.progress}
+              color="secondary"
+            />
+          )}
           <div key={id} className={classes.notification} onClick={onDismiss}>
             <Icon className={classes.icon} />
             <Typography variant="body2" color="inherit" noWrap>
@@ -83,7 +87,8 @@ class Notification extends React.Component {
 
 Notification.propTypes = {
   title: PropTypes.string.isRequired,
-  onDismiss: PropTypes.func.isRequired
+  onDismiss: PropTypes.func.isRequired,
+  time: PropTypes.number
 };
 
 export default withStyles(styles)(Notification);

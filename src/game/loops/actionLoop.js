@@ -5,7 +5,7 @@ import executeAction from "engine/executeAction";
 let lastGeneratedAction = 0;
 
 export default progress => {
-  if (lastGeneratedAction >= 1000) {
+  if (lastGeneratedAction >= 2000) {
     const { executing, actionTriggers } = store.engine;
     // Don't execute new actions if a command is already executing or if any triggers are awaiting
     if (!executing && !actionTriggers) {

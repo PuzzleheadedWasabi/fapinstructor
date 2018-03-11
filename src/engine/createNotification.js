@@ -2,11 +2,12 @@ import store from "store";
 import play from "engine/audio";
 import audioLibrary from "audio";
 
-const createNotification = (title) => {
-  play(audioLibrary.Card)
+const createNotification = (title, time) => {
+  play(audioLibrary.Card);
   store.engine.notifications.push({
-    title
+    title,
+    time
   });
-}
+};
 
 export default createNotification;
