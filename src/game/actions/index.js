@@ -8,6 +8,7 @@ import randomGripAdjustment from "./grip";
 import { addRubberBand, removeRubberBand } from "./cbt/rubberband";
 import { addClothespin, removeClothespin } from "./cbt/clothespin";
 import applyIcyHot from "./cbt/icyhot";
+import ballslaps from "./cbt/ballslaps";
 import {
   setStrokeStyleDominant,
   setStrokeStyleNondominant,
@@ -35,17 +36,17 @@ const actions = [
   createProbability(addClothespin, 3),
   createProbability(removeClothespin, 1),
   createProbability(applyIcyHot, 1),
-  // createCommand(COMMANDS.CBT.BALL_SLAPS, actions.ballSlaps, 4),
+  createProbability(ballslaps, 4),
   // createCommand(COMMANDS.CBT.HEAD_PALMING, actions.headPalming, 1),
   // stroke style
-  createProbability(setStrokeStyleDominant, 5),
+  createProbability(setStrokeStyleDominant, 7),
   createProbability(setStrokeStyleNondominant, 5),
   createProbability(setStrokeStyleHeadOnly, 1),
-  createProbability(setStrokeStyleShaftOnly, 2),
-  createProbability(setStrokeStyleOverhandGrip, 2),
+  createProbability(setStrokeStyleShaftOnly, 5),
+  createProbability(setStrokeStyleOverhandGrip, 1),
   // anal
   createProbability(insertButtPlug, 1),
-  createProbability(removeButtPlug, 0.5),
+  createProbability(removeButtPlug, 1),
   // cei
   createProbability(eatPrecum, 3)
 ];
