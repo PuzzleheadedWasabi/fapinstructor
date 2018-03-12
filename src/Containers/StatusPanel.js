@@ -6,6 +6,7 @@ import connect from "hoc/connect";
 import elapsedGameTime from "game/utils/elapsedGameTime";
 import { round } from "utils/math";
 import { GripStrengthString } from "game/enums/GripStrength";
+import { StrokeStyleString } from "game/enums/StrokeStyle";
 import logo from "images/logo.svg";
 import DownIcon from "material-ui-icons/ArrowDropDown";
 import UpIcon from "material-ui-icons/ArrowDropUp";
@@ -53,7 +54,10 @@ class StatusPanel extends React.Component {
 
   render() {
     const { open, strokeSpeedUnit } = this.state;
-    const { classes, game: { strokeSpeed, gripStrength } } = this.props;
+    const {
+      classes,
+      game: { strokeSpeed, gripStrength, strokeStyle }
+    } = this.props;
 
     return (
       <div className={classes.root}>
@@ -82,6 +86,7 @@ class StatusPanel extends React.Component {
                 />
               </div>
               <Label value="Stroke Grip" />
+              <Label value="Stroke Style" />
             </div>
             <div>
               <Label value={elapsedGameTime("minutes")} />
@@ -96,6 +101,7 @@ class StatusPanel extends React.Component {
                 />
               </div>
               <Label value={GripStrengthString[gripStrength]} />
+              <Label value={StrokeStyleString[strokeStyle]} />
             </div>
           </div>
         )}

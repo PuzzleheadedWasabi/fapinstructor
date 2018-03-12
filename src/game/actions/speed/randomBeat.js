@@ -1,6 +1,6 @@
 import store from "store";
 import createNotification from "engine/createNotification";
-import { setStrokeSpeed } from "game/utils/strokeSpeed";
+import { setStrokeSpeed, randomStrokeSpeed } from "game/utils/strokeSpeed";
 import { getRandomInclusiveInteger, clamp } from "utils/math";
 import delay from "utils/delay";
 
@@ -49,6 +49,8 @@ const randomBeat = async () => {
     setStrokeSpeed(0);
     await delay(setGapTime * 1000);
   }
+
+  setStrokeSpeed(randomStrokeSpeed());
 };
 
 export default randomBeat;

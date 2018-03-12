@@ -1,18 +1,38 @@
 import actionIterator from "engine/actionIterator";
 import { getRandomInclusiveInteger } from "utils/math";
 import createProbability from "../utils/createProbability";
-import doubleStrokes from "./doubleStrokes";
-import halvedStrokes from "./halvedStrokes";
-import randomBeat from "./randomBeat";
-import randomGripAdjustment from "./grip"
-import randomRubberBandAdjustment from "./cbt/rubberband";
+import doubleStrokes from "./speed/doubleStrokes";
+import halvedStrokes from "./speed/halvedStrokes";
+import randomBeat from "./speed/randomBeat";
+import randomGripAdjustment from "./grip";
+import { addRubberBand, removeRubberBand } from "./cbt/rubberband";
+import {
+  setStrokeStyleDominant,
+  setStrokeStyleNondominant,
+  setStrokeStyleHeadOnly,
+  setStrokeStyleShaftOnly,
+  setStrokeStyleOverhandGrip
+} from "./strokeStyle";
+import eatPrecum from "./cei/eatPrecum";
 
 const actions = [
+  // speed
   createProbability(halvedStrokes, 2),
   createProbability(doubleStrokes, 2),
-  createProbability(randomBeat, 10),
+  createProbability(randomBeat, 30),
+  // cbt
   createProbability(randomGripAdjustment, 15),
-  createProbability(randomRubberBandAdjustment, 100),
+  createProbability(addRubberBand, 3),
+  createProbability(removeRubberBand, 1),
+  // stroke style
+  createProbability(setStrokeStyleDominant, 5),
+  createProbability(setStrokeStyleNondominant, 5),
+  createProbability(setStrokeStyleHeadOnly, 1),
+  createProbability(setStrokeStyleShaftOnly, 2),
+  createProbability(setStrokeStyleOverhandGrip, 2),
+  // anal
+  // cei
+  createProbability(eatPrecum, 3)
 ];
 
 const generateAction = () => {

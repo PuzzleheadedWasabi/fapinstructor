@@ -3,14 +3,17 @@ import createNotification, {
   dismissNotification
 } from "engine/createNotification";
 import { getRandomBoolean } from "utils/math";
+import { strokerRemoteControl } from "game/loops/strokerLoop";
 
 export const addRubberBand = async () => {
+  strokerRemoteControl.pause();
   const newRubberBands = store.game.rubberBands + 1;
   const notificationId = createNotification(`Add a rubberband`, {
     autoDismiss: false
   });
 
   const done = async () => {
+    strokerRemoteControl.play();
     store.game.rubberBands = newRubberBands;
     dismissNotification(notificationId);
   };
@@ -20,6 +23,7 @@ export const addRubberBand = async () => {
 };
 
 export const removeRubberBand = async () => {
+  strokerRemoteControl.pause();
   const currentRubberBands = store.game.rubberBands;
 
   if (currentRubberBands !== 0) {
@@ -29,6 +33,7 @@ export const removeRubberBand = async () => {
     });
 
     const done = async () => {
+      strokerRemoteControl.play();
       store.game.rubberBands = newRubberBands;
       dismissNotification(notificationId);
     };
