@@ -4,11 +4,13 @@ import createProbability from "../utils/createProbability";
 import doubleStrokes from "./doubleStrokes";
 import halvedStrokes from "./halvedStrokes";
 import randomBeat from "./randomBeat";
+import randomGripAdjustment from "./grip"
 
 const actions = [
   createProbability(halvedStrokes, 2),
   createProbability(doubleStrokes, 2),
-  createProbability(randomBeat, 100)
+  createProbability(randomBeat, 10),
+  createProbability(randomGripAdjustment, 15),
 ];
 
 const generateAction = () => {

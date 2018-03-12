@@ -10,8 +10,7 @@ const styles = theme => ({
   root: {
     background: "rgba(0, 0, 0, 0.8)",
     margin: 5,
-    border: "1px solid #222",
-    borderTop: 0
+    border: "1px solid #222"
   },
   notification: {
     padding: "14px 24px",
