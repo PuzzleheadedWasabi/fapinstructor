@@ -2,13 +2,33 @@ import store from "store";
 import createNotification, {
   dismissNotification
 } from "engine/createNotification";
-import { getRandomBoolean } from "utils/math";
+import { getRandomBoolean, getRandomInclusiveInteger } from "utils/math";
 import { strokerRemoteControl } from "game/loops/strokerLoop";
 
 export const addRubberBand = async () => {
   strokerRemoteControl.pause();
   const newRubberBands = store.game.rubberBands + 1;
-  const notificationId = createNotification(`Add a rubberband`, {
+
+  let location = "Put a rubberband ";
+  switch (getRandomInclusiveInteger(1, 4)) {
+    case 1: {
+      location += "onto the base of your shaft";
+      break;
+    }
+    case 2: {
+      location += "onto the middle of your shaft";
+      break;
+    }
+    case 3: {
+      location += "underneath your cock head";
+      break;
+    }
+    default: {
+      location += "anywhere on your cock";
+    }
+  }
+
+  const notificationId = createNotification(location, {
     autoDismiss: false
   });
 
@@ -27,7 +47,7 @@ export const removeRubberBand = async () => {
   const currentRubberBands = store.game.rubberBands;
 
   if (currentRubberBands !== 0) {
-    const newRubberBands = store.game.rubberBands + 1;
+    const newRubberBands = store.game.rubberBands - 1;
     const notificationId = createNotification(`Remove a rubberband`, {
       autoDismiss: false
     });

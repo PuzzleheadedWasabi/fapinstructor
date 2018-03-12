@@ -13,6 +13,7 @@ export default () => {
     strokeSpeed: randomStrokeSpeed(),
     gripStrength: store.config.initialGripStrength,
     rubberBands: 0,
+    clothespins: 0,
     strokeStyle: StrokeStyleEnum.Dominant,
     buttPlugInserted: false
   };

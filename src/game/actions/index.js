@@ -6,6 +6,7 @@ import halvedStrokes from "./speed/halvedStrokes";
 import randomBeat from "./speed/randomBeat";
 import randomGripAdjustment from "./grip";
 import { addRubberBand, removeRubberBand } from "./cbt/rubberband";
+import { addClothespin, removeClothespin } from "./cbt/clothespin";
 import {
   setStrokeStyleDominant,
   setStrokeStyleNondominant,
@@ -20,7 +21,7 @@ const actions = [
   // speed
   createProbability(halvedStrokes, 2),
   createProbability(doubleStrokes, 2),
-  createProbability(randomBeat, 30),
+  createProbability(randomBeat, 15),
   //createCommand(COMMANDS.SPEED.RANDOM_SPEED, actions.playSpeedCard, 8),
   //createCommand(COMMANDS.SPEED.INCREASE_SPEED_VARIANCE, actions.increaseSpeedVariance, 17)
   //ACCELERATION_CYCLES
@@ -30,7 +31,8 @@ const actions = [
   createProbability(randomGripAdjustment, 15),
   createProbability(addRubberBand, 3),
   createProbability(removeRubberBand, 1),
-  // createCommand(COMMANDS.CBT.ADD_CLOTHESPIN, actions.addClothespin, 3),
+  createProbability(addClothespin, 3),
+  createProbability(removeClothespin, 1),
   // createCommand(COMMANDS.CBT.BALL_SLAPS, actions.ballSlaps, 4),
   // createCommand(COMMANDS.CBT.HEAD_PALMING, actions.headPalming, 1),
   // createCommand(COMMANDS.CBT.ICYHOT, actions.applyIcyHot, 1)
