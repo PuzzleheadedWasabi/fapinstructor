@@ -56,7 +56,7 @@ class StatusPanel extends React.Component {
     const { open, strokeSpeedUnit } = this.state;
     const {
       classes,
-      game: { strokeSpeed, gripStrength, strokeStyle }
+      game: { strokeSpeed, gripStrength, strokeStyle, buttPlugInserted }
     } = this.props;
 
     return (
@@ -87,6 +87,7 @@ class StatusPanel extends React.Component {
               </div>
               <Label value="Stroke Grip" />
               <Label value="Stroke Style" />
+              {buttPlugInserted && <Label value="Butt Plug" />}
             </div>
             <div>
               <Label value={elapsedGameTime("minutes")} />
@@ -102,6 +103,7 @@ class StatusPanel extends React.Component {
               </div>
               <Label value={GripStrengthString[gripStrength]} />
               <Label value={StrokeStyleString[strokeStyle]} />
+              {buttPlugInserted && <Label value="Inserted" />}
             </div>
           </div>
         )}

@@ -14,16 +14,26 @@ import {
   setStrokeStyleOverhandGrip
 } from "./strokeStyle";
 import eatPrecum from "./cei/eatPrecum";
+import { insertButtPlug, removeButtPlug } from "./anal/buttPlug";
 
 const actions = [
   // speed
   createProbability(halvedStrokes, 2),
   createProbability(doubleStrokes, 2),
   createProbability(randomBeat, 30),
+  //createCommand(COMMANDS.SPEED.RANDOM_SPEED, actions.playSpeedCard, 8),
+  //createCommand(COMMANDS.SPEED.INCREASE_SPEED_VARIANCE, actions.increaseSpeedVariance, 17)
+  //ACCELERATION_CYCLES
+  //SLOW_THEN_FAST
+  //TRIPLETS
   // cbt
   createProbability(randomGripAdjustment, 15),
   createProbability(addRubberBand, 3),
   createProbability(removeRubberBand, 1),
+  // createCommand(COMMANDS.CBT.ADD_CLOTHESPIN, actions.addClothespin, 3),
+  // createCommand(COMMANDS.CBT.BALL_SLAPS, actions.ballSlaps, 4),
+  // createCommand(COMMANDS.CBT.HEAD_PALMING, actions.headPalming, 1),
+  // createCommand(COMMANDS.CBT.ICYHOT, actions.applyIcyHot, 1)
   // stroke style
   createProbability(setStrokeStyleDominant, 5),
   createProbability(setStrokeStyleNondominant, 5),
@@ -31,6 +41,8 @@ const actions = [
   createProbability(setStrokeStyleShaftOnly, 2),
   createProbability(setStrokeStyleOverhandGrip, 2),
   // anal
+  createProbability(insertButtPlug, 1),
+  createProbability(removeButtPlug, 0.5),
   // cei
   createProbability(eatPrecum, 3)
 ];

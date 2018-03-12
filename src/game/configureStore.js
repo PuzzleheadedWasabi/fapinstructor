@@ -13,6 +13,7 @@ export default () => {
     strokeSpeed: randomStrokeSpeed(),
     gripStrength: store.config.initialGripStrength,
     rubberBands: 0,
-    strokeStyle: StrokeStyleEnum.Dominant
+    strokeStyle: StrokeStyleEnum.Dominant,
+    buttPlugInserted: false
   };
 };
