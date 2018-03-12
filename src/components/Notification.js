@@ -36,25 +36,29 @@ class Notification extends React.Component {
   };
 
   componentDidMount() {
-    const time = this.props.time || 5000;
+    if (this.props.autoDismiss) {
+      const time = this.props.time || 5000;
 
-    this.interval = setInterval(() => {
-      const progress = this.state.progress + 1;
+      this.interval = setInterval(() => {
+        const progress = this.state.progress + 1;
 
-      if (progress > 100) {
-        clearInterval(this.interval);
+        if (progress > 100) {
+          clearInterval(this.interval);
 
-        setTimeout(() => {
-          this.props.onDismiss(this.props.id);
-        }, 500);
-      } else {
-        this.setState({ progress });
-      }
-    }, time / 100);
+          setTimeout(() => {
+            this.props.onDismiss(this.props.id);
+          }, 500);
+        } else {
+          this.setState({ progress });
+        }
+      }, time / 100);
+    }
   }
 
   componentWillUnmount() {
-    clearInterval(this.interval);
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
   }
 
   render() {
@@ -84,10 +88,15 @@ class Notification extends React.Component {
   }
 }
 
+Notification.defaultProps = {
+  autoDismiss: true
+}
+
 Notification.propTypes = {
   title: PropTypes.string.isRequired,
   onDismiss: PropTypes.func.isRequired,
-  time: PropTypes.number
+  time: PropTypes.number,
+  autoDismiss: PropTypes.bool
 };
 
 export default withStyles(styles)(Notification);

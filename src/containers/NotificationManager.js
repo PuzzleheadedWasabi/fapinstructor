@@ -24,6 +24,7 @@ class NotificationManager extends React.Component {
                 id={index}
                 title={notification.title}
                 time={notification.time}
+                autoDismiss={notification.autoDismiss}
                 onDismiss={this.handleDismiss(index)}
               />
             )

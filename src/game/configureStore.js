@@ -10,6 +10,7 @@ export default () => {
     pictures: [],
     pictureIndex: -1,
     strokeSpeed: randomStrokeSpeed(),
-    gripStrength: store.config.initialGripStrength
+    gripStrength: store.config.initialGripStrength,
+    rubberBands: 0
   };
 };

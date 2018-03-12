@@ -32,10 +32,9 @@ const randomBeat = async () => {
     setGapTime * setCount +
     startDelayTime;
 
-  createNotification(
-    `Random Beat [${fastReps}, ${slowReps}]`,
-    totalTime * 1000
-  );
+  createNotification(`Random Beat [${fastReps}, ${slowReps}]`, {
+    time: totalTime * 1000
+  });
 
   setStrokeSpeed(0);
   await delay(startDelayTime * 1000);

@@ -3,7 +3,7 @@ import createNotification from "engine/createNotification";
 import { getRandomBoolean } from "utils/math";
 import { GripStrengthEnum, GripStrengthString } from "game/enums/GripStrength";
 
-const tightenGrip = () => {
+export const tightenGrip = () => {
   const currentGrip = store.game.gripStrength;
   const tightestGrip = Object.keys(GripStrengthEnum).length - 1;
 
@@ -15,7 +15,7 @@ const tightenGrip = () => {
   }
 };
 
-const losenGrip = () => {
+export const losenGrip = () => {
   const currentGrip = store.game.gripStrength;
   const lightestGrip = 0;
 
