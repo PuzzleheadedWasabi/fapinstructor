@@ -30,7 +30,7 @@ const actions = [
   //SLOW_THEN_FAST
   //TRIPLETS
   // cbt
-  createProbability(randomGripAdjustment, 15),
+  createProbability(randomGripAdjustment, 20),
   createProbability(addRubberBand, 3),
   createProbability(removeRubberBand, 1),
   createProbability(addClothespin, 3),
