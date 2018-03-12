@@ -16,7 +16,6 @@ const styles = theme => ({
     padding: "14px 24px",
     color: "white",
     display: "flex",
-    justifyContent: "space-between",
     alignItems: "center",
     cursor: "pointer",
     userSelect: "none",
