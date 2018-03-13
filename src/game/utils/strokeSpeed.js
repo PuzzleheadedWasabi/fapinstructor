@@ -10,13 +10,18 @@ import { clamp, getRandomArbitrary } from "utils/math";
 export const randomStrokeSpeed = ({ slow = 2, fast = 1.4 } = {}) => {
   const { slowestStrokeSpeed, fastestStrokeSpeed } = store.config;
 
+  const slowestAdjustedSpeed =
+    slow > 0 ? slowestStrokeSpeed * slow : slowestStrokeSpeed;
+  const fastestAdjustedSpeed =
+    fast > 0 ? fastestStrokeSpeed / fast : fastestStrokeSpeed;
+
   const minStrokeSpeed = clamp(
-    slowestStrokeSpeed * slow,
+    slowestAdjustedSpeed,
     slowestStrokeSpeed,
     fastestStrokeSpeed
   );
   const maxStrokeSpeed = clamp(
-    fastestStrokeSpeed / fast,
+    fastestAdjustedSpeed,
     slowestStrokeSpeed,
     fastestStrokeSpeed
   );

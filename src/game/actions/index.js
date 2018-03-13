@@ -3,6 +3,7 @@ import { getRandomInclusiveInteger } from "utils/math";
 import createProbability from "../utils/createProbability";
 import doubleStrokes from "./speed/doubleStrokes";
 import halvedStrokes from "./speed/halvedStrokes";
+import randomStrokeSpeed from "./speed/randomStrokeSpeed";
 import randomBeat from "./speed/randomBeat";
 import randomGripAdjustment from "./grip";
 import { addRubberBand, removeRubberBand } from "./cbt/rubberband";
@@ -24,8 +25,7 @@ const actions = [
   createProbability(halvedStrokes, 2),
   createProbability(doubleStrokes, 2),
   createProbability(randomBeat, 15),
-  //createCommand(COMMANDS.SPEED.RANDOM_SPEED, actions.playSpeedCard, 8),
-  //createCommand(COMMANDS.SPEED.INCREASE_SPEED_VARIANCE, actions.increaseSpeedVariance, 17)
+  createProbability(randomStrokeSpeed, 20),
   //ACCELERATION_CYCLES
   //SLOW_THEN_FAST
   //TRIPLETS
