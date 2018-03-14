@@ -19,6 +19,8 @@ import {
 } from "./strokeStyle";
 import eatPrecum from "./cei/eatPrecum";
 import { insertButtPlug, removeButtPlug } from "./anal/buttPlug";
+import shouldOrgasm from "./orgasm/shouldOrgasm";
+import shouldEdge from "./orgasm/shouldEdge";
 
 const actions = [
   // speed
@@ -53,18 +55,25 @@ const actions = [
 
 const generateAction = () => {
   const rand = getRandomInclusiveInteger(1, 100);
+  let action = null;
 
-  // applies the probability to each action
-  const chosenActions = actions.reduce((chosenActions, action) => {
-    if (rand <= action.probability) {
-      chosenActions.push(action.func);
-    }
-    return chosenActions;
-  }, []);
+  if (shouldOrgasm()) {
+    //action = orgasm;
+  } else if (shouldEdge()) {
+    //action = edge;
+  } else {
+    // applies the probability to each action
+    const chosenActions = actions.reduce((chosenActions, action) => {
+      if (rand <= action.probability) {
+        chosenActions.push(action.func);
+      }
+      return chosenActions;
+    }, []);
 
-  // get one of the chosen actions
-  const action =
-    chosenActions[getRandomInclusiveInteger(0, chosenActions.length - 1)];
+    // get one of the chosen actions
+    action =
+      chosenActions[getRandomInclusiveInteger(0, chosenActions.length - 1)];
+  }
 
   return action;
 };
