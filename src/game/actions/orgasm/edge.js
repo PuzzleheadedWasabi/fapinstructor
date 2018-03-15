@@ -1,70 +1,66 @@
-// import * as actions from "../../index";
-// import * as styleActions from "../style";
-// import { NOTIFICATION_TYPE, createNotification } from "../../notification";
-// import { inclusiveIntegerRandom } from "../../../utils/MathHelper";
-// import { interruptTimeout } from "../../../utils/ReduxHelper";
+import store from "store";
+import play from "engine/audio";
+import audioLibrary from "audio";
+import { setStrokeSpeed, randomStrokeSpeed } from "game/utils/strokeSpeed";
+import { setDefaultGrip } from "game/actions/grip";
+import { setStrokeStyleDominant } from "game/actions/strokeStyle";
+import createNotification, {
+  dismissNotification
+} from "engine/createNotification";
+import { getRandomBoolean, getRandomInclusiveInteger } from "utils/math";
+import delay from "utils/delay";
+import { strokerRemoteControl } from "game/loops/strokerLoop";
 
-// export const edge = (cb) => async (dispatch, getState) => {
-//   const { config: { fastestSpeed } } = getState();
-//   window.audio.play("edge");
+export const rideTheEdge = async (time = getRandomInclusiveInteger(5, 30)) => {
+  setStrokeSpeed(0);
+  const notificationId = createNotification("Ride the edge", {
+    autoDismiss: false
+  });
+  play(audioLibrary.KeepStroking);
 
-//   dispatch(actions.setCommandsEnabled(false));
-//   dispatch(actions.setSpeed(fastestSpeed));
-//   dispatch(styleActions.setNormalGripStrength());
-//   dispatch(styleActions.playStyleDominate());
-//   dispatch(
-//     createNotification(
-//       NOTIFICATION_TYPE.WARNING,
-//       "Get to the edge for me",
-//       "Edge Card"
-//     )
-//   );
+  await delay(time * 1000);
+  dismissNotification(notificationId);
+};
 
-//   return actions.createCallback(dispatch)(cb || handleEdge, "Edging");
-// };
+export const edging = notificationId => async () => {
+  const { config: { edgeCooldown } } = store;
 
-// export const rideEdge = length => async (dispatch, getState, subscribe) => {
-//   dispatch(actions.setSpeed(0));
-//   dispatch(
-//     createNotification(NOTIFICATION_TYPE.WARNING, "Ride the edge!", "Edge Card")
-//   );
-//   window.audio.play("keep_stroking");
-// };
+  dismissNotification(notificationId);
+  store.game.edges++;
 
-// export const handleEdge = () => async (dispatch, getState, subscribe) => {
-//   const { config: { slowestSpeed, edgeCooldown } } = getState();
+  const holdit = getRandomBoolean();
+  if (holdit) {
+    await rideTheEdge();
+  }
 
-//   dispatch(actions.incrementEdges());
+  createNotification("Let go of your cock");
+  strokerRemoteControl.pause();
 
-//   const holdit = inclusiveIntegerRandom(1, 2);
-//   let length = 0;
-//   dispatch(actions.setSpeed(0));
+  await delay(edgeCooldown * 1000);
 
-//   if (holdit === 1) {
-//     length = inclusiveIntegerRandom(5000, 30000);
-//     dispatch(rideEdge(length));
-//   }
+  strokerRemoteControl.play();
 
-//   interruptTimeout(getState, subscribe)(() => {
-//     setTimeout(() => {
-//       window.audio.play("start_stroking_again");
-//       dispatch(
-//         createNotification(
-//           NOTIFICATION_TYPE.INFO,
-//           "Start stroking again!",
-//           "Speed Card"
-//         )
-//       );
-//       dispatch(actions.setSpeed(slowestSpeed));
-//       dispatch(actions.setCommandsEnabled(true));
-//     }, edgeCooldown * 1000);
+  play(audioLibrary.StartStrokingAgain);
+  createNotification("Start stroking again");
+  randomStrokeSpeed();
+};
+edging.label = "Edging";
 
-//     dispatch(
-//       createNotification(
-//         NOTIFICATION_TYPE.WARNING,
-//         "Let go of your cock!",
-//         "Edge Card"
-//       )
-//     );
-//   }, length);
-// };
+const edge = async () => {
+  const { config: { fastestStrokeSpeed } } = store;
+  play(audioLibrary.Edge);
+  setStrokeSpeed(fastestStrokeSpeed);
+
+  setDefaultGrip();
+  setStrokeStyleDominant();
+
+  const notificationId = createNotification("Get to the edge for me", {
+    autoDismiss: false
+  });
+
+  const trigger = edging(notificationId);
+  trigger.label = "Edging";
+  return [trigger];
+};
+
+export default edge;

@@ -12,7 +12,7 @@ import ruinitforme from "../audio/ruinitforme.mp3";
 const audioLibrary = {
   Tick: fetchAudioFile(tick),
   Cum: fetchAudioFile(cum),
-  StarStrokingAgain: fetchAudioFile(start_stroking_again),
+  StartStrokingAgain: fetchAudioFile(start_stroking_again),
   Denied: fetchAudioFile(denied),
   Edge: fetchAudioFile(edge),
   Ruined: fetchAudioFile(ruined),

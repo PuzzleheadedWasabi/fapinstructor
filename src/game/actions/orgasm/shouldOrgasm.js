@@ -9,12 +9,20 @@ const shouldOrgasm = () => {
 
   const rand = Math.random();
 
-  return (
+  const result =
     minimumRuinedOrgasms <= ruins &&
     minimumEdges <= edges &&
     elapsedGameTime() >= minimumGameTime &&
-    rand <= probability ** 9
-  );
+    rand <= probability ** 9;
+
+  if (result) {
+    console.log({ rand, probability });
+    console.log(rand <= probability ** 9);
+    console.log("time", elapsedGameTime() >= minimumGameTime);
+    debugger;
+  }
+
+  return result;
 };
 
 export default shouldOrgasm;

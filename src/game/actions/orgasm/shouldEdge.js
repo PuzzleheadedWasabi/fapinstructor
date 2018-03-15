@@ -9,6 +9,8 @@ const shouldEdge = () => {
 
   const rand = Math.random();
 
+  return true;
+
   return (
     elapsedGameTime() > 4 &&
     rand <= probability &&
