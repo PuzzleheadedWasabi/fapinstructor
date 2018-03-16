@@ -1,6 +1,5 @@
 import store from "store";
 import elapsedGameTime from "game/utils/elapsedGameTime";
-import doubleStrokes from "game/actions/speed/doubleStrokes";
 
 const shouldEdge = () => {
   const {

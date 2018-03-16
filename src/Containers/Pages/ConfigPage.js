@@ -288,6 +288,23 @@ class ConfigPage extends React.Component {
                   />
                 </Grid>
                 <Grid item xs={12} md={4}>
+                  <FormControl className={classes.control}>
+                    <InputLabel>Edge Cooldown</InputLabel>
+                    <Input
+                      id="edgeCooldown"
+                      value={store.config.edgeCooldown}
+                      onChange={this.handleChange("edgeCooldown")}
+                      fullWidth
+                      type="number"
+                      inputProps={{ step: "1", min: "0" }}
+                      endAdornment={
+                        <InputAdornment position="end">seconds</InputAdornment>
+                      }
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs />
+                <Grid item xs={12} md={4}>
                   <TextField
                     id="minimumRuinedOrgasms"
                     label="Minimum Ruined Orgasms"
@@ -311,6 +328,22 @@ class ConfigPage extends React.Component {
                 </Grid>
                 <Grid item xs={12} md={4}>
                   <FormControl className={classes.control}>
+                    <InputLabel>Ruin Cooldown</InputLabel>
+                    <Input
+                      id="ruinCooldown"
+                      value={store.config.ruinCooldown}
+                      onChange={this.handleChange("ruinCooldown")}
+                      fullWidth
+                      type="number"
+                      inputProps={{ step: "1", min: "0" }}
+                      endAdornment={
+                        <InputAdornment position="end">seconds</InputAdornment>
+                      }
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <FormControl className={classes.control}>
                     <InputLabel>Ruined Orgasm Probability</InputLabel>
                     <Input
                       id="ruinedOrgasmProbability"
@@ -318,23 +351,6 @@ class ConfigPage extends React.Component {
                       onChange={this.handleChange("ruinedOrgasmProbability")}
                       type="number"
                       inputProps={{ step: "10", min: "0", max: "100" }}
-                      endAdornment={
-                        <InputAdornment position="end">%</InputAdornment>
-                      }
-                    />
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12} md={4}>
-                  <FormControl className={classes.control}>
-                    <InputLabel>Edge Cooldown</InputLabel>
-
-                    <Input
-                      id="edgeCooldown"
-                      value={store.config.edgeCooldown}
-                      onChange={this.handleChange("edgeCooldown")}
-                      fullWidth
-                      type="number"
-                      inputProps={{ step: "1", min: "0" }}
                       endAdornment={
                         <InputAdornment position="end">%</InputAdornment>
                       }

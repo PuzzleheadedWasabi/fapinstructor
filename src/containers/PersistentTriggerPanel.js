@@ -1,5 +1,7 @@
 import React from "react";
 import Button from "material-ui/Button";
+import executeAction from "engine/executeAction";
+import { ruinedOrgasm } from "game/actions/orgasm/ruin";
 
 const PersistentTriggerPanel = () => (
   <div>
@@ -9,7 +11,7 @@ const PersistentTriggerPanel = () => (
       size="large"
       style={{ opacity: 0.8, margin: 10 }}
       onClick={() => {
-        console.log("interrupt test ");
+        executeAction(ruinedOrgasm(), true);
       }}
     >
       Ruin

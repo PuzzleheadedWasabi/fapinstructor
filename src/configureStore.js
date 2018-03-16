@@ -20,6 +20,7 @@ const defaultConfig = {
   maximumRuinedOrgasms: 0,
   ruinedOrgasmProbability: 50, // %
   edgeCooldown: 5, // sec
+  ruinCooldown: 20, // sec
   slowestStrokeSpeed: 0.25, // sec
   fastestStrokeSpeed: 5, // sec
   initialGripStrength: GripStrengthEnum.Normal,

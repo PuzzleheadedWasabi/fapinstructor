@@ -1,36 +1,43 @@
-// import * as actions from "../../index";
-// import { NOTIFICATION_TYPE, createNotification } from "../../notification";
+import store from "store";
+import createNotification, {
+  dismissNotification
+} from "engine/createNotification";
+import { setStrokeSpeed, randomStrokeSpeed } from "game/utils/strokeSpeed";
+import delay from "utils/delay";
+import play from "engine/audio";
+import audioLibrary from "audio";
+import { strokerRemoteControl } from "game/loops/strokerLoop";
 
-// export const ruinOrgasm = () => async (dispatch, getState, subscribe) => {
-//   const { config: { fastestSpeed } } = getState();
+export const ruinedOrgasm = notificationId => async () => {
+  if (notificationId) {
+    dismissNotification(notificationId);
+  }
+  store.game.ruins++;
+  play(audioLibrary.Ruined);
+  const { config: { ruinCooldown } } = store;
 
-//   dispatch(actions.setCommandsEnabled(false));
+  strokerRemoteControl.pause();
 
-//   dispatch(actions.setSpeed(fastestSpeed));
-//   window.audio.play("ruinitforme");
-//   dispatch(createNotification(NOTIFICATION_TYPE.ERROR, "Ruin it", "Ruin it!"));
+  await delay(ruinCooldown * 1000);
 
-//   return actions.createCallback(dispatch)(handleRuinOrgasm, "Ruined");
-// };
+  setStrokeSpeed(randomStrokeSpeed());
+  strokerRemoteControl.play();
+  createNotification("Start stroking again");
+  play(audioLibrary.StartStrokingAgain);
 
-// export const handleRuinOrgasm = () => async (dispatch, getState, subscribe) => {
-//   const { config: { ruinCooldown, slowestSpeed } } = getState();
+  await delay(3000);
+};
 
-//   window.audio.play("ruined");
-//   dispatch(actions.setInterrupt(true));
-//   dispatch(actions.incrementRuined());
-//   dispatch(actions.incrementMercy());
-//   dispatch(actions.setSpeed(0));
+const ruinOrgasm = async () => {
+  const { config: { fastestStrokeSpeed } } = store;
+  const notificationId = createNotification("Ruin it");
+  play(audioLibrary.RuinItForMe);
+  setStrokeSpeed(fastestStrokeSpeed);
 
-//   setTimeout(() => {
-//     window.audio.play("start_stroking_again");
-//     createNotification(
-//       NOTIFICATION_TYPE.INFO,
-//       "Start stroking again!",
-//       "Speed Card"
-//     );
-//     dispatch(actions.setSpeed(slowestSpeed));
-//     dispatch(actions.setCommandsEnabled(true));
-//     dispatch(actions.setInterrupt(false));
-//   }, ruinCooldown * 1000);
-// };
+  const trigger = ruinedOrgasm(notificationId);
+  trigger.label = "Ruined";
+
+  return [trigger];
+};
+
+export default ruinOrgasm;

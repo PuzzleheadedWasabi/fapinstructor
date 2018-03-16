@@ -40,13 +40,12 @@ export const edging = notificationId => async () => {
 
   strokerRemoteControl.play();
 
-  play(audioLibrary.StartStrokingAgain);
-  createNotification("Start stroking again");
   setStrokeSpeed(randomStrokeSpeed());
+  createNotification("Start stroking again");
+  play(audioLibrary.StartStrokingAgain);
 
   await delay(3000);
 };
-edging.label = "Edging";
 
 const edge = async () => {
   const { config: { fastestStrokeSpeed } } = store;
