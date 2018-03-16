@@ -15,7 +15,7 @@ const defaultConfig = {
   finalOrgasmRandom: false,
   minimumGameTime: 5, // min
   maximumGameTime: 20, // min
-  minimumEdges: 0,
+  minimumEdges: 3,
   minimumRuinedOrgasms: 0,
   maximumRuinedOrgasms: 0,
   ruinedOrgasmProbability: 50, // %

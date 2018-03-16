@@ -10,7 +10,8 @@ import {
   FormControl,
   FormControlLabel,
   FormLabel,
-  FormGroup
+  FormGroup,
+  FormHelperText
 } from "material-ui/Form";
 import TextField from "material-ui/TextField";
 import Switch from "material-ui/Switch";
@@ -53,7 +54,7 @@ class ConfigPage extends React.Component {
     store.config[name] = checked;
   };
 
-  handleTaskRandomize = (event) => {
+  handleTaskRandomize = event => {
     Object.keys(store.config.tasks).forEach(task => {
       store.config.tasks[task] = getRandomBoolean();
     });
@@ -210,6 +211,10 @@ class ConfigPage extends React.Component {
                         <InputAdornment position="end">minutes</InputAdornment>
                       }
                     />
+                    <FormHelperText>
+                      Just an estimate, other config options may impact this
+                      setting
+                    </FormHelperText>
                   </FormControl>
                 </Grid>
               </Grid>

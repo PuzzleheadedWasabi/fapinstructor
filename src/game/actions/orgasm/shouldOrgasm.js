@@ -13,7 +13,7 @@ const shouldOrgasm = () => {
     }
   } = store;
 
-  let isAllowedOrgasm = false;
+  let result = false;
   const isAllowedChance =
     minimumRuinedOrgasms <= ruins &&
     minimumEdges <= edges &&
@@ -24,11 +24,12 @@ const shouldOrgasm = () => {
     const gameCompletionPercent =
       elapsedGameTime("seconds") / (maximumGameTime * 60);
 
-    isAllowedOrgasm = gameCompletionPercent / actionFrequency > rand;
-    isAllowedOrgasm = false;
+    // Probability Graph: https://www.desmos.com/calculator/xhyaj1gxuc
+    result = gameCompletionPercent ** 4 / actionFrequency > rand;
   }
 
-  return isAllowedOrgasm || elapsedGameTime("minutes") >= maximumGameTime;
+  // If the game time has overreached then always return true
+  return result || elapsedGameTime("minutes") >= maximumGameTime;
 };
 
 export default shouldOrgasm;
