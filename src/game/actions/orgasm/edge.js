@@ -42,7 +42,9 @@ export const edging = notificationId => async () => {
 
   play(audioLibrary.StartStrokingAgain);
   createNotification("Start stroking again");
-  randomStrokeSpeed();
+  setStrokeSpeed(randomStrokeSpeed());
+
+  await delay(3000);
 };
 edging.label = "Edging";
 

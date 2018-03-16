@@ -12,7 +12,7 @@ const shouldEdge = () => {
   return true;
 
   return (
-    elapsedGameTime() > 4 &&
+    elapsedGameTime("seconds") > 4 &&
     rand <= probability &&
     strokeSpeed >= fastestStrokeSpeed / 1.3
   );

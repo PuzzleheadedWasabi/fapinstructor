@@ -58,9 +58,7 @@ const generateAction = () => {
   const rand = getRandomInclusiveInteger(1, 100);
   let action = null;
 
-  console.log("generateAction");
   if (shouldOrgasm()) {
-    console.log('orgasm')
     //action = orgasm;
   } else if (shouldEdge()) {
     action = edge;

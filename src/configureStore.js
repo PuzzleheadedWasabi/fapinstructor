@@ -23,6 +23,7 @@ const defaultConfig = {
   slowestStrokeSpeed: 0.25, // sec
   fastestStrokeSpeed: 5, // sec
   initialGripStrength: GripStrengthEnum.Normal,
+  actionFrequency: 5, // sec
   tasks: {
     doubleStrokes: true,
     halvedStrokes: true,

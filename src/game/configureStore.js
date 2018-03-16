@@ -5,7 +5,6 @@ import { StrokeStyleEnum } from "game/enums/StrokeStyle";
 
 export default () => {
   store.game = {
-    probability: 0,
     startTime: new moment(),
     shownSlides: 0,
     pictures: [],

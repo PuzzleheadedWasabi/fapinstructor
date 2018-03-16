@@ -3,26 +3,32 @@ import elapsedGameTime from "game/utils/elapsedGameTime";
 
 const shouldOrgasm = () => {
   const {
-    game: { ruins, edges, probability },
-    config: { minimumRuinedOrgasms, minimumEdges, minimumGameTime }
+    game: { ruins, edges },
+    config: {
+      minimumRuinedOrgasms,
+      minimumEdges,
+      minimumGameTime,
+      maximumGameTime,
+      actionFrequency
+    }
   } = store;
 
-  const rand = Math.random();
-
-  const result =
+  let isAllowedOrgasm = false;
+  const isAllowedChance =
     minimumRuinedOrgasms <= ruins &&
     minimumEdges <= edges &&
-    elapsedGameTime() >= minimumGameTime &&
-    rand <= probability ** 9;
+    elapsedGameTime("minutes") >= minimumGameTime;
 
-  if (result) {
-    console.log({ rand, probability });
-    console.log(rand <= probability ** 9);
-    console.log("time", elapsedGameTime() >= minimumGameTime);
-    debugger;
+  if (isAllowedChance) {
+    const rand = Math.random();
+    const gameCompletionPercent =
+      elapsedGameTime("seconds") / (maximumGameTime * 60);
+
+    isAllowedOrgasm = gameCompletionPercent / actionFrequency > rand;
+    isAllowedOrgasm = false;
   }
 
-  return result;
+  return isAllowedOrgasm || elapsedGameTime("minutes") >= maximumGameTime;
 };
 
 export default shouldOrgasm;
