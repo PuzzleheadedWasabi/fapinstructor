@@ -1,21 +1,20 @@
+import { dismissAllNotifications } from "engine/createNotification"
+
 let interruptibles = [];
 
-const interruptible = id => {
-  interruptibles.push(id);
-};
-
-// Makes an interruptable action into an uninterruptable action
-const removeInterruptible = id => {
-  delete interruptibles[id - 1];
+const interruptible = (id, reject) => {
+  interruptibles.push({ id, reject });
 };
 
 const interrupt = () => {
-  interruptibles.forEach(id => {
+  interruptibles.forEach(({ id, reject }) => {
     // works for both timeout and intervals
     clearTimeout(id);
+    reject();
   });
+  dismissAllNotifications();
   interruptibles = [];
 };
 
-export { interruptible, removeInterruptible };
+export { interruptible };
 export default interrupt;

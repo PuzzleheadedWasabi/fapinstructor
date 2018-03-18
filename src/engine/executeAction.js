@@ -39,16 +39,18 @@ const executeAction = (action, shouldInterrupt) => {
   engine.actionTriggers = null;
   engine.executing = true;
 
-  return action().then(trigger => {
-    if (trigger) {
-      if (Array.isArray(trigger)) {
-        engine.actionTriggers = trigger;
-      } else {
-        engine.actionTriggers = Array.of(trigger);
+  return action()
+    .then(trigger => {
+      if (trigger) {
+        if (Array.isArray(trigger)) {
+          engine.actionTriggers = trigger;
+        } else {
+          engine.actionTriggers = Array.of(trigger);
+        }
       }
-    }
-    engine.executing = false;
-  });
+      engine.executing = false;
+    })
+    .catch(e => {});
 };
 
 export default executeAction;
