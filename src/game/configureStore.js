@@ -15,6 +15,7 @@ export default () => {
     clothespins: 0,
     ruins: 0,
     edges: 0,
+    orgasms: 0,
     strokeStyle: StrokeStyleEnum.Dominant,
     buttPlugInserted: false
   };

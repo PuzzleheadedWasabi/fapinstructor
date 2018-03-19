@@ -18,6 +18,7 @@ const defaultConfig = {
   minimumEdges: 3,
   minimumRuinedOrgasms: 0,
   maximumRuinedOrgasms: 0,
+  maximumOrgasms: 1,
   ruinedOrgasmProbability: 50, // %
   edgeCooldown: 5, // sec
   ruinCooldown: 20, // sec

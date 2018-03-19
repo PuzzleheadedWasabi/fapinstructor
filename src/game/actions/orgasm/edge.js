@@ -22,16 +22,19 @@ export const rideTheEdge = async (time = getRandomInclusiveInteger(5, 30)) => {
   dismissNotification(notificationId);
 };
 
-export const edging = notificationId => async () => {
-  const { config: { edgeCooldown } } = store;
-
+export const edging = (notificationId, time) => async () => {
   dismissNotification(notificationId);
   store.game.edges++;
 
-  const holdit = getRandomBoolean();
-  if (holdit) {
-    await rideTheEdge();
+  const holdIt = getRandomBoolean();
+
+  if (holdIt || time) {
+    await rideTheEdge(time);
   }
+};
+
+export const stopEdging = async () => {
+  const { config: { edgeCooldown } } = store;
 
   createNotification("Let go of your cock");
   strokerRemoteControl.pause();
@@ -47,7 +50,7 @@ export const edging = notificationId => async () => {
   await delay(3000);
 };
 
-const edge = async () => {
+export const getToTheEdge = async () => {
   const { config: { fastestStrokeSpeed } } = store;
   play(audioLibrary.Edge);
   setStrokeSpeed(fastestStrokeSpeed);
@@ -58,8 +61,15 @@ const edge = async () => {
   const notificationId = createNotification("Get to the edge for me", {
     autoDismiss: false
   });
+  return notificationId;
+};
 
-  const trigger = edging(notificationId);
+const edge = async () => {
+  const notificationId = await getToTheEdge();
+
+  const trigger = edging(notificationId).then(async () => {
+    await stopEdging();
+  });
   trigger.label = "Edging";
   return [trigger];
 };

@@ -1,122 +1,135 @@
-// import * as actions from "../../index";
-// import { edge, rideEdge } from "./edge";
-// import { NOTIFICATION_TYPE, createNotification } from "../../notification";
-// import { ruinOrgasm } from "./ruin";
-// import { inclusiveIntegerRandom } from "../../../utils/MathHelper";
+import store from "store";
+import createNotification, {
+  dismissNotification
+} from "engine/createNotification";
+import { setStrokeSpeed, randomStrokeSpeed } from "game/utils/strokeSpeed";
+import delay from "utils/delay";
+import play from "engine/audio";
+import audioLibrary from "audio";
+import { strokerRemoteControl } from "game/loops/strokerLoop";
+import { getToTheEdge, edging } from "./edge";
+import { getRandomInclusiveInteger } from "utils/math";
 
-// export const ORGASM_TYPE = {
-//   ORGASM: "ORGASM",
-//   RUINED: "RUINED",
-//   DENIED: "DENIED"
-// };
+const edge = async () => {
+  const notificationId = await getToTheEdge();
 
-// export const CEI_TYPE = {
-//   NONE: "NONE",
-//   FACE: "FACE",
-//   MOUTH: "MOUTH",
-//   HAND: "HAND",
-//   FLOOR: "FLOOR",
-//   PLATE: "PLATE"
-// };
+  const trigger = edging(notificationId, 30).then(async () => {
+    await handlEdgeEnd();
+  });
+  trigger.label = "Edging";
+  return [trigger];
+};
 
-// export const CEI_DURING_TYPE = {
-//   RUINED: "RUINED",
-//   ORGASM: "ORGASM",
-//   RANDOM: "RANDOM"
-// }
+export const determineOrgasm = async () => {
+  return [edge];
+};
 
-// export const determineOrgasm = () => async (dispatch, getState, subscribe) => {
-//   dispatch(actions.setCommandsEnabled(false));
-//   return dispatch(edge(handleEdge));
-// };
+const doRuin = async () => {
+  const { config: { fastestStrokeSpeed } } = store;
 
-// export const handleEdge = () => async (dispatch, getState) => {
-//   const length = inclusiveIntegerRandom(10000, 30000);
-//   dispatch(rideEdge(length));
-//   return actions.createCallback(dispatch)(handlEdgeEnd, "", length);
-// };
+  setStrokeSpeed(fastestStrokeSpeed);
+  play(audioLibrary.RuinItForMe);
+  const nid = createNotification("Ruin it");
 
-// export const handlEdgeEnd = () => async (dispatch, getState) => {
-//   const {
-//     counters: { ruined },
-//     config: { fastestSpeed, orgasm, minRuined, maxRuined, ruinedProbability }
-//   } = getState();
+  const done = async () => {
+    dismissNotification(nid);
+    store.game.ruins++;
+    end();
+  };
+  done.label = "Ruined";
 
-//   dispatch(actions.incrementEdges());
+  return [done];
+};
 
-//   if (ruined < minRuined) {
-//     return dispatch(ruinOrgasm());
-//   } else if (ruined < maxRuined) {
-//     const rand = Math.random();
-//     if (rand <= ruinedProbability / 100) {
-//       return dispatch(ruinOrgasm());
-//     }
-//   }
+const doOrgasm = async () => {
+  const { config: { fastestStrokeSpeed } } = store;
 
-//   let speed;
-//   let audioName;
-//   let message;
-//   let notificationType;
+  setStrokeSpeed(fastestStrokeSpeed);
+  play(audioLibrary.Cum);
+  const nid = createNotification("You have permission to have a full orgasm");
 
-//   switch (orgasm) {
-//     case ORGASM_TYPE.RUINED:
-//       audioName = "ruinitforme";
-//       speed = fastestSpeed;
-//       message = "Ruin it!";
-//       notificationType = NOTIFICATION_TYPE.ERROR;
-//       break;
-//     case ORGASM_TYPE.DENIED:
-//       audioName = "denied";
-//       speed = 0;
-//       message = "You have been denied!";
-//       notificationType = NOTIFICATION_TYPE.ERROR;
-//       break;
-//     case ORGASM_TYPE.ORGASM:
-//       audioName = "cum";
-//       speed = fastestSpeed;
-//       message = "You have permission!";
-//       notificationType = NOTIFICATION_TYPE.SUCCESS;
-//       break;
-//     default:
-//   }
+  const done = async () => {
+    dismissNotification(nid);
+    end();
+  };
+  done.label = "Orgasmed";
 
-//   dispatch(actions.setSpeed(speed));
-//   window.audio.play(audioName);
-//   dispatch(
-//     createNotification(notificationType, message, "Orgasm Determiniation")
-//   );
+  return [done];
+};
 
-//   return [
-//     actions.createCallback(dispatch)(handleDetermineOrgasm),
-//     actions.createCallback(dispatch)(handleSkipDetermineOrgasm, "Skip")
-//   ];
-// };
+const doDenied = async () => {
+  const { config: { fastestStrokeSpeed } } = store;
 
-// export const handleDetermineOrgasm = () => async (dispatch, getState) => {
-//   const { config: { orgasm } } = getState();
+  setStrokeSpeed(fastestStrokeSpeed);
+  play(audioLibrary.Cum);
+  const nid = createNotification("Denied an orgasm");
 
-//   if (orgasm === ORGASM_TYPE.RUINED) {
-//     dispatch(actions.incrementRuined());
-//   }
+  const done = async () => {
+    dismissNotification(nid);
+    end();
+  };
+  done.label = "Denied";
 
-//   dispatch(actions.setSpeed(0));
-//   dispatch(actions.setRunning(false));
-//   dispatch(setOrgasm(orgasm));
+  return [done];
+};
 
-//   if (window.ga) {
-//     window.ga("send", "event", "command", ORGASM_TYPE.ORGASM, "orgasm");
-//   }
-// };
+export const handlEdgeEnd = async () => {
+  const {
+    config: {
+      finalOrgasmAllowed,
+      finalOrgasmDenied,
+      finalOrgasmRuined,
+      finalOrgasmRandom
+    }
+  } = store;
 
-// export const handleSkipDetermineOrgasm = () => async (dispatch, getState) => {
-//   const { config: { slowestSpeed, fastestSpeed } } = getState();
+  let trigger;
 
-//   dispatch(actions.setSpeed((slowestSpeed + fastestSpeed) / 2));
-//   dispatch(actions.setAllUpdatesEnabled(true));
-// };
+  if (finalOrgasmRandom) {
+    let options = [];
 
-// const SET_ORGASM = "SET_ORGASM";
-// export const setOrgasm = orgasm => ({
-//   type: SET_ORGASM,
-//   orgasm
-// });
+    if (finalOrgasmAllowed) {
+      options.push(doOrgasm);
+    } else if (finalOrgasmDenied) {
+      options.push(doDenied);
+    } else if (finalOrgasmRuined) {
+      options.push(doRuin);
+    }
+    trigger = options[getRandomInclusiveInteger(0, options.length - 1)];
+  } else {
+    if (finalOrgasmAllowed) {
+      trigger = doOrgasm;
+    } else if (finalOrgasmDenied) {
+      trigger = doDenied;
+    } else if (finalOrgasmRuined) {
+      trigger = doRuin;
+    }
+  }
+
+  return [trigger, skip];
+};
+
+const skip = async () => {
+  setStrokeSpeed(randomStrokeSpeed());
+
+  // extend the game by 20%
+  store.config.maximumGameTime *= 1.2;
+};
+skip.label = "Skip & Add Time";
+
+const end = async () => {
+  strokerRemoteControl.pause();
+
+  const { maximumOrgasms } = store.config;
+  store.game.orgasms++;
+
+  // should continue?
+  if (store.game.orgasms <= maximumOrgasms) {
+    setStrokeSpeed(randomStrokeSpeed());
+    strokerRemoteControl.play();
+    createNotification("Start stroking again");
+    play(audioLibrary.StartStrokingAgain);
+
+    await delay(3000);
+  }
+};
