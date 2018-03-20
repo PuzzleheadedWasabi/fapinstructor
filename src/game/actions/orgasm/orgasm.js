@@ -10,20 +10,6 @@ import { strokerRemoteControl } from "game/loops/strokerLoop";
 import { getToTheEdge, edging } from "./edge";
 import { getRandomInclusiveInteger } from "utils/math";
 
-const edge = async () => {
-  const notificationId = await getToTheEdge();
-
-  const trigger = edging(notificationId, 30).then(async () => {
-    await handlEdgeEnd();
-  });
-  trigger.label = "Edging";
-  return [trigger];
-};
-
-export const determineOrgasm = async () => {
-  return [edge];
-};
-
 const doRuin = async () => {
   const { config: { fastestStrokeSpeed } } = store;
 
@@ -73,7 +59,7 @@ const doDenied = async () => {
   return [done];
 };
 
-export const handlEdgeEnd = async () => {
+export const determineOrgasm = async () => {
   const {
     config: {
       finalOrgasmAllowed,
@@ -133,3 +119,16 @@ const end = async () => {
     await delay(3000);
   }
 };
+
+const orgasm = async () => {
+  const notificationId = await getToTheEdge();
+
+  const trigger = edging(notificationId, 30).then(async () => {
+    await determineOrgasm();
+  });
+  trigger.label = "Edging";
+
+  return [trigger];
+};
+
+export default orgasm;

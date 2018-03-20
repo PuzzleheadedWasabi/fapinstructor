@@ -33,6 +33,7 @@ const shouldRuin = () => {
     }
   }
 
+  console.log('shouldRuin', result)
   return result;
 };
 

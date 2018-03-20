@@ -1,23 +1,25 @@
 import store from "store";
 import elapsedGameTime from "game/utils/elapsedGameTime";
 
-const shouldOrgasm = () => {
+export const allowedOrgasm = () => {
   const {
     game: { ruins, edges },
-    config: {
-      minimumRuinedOrgasms,
-      minimumEdges,
-      minimumGameTime,
-      maximumGameTime,
-      actionFrequency
-    }
+    config: { minimumRuinedOrgasms, minimumEdges, minimumGameTime }
   } = store;
 
-  let result = false;
   const isAllowedChance =
     minimumRuinedOrgasms <= ruins &&
     minimumEdges <= edges &&
     elapsedGameTime("minutes") >= minimumGameTime;
+
+  return isAllowedChance;
+};
+
+export const shouldOrgasm = () => {
+  const { config: { maximumGameTime, actionFrequency } } = store;
+
+  let result = false;
+  const isAllowedChance = allowedOrgasm();
 
   if (isAllowedChance) {
     const rand = Math.random();

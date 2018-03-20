@@ -26,6 +26,7 @@ const shouldEdge = () => {
     result = gameCompletionPercent ** 3 / actionFrequency > rand;
   }
 
+  console.log('shouldEdge', result)
   return result;
 };
 
