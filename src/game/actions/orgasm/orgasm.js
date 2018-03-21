@@ -10,7 +10,7 @@ import { strokerRemoteControl } from "game/loops/strokerLoop";
 import { getToTheEdge, edging } from "./edge";
 import { getRandomInclusiveInteger } from "utils/math";
 
-const doRuin = async () => {
+export const doRuin = async () => {
   const { config: { fastestStrokeSpeed } } = store;
 
   setStrokeSpeed(fastestStrokeSpeed);
@@ -24,10 +24,10 @@ const doRuin = async () => {
   };
   done.label = "Ruined";
 
-  return [done];
+  return done;
 };
 
-const doOrgasm = async () => {
+export const doOrgasm = async () => {
   const { config: { fastestStrokeSpeed } } = store;
 
   setStrokeSpeed(fastestStrokeSpeed);
@@ -43,7 +43,7 @@ const doOrgasm = async () => {
   return [done];
 };
 
-const doDenied = async () => {
+export const doDenied = async () => {
   const { config: { fastestStrokeSpeed } } = store;
 
   setStrokeSpeed(fastestStrokeSpeed);
@@ -95,7 +95,7 @@ export const determineOrgasm = async () => {
   return [trigger, skip];
 };
 
-const skip = async () => {
+export const skip = async () => {
   setStrokeSpeed(randomStrokeSpeed());
 
   // extend the game by 20%
@@ -103,20 +103,20 @@ const skip = async () => {
 };
 skip.label = "Skip & Add Time";
 
-const end = async () => {
-  strokerRemoteControl.pause();
-
+export const end = async () => {
   const { maximumOrgasms } = store.config;
+  strokerRemoteControl.pause();
   store.game.orgasms++;
 
   // should continue?
-  if (store.game.orgasms <= maximumOrgasms) {
+  if (store.game.orgasms < maximumOrgasms) {
     setStrokeSpeed(randomStrokeSpeed());
     strokerRemoteControl.play();
     createNotification("Start stroking again");
     play(audioLibrary.StartStrokingAgain);
-
     await delay(3000);
+  } else {
+    setStrokeSpeed(0);
   }
 };
 
