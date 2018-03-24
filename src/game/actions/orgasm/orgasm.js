@@ -40,7 +40,7 @@ export const doOrgasm = async () => {
   };
   done.label = "Orgasmed";
 
-  return [done];
+  return done;
 };
 
 export const doDenied = async () => {
@@ -56,7 +56,7 @@ export const doDenied = async () => {
   };
   done.label = "Denied";
 
-  return [done];
+  return done;
 };
 
 export const determineOrgasm = async () => {
@@ -128,7 +128,7 @@ const orgasm = async () => {
   });
   trigger.label = "Edging";
 
-  return [trigger];
+  return trigger;
 };
 
 export default orgasm;
