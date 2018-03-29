@@ -62,7 +62,10 @@ class StatusPanel extends React.Component {
         strokeStyle,
         buttPlugInserted,
         rubberBands,
-        clothespins
+        clothespins,
+        edges,
+        ruins,
+        orgasms
       }
     } = this.props;
 
@@ -97,6 +100,9 @@ class StatusPanel extends React.Component {
               {buttPlugInserted && <Label value="Butt Plug" />}
               {rubberBands > 0 && <Label value="Rubberbands" />}
               {clothespins > 0 && <Label value="Clothepins" />}
+              {edges > 0 && <Label value="Edges" />}
+              {ruins > 0 && <Label value="Ruins" />}
+              {orgasms > 0 && <Label value="Orgasms" />}
             </div>
             <div>
               <Label value={elapsedGameTime("minutes")} />
@@ -115,6 +121,9 @@ class StatusPanel extends React.Component {
               {buttPlugInserted && <Label value="Inserted" />}
               {rubberBands > 0 && <Label value={rubberBands} />}
               {clothespins > 0 && <Label value={clothespins} />}
+              {edges > 0 && <Label value={edges} />}
+              {ruins > 0 && <Label value={ruins} />}
+              {orgasms > 0 && <Label value={orgasms} />}
             </div>
           </div>
         )}

@@ -1,10 +1,21 @@
 import store from "store";
-import { setStrokeSpeed } from "game/utils/strokeSpeed";
+import { setStrokeSpeed, randomStrokeSpeed } from "game/utils/strokeSpeed";
 import createNotification from "engine/createNotification";
+import { getRandomInclusiveInteger } from "utils/math";
+import delay from "utils/delay";
 
 const doubleStrokes = async () => {
   setStrokeSpeed(store.game.strokeSpeed * 2);
-  createNotification("Double Strokes");
+
+  let totalTime = getRandomInclusiveInteger(5, 20)
+
+  createNotification(`Double Strokes`, {
+    time: totalTime * 1000
+  });
+
+  await delay(totalTime * 1000);
+
+  setStrokeSpeed(randomStrokeSpeed());
 };
 
 export default doubleStrokes;

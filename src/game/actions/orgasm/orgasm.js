@@ -125,7 +125,7 @@ const orgasm = async () => {
 
   const trigger = async () => {
     dismissNotification(notificationId);
-   // await edging(30);
+    await edging(30);
     return await determineOrgasm();
   };
   trigger.label = "Edging";
