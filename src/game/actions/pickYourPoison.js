@@ -14,7 +14,7 @@ const pickYourPoison = async () => {
   return chosenActions.map(action => {
     const trigger = async () => {
       dismissNotification(nid);
-      executeAction(action);
+      await executeAction(action);
     };
     trigger.label = action.label;
     return trigger;
