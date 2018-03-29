@@ -1,5 +1,3 @@
-import actionIterator from "engine/actionIterator";
-import { getRandomInclusiveInteger } from "utils/math";
 import createProbability from "../utils/createProbability";
 import doubleStrokes from "./speed/doubleStrokes";
 import halvedStrokes from "./speed/halvedStrokes";
@@ -19,12 +17,7 @@ import {
 } from "./strokeStyle";
 import eatPrecum from "./cei/eatPrecum";
 import { insertButtPlug, removeButtPlug } from "./anal/buttPlug";
-import shouldOrgasm from "./orgasm/shouldOrgasm";
-import shouldEdge from "./orgasm/shouldEdge";
-import shouldRuin from "./orgasm/shouldRuin";
-import edge from "./orgasm/edge";
-import ruin from "./orgasm/ruin";
-import orgasm from "./orgasm/orgasm";
+import pickYourPoison from "./pickYourPoison"
 
 const actions = [
   // speed
@@ -54,37 +47,9 @@ const actions = [
   createProbability(insertButtPlug, 1),
   createProbability(removeButtPlug, 1),
   // cei
-  createProbability(eatPrecum, 3)
+  createProbability(eatPrecum, 3),
+  // misc.
+  createProbability(pickYourPoison, 10)
 ];
 
-const generateAction = () => {
-  const rand = getRandomInclusiveInteger(1, 100);
-  let action = null;
-
-  if (shouldOrgasm()) {
-    action = orgasm;
-  } else if (shouldEdge()) {
-    action = edge;
-  } else if (shouldRuin()) {
-    action = ruin;
-  } else {
-    // applies the probability to each action
-    const chosenActions = actions.reduce((chosenActions, action) => {
-      if (rand <= action.probability) {
-        chosenActions.push(action.func);
-      }
-      return chosenActions;
-    }, []);
-
-    // get one of the chosen actions
-    action =
-      chosenActions[getRandomInclusiveInteger(0, chosenActions.length - 1)];
-  }
-
-  return action;
-};
-
-/**
- * Create an actionIterator using a action generator
- */
-export default new actionIterator(generateAction);
+export default actions;

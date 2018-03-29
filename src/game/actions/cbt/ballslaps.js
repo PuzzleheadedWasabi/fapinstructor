@@ -27,5 +27,6 @@ const ballslaps = async () => {
 
   setStrokeSpeed(randomStrokeSpeed());
 };
+ballslaps.label = "Ball slaps";
 
 export default ballslaps;

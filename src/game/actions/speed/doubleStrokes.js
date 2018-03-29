@@ -17,5 +17,6 @@ const doubleStrokes = async () => {
 
   setStrokeSpeed(randomStrokeSpeed());
 };
+doubleStrokes.label = "Double Strokes"
 
 export default doubleStrokes;

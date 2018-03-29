@@ -25,6 +25,7 @@ export const addClothespin = async () => {
     return [done];
   }
 };
+addClothespin.label = "Add Clothespin";
 
 export const removeClothespin = async () => {
   strokerRemoteControl.pause();
@@ -44,3 +45,4 @@ export const removeClothespin = async () => {
     return [done];
   }
 };
+removeClothespin.label = "Remove Clothespin";

@@ -52,5 +52,6 @@ const randomBeat = async () => {
 
   setStrokeSpeed(randomStrokeSpeed());
 };
+randomBeat.label = "Random Beat";
 
 export default randomBeat;

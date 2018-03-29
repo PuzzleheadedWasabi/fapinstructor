@@ -13,7 +13,7 @@ export const setDefaultGrip = () => {
       `Change your grip to ${GripStrengthString[store.game.gripStrength]}`
     );
   }
-}
+};
 
 export const tightenGrip = () => {
   const currentGrip = store.game.gripStrength;
@@ -46,5 +46,6 @@ const randomGripAdjustment = async () => {
     losenGrip();
   }
 };
+randomGripAdjustment.label = "Random Grip Adjustment";
 
 export default randomGripAdjustment;

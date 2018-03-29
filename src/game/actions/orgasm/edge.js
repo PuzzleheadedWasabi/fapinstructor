@@ -1,6 +1,7 @@
 import store from "store";
 import play from "engine/audio";
 import audioLibrary from "audio";
+import elapsedGameTime from "game/utils/elapsedGameTime";
 import { setStrokeSpeed, randomStrokeSpeed } from "game/utils/strokeSpeed";
 import { setDefaultGrip } from "game/actions/grip";
 import { setStrokeStyleDominant } from "game/actions/strokeStyle";
@@ -10,6 +11,26 @@ import createNotification, {
 import { getRandomBoolean, getRandomInclusiveInteger } from "utils/math";
 import delay from "utils/delay";
 import { strokerRemoteControl } from "game/loops/strokerLoop";
+
+export const shouldEdge = () => {
+  const {
+    config: { minimumGameTime, maximumGameTime, actionFrequency }
+  } = store;
+
+  let result = false;
+  const isAllowedChance = elapsedGameTime("minutes") >= minimumGameTime * 1.2;
+
+  if (isAllowedChance) {
+    const rand = Math.random();
+    const gameCompletionPercent =
+      elapsedGameTime("seconds") / (maximumGameTime * 60);
+
+    // Probability Graph: https://www.desmos.com/calculator/7ppaz3wzas
+    result = gameCompletionPercent ** 3 / actionFrequency > rand;
+  }
+
+  return result;
+};
 
 export const rideTheEdge = async (time = getRandomInclusiveInteger(5, 30)) => {
   setStrokeSpeed(0);

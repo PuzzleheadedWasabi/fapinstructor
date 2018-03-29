@@ -8,6 +8,7 @@ export const setStrokeStyleDominant = async () => {
     store.game.strokeStyle = StrokeStyleEnum.Dominant;
   }
 };
+setStrokeStyleDominant.label = "Dominant Hand";
 
 export const setStrokeStyleNondominant = async () => {
   if (store.game.strokeStyle !== StrokeStyleEnum.Nondominant) {
@@ -15,6 +16,7 @@ export const setStrokeStyleNondominant = async () => {
     store.game.strokeStyle = StrokeStyleEnum.Nondominant;
   }
 };
+setStrokeStyleNondominant.label = "Nondominant Hand";
 
 export const setStrokeStyleHeadOnly = async () => {
   if (store.game.strokeStyle !== StrokeStyleEnum.HeadOnly) {
@@ -22,6 +24,7 @@ export const setStrokeStyleHeadOnly = async () => {
     store.game.strokeStyle = StrokeStyleEnum.HeadOnly;
   }
 };
+setStrokeStyleHeadOnly.label = "Head Stroking";
 
 export const setStrokeStyleShaftOnly = async () => {
   if (store.game.strokeStyle !== StrokeStyleEnum.ShaftOnly) {
@@ -29,6 +32,7 @@ export const setStrokeStyleShaftOnly = async () => {
     store.game.strokeStyle = StrokeStyleEnum.ShaftOnly;
   }
 };
+setStrokeStyleShaftOnly.label = "Shaft Stroking";
 
 export const setStrokeStyleOverhandGrip = async () => {
   if (store.game.strokeStyle !== StrokeStyleEnum.OverhandGrip) {
@@ -36,3 +40,4 @@ export const setStrokeStyleOverhandGrip = async () => {
     store.game.strokeStyle = StrokeStyleEnum.OverhandGrip;
   }
 };
+setStrokeStyleOverhandGrip.label = "Overhand Grip"

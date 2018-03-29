@@ -6,5 +6,6 @@ const halvedStrokes = async () => {
   setStrokeSpeed(store.game.strokeSpeed / 2);
   createNotification("Halved Strokes");
 };
+halvedStrokes.label = "Halved Strokes";
 
 export default halvedStrokes;

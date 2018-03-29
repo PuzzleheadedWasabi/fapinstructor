@@ -22,6 +22,7 @@ export const insertButtPlug = async () => {
     return [done];
   }
 };
+insertButtPlug.label = "Insert Buttplug";
 
 export const removeButtPlug = async () => {
   if (store.game.buttPlugInserted) {
@@ -41,3 +42,4 @@ export const removeButtPlug = async () => {
     return [done];
   }
 };
+removeButtPlug.label = "Remove Buttplug";

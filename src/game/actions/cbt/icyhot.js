@@ -20,5 +20,6 @@ const applyIcyHot = async () => {
 
   return [done];
 };
+applyIcyHot.label = "Apply Icyhot";
 
 export default applyIcyHot;

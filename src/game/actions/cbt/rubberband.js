@@ -41,6 +41,7 @@ export const addRubberBand = async () => {
 
   return [done];
 };
+addRubberBand.label = "Add Rubberband";
 
 export const removeRubberBand = async () => {
   strokerRemoteControl.pause();
@@ -62,6 +63,7 @@ export const removeRubberBand = async () => {
     return [done];
   }
 };
+addRubberBand.label = "Remove Rubberband";
 
 const randomRubberBandAdjustment = async () => {
   if (getRandomBoolean()) {
@@ -70,5 +72,6 @@ const randomRubberBandAdjustment = async () => {
     return removeRubberBand();
   }
 };
+randomRubberBandAdjustment.label = "Random Rubberband Adjustment";
 
 export default randomRubberBandAdjustment;
