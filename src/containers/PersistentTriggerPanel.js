@@ -19,7 +19,7 @@ class PersistentTriggerPanel extends React.Component {
           disabled={this.state.ruinedOrgasmDisabled}
           onClick={() => {
             this.setState({ ruinedOrgasmDisabled: true });
-            executeAction(ruinedOrgasm(), true).then(() => {
+            executeAction(ruinedOrgasm, true).then(() => {
               this.setState({ ruinedOrgasmDisabled: false });
             });
           }}

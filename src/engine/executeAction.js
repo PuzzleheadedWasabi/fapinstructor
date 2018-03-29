@@ -27,8 +27,9 @@ const executeAction = (action, shouldInterrupt) => {
   if (typeof action !== "function") {
     throw new Error(`action is not a function, ${action}`);
   }
-  if (engine.executing) {
-    if (!shouldInterrupt) {
+
+  if (shouldInterrupt) {
+    if (engine.executing) {
       throw new Error(
         `cannot execute a new action when the previous one isn't complete, ${action}`
       );

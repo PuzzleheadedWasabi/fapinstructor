@@ -28,8 +28,8 @@ import orgasm from "./orgasm/orgasm";
 
 const actions = [
   // speed
-  createProbability(halvedStrokes, 2),
-  createProbability(doubleStrokes, 2),
+  createProbability(halvedStrokes, 5),
+  createProbability(doubleStrokes, 15),
   createProbability(randomBeat, 15),
   createProbability(randomStrokeSpeed, 20),
   //ACCELERATION_CYCLES

@@ -3,19 +3,11 @@ import elapsedGameTime from "game/utils/elapsedGameTime";
 
 const shouldEdge = () => {
   const {
-    config: {
-      minimumGameTime,
-      maximumGameTime,
-      actionFrequency,
-      fastestStrokeSpeed
-    },
-    game: { strokeSpeed }
+    config: { minimumGameTime, maximumGameTime, actionFrequency }
   } = store;
 
   let result = false;
-  const isAllowedChance =
-    elapsedGameTime("minutes") >= minimumGameTime * 1.2 &&
-    strokeSpeed >= fastestStrokeSpeed / 1.7;
+  const isAllowedChance = elapsedGameTime("minutes") >= minimumGameTime * 1.2;
 
   if (isAllowedChance) {
     const rand = Math.random();
@@ -26,7 +18,7 @@ const shouldEdge = () => {
     result = gameCompletionPercent ** 3 / actionFrequency > rand;
   }
 
-  console.log('shouldEdge', result)
+  console.log("shouldEdge", result);
   return result;
 };
 

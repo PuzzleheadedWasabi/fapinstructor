@@ -8,10 +8,7 @@ import play from "engine/audio";
 import audioLibrary from "audio";
 import { strokerRemoteControl } from "game/loops/strokerLoop";
 
-export const ruinedOrgasm = notificationId => async () => {
-  if (notificationId) {
-    dismissNotification(notificationId);
-  }
+export const ruinedOrgasm = async () => {
   store.game.ruins++;
   play(audioLibrary.Ruined);
   const { config: { ruinCooldown } } = store;
@@ -34,7 +31,10 @@ const ruinOrgasm = async () => {
   play(audioLibrary.RuinItForMe);
   setStrokeSpeed(fastestStrokeSpeed);
 
-  const trigger = ruinedOrgasm(notificationId);
+  const trigger = async () => {
+    dismissNotification(notificationId);
+    await ruinedOrgasm();
+  };
   trigger.label = "Ruined";
 
   return [trigger];
