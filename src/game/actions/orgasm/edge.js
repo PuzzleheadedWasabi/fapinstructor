@@ -22,8 +22,7 @@ export const rideTheEdge = async (time = getRandomInclusiveInteger(5, 30)) => {
   dismissNotification(notificationId);
 };
 
-export const edging = (notificationId, time) => async () => {
-  dismissNotification(notificationId);
+export const edging = async time => {
   store.game.edges++;
 
   const holdIt = getRandomBoolean();
@@ -67,10 +66,13 @@ export const getToTheEdge = async () => {
 const edge = async () => {
   const notificationId = await getToTheEdge();
 
-  const trigger = edging(notificationId).then(async () => {
+  const trigger = async () => {
+    dismissNotification(notificationId);
+    await edging();
     await stopEdging();
-  });
+  };
   trigger.label = "Edging";
+
   return [trigger];
 };
 

@@ -8,7 +8,7 @@ import CustomError from "utils/CustomError";
 import ImagePlayer from "components/ImagePlayer";
 import { CircularProgress } from "material-ui/Progress";
 import HUD from "containers/HUD";
-import EndPage from "containers/Page/EndPage"
+import EndPage from "containers/Pages/EndPage";
 
 const styles = theme => ({
   progress: {
@@ -63,10 +63,10 @@ class GamePage extends React.Component {
         {maximumOrgasms === orgasms ? (
           <EndPage />
         ) : (
-          <div>
-            <HUD />
-            <ImagePlayer url={pictures[pictureIndex]} />
-          </div>
+          [
+            <HUD key="hud" />,
+            <ImagePlayer key="imageplayer" url={pictures[pictureIndex]} />
+          ]
         )}
       </div>
     );

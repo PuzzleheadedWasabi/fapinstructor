@@ -92,7 +92,7 @@ export const determineOrgasm = async () => {
     }
   }
 
-  return [trigger, skip];
+  return [await trigger(), skip];
 };
 
 export const skip = async () => {
@@ -123,9 +123,11 @@ export const end = async () => {
 const orgasm = async () => {
   const notificationId = await getToTheEdge();
 
-  const trigger = edging(notificationId, 30).then(async () => {
-    await determineOrgasm();
-  });
+  const trigger = async () => {
+    dismissNotification(notificationId);
+   // await edging(30);
+    return await determineOrgasm();
+  };
   trigger.label = "Edging";
 
   return trigger;
