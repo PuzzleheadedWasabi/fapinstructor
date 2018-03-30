@@ -49,7 +49,7 @@ const actions = [
   // cei
   createProbability(eatPrecum, 3),
   // misc.
-  createProbability(pickYourPoison, 10)
+  createProbability(pickYourPoison, 15)
 ];
 
 export default actions;

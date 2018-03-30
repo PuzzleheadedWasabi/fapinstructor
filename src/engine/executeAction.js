@@ -29,11 +29,6 @@ const executeAction = (action, shouldInterrupt) => {
   }
 
   if (shouldInterrupt) {
-    if (engine.executing) {
-      throw new Error(
-        `cannot execute a new action when the previous one isn't complete, ${action}`
-      );
-    }
     interrupt();
   }
 

@@ -10,6 +10,7 @@ import { strokerRemoteControl } from "game/loops/strokerLoop";
 import { getToTheEdge, edging } from "./edge";
 import { getRandomInclusiveInteger } from "utils/math";
 import elapsedGameTime from "game/utils/elapsedGameTime";
+import { stopGame } from "game"
 
 export const allowedOrgasm = () => {
   const {
@@ -155,6 +156,7 @@ export const end = async () => {
     await delay(3000);
   } else {
     setStrokeSpeed(0);
+    stopGame();
   }
 };
 

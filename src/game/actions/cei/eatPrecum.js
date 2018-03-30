@@ -20,5 +20,6 @@ const eatPrecum = async () => {
 
   return [done];
 };
+eatPrecum.label = "Eat Precum";
 
 export default eatPrecum;

@@ -1,11 +1,13 @@
 import { getRandomActions } from "./generateAction";
 import executeAction from "engine/executeAction";
+import { getRandomInclusiveInteger } from "utils/math";
 import createNotification, {
   dismissNotification
 } from "engine/createNotification";
 
 const pickYourPoison = async () => {
-  const chosenActions = getRandomActions(5);
+  const rand = getRandomInclusiveInteger(2, 4);
+  const chosenActions = getRandomActions(rand);
 
   const nid = createNotification("Pick your poison", {
     autoDismiss: false

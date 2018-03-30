@@ -63,7 +63,7 @@ export const removeRubberBand = async () => {
     return [done];
   }
 };
-addRubberBand.label = "Remove Rubberband";
+removeRubberBand.label = "Remove Rubberband";
 
 const randomRubberBandAdjustment = async () => {
   if (getRandomBoolean()) {

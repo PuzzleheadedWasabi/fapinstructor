@@ -4,34 +4,35 @@ import actions from "./index";
 import edge, { shouldEdge } from "./orgasm/edge";
 import ruin, { shouldRuin } from "./orgasm/ruin";
 import orgasm, { shouldOrgasm } from "./orgasm/orgasm";
-import pickYourPoison from "./pickYourPoison";
+import _ from "lodash";
 
-export const getRandomActions = count => {
-  const rand = getRandomInclusiveInteger(1, 100);
-
+export const getRandomActions = (count = 0) => {
   // applies the probability to each action
-  let chosenActions = actions.reduce((chosenActions, action) => {
-    if (rand <= action.probability) {
-      chosenActions.push(action.func);
-    }
-    return chosenActions;
-  }, []);
+  let chosenActions = [];
+  do {
+    chosenActions = chosenActions.concat(
+      actions.reduce((accumulator, action) => {
+        const rand = getRandomInclusiveInteger(1, 100);
+        if (rand <= action.probability) {
+          accumulator.push(action.func);
+        }
+        return accumulator;
+      }, [])
+    );
+  } while (chosenActions.length < count);
 
-  if (chosenActions.length < count) {
-    chosenActions = chosenActions.concat(getRandomActions(count));
-  }
+  chosenActions = _.shuffle(chosenActions);
 
   if (count) {
-    chosenActions = chosenActions.slice(0, count);
+    chosenActions = count > 0 ? chosenActions.slice(0, count) : chosenActions;
   }
 
-  console.log(chosenActions)
   return chosenActions;
 };
 
 const generateAction = () => {
   let action = null;
-  return pickYourPoison;
+
   if (shouldOrgasm()) {
     action = orgasm;
   } else if (shouldEdge()) {
