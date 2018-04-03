@@ -17,17 +17,18 @@ import {
 } from "./strokeStyle";
 import eatPrecum from "./cei/eatPrecum";
 import { insertButtPlug, removeButtPlug } from "./anal/buttPlug";
-import pickYourPoison from "./pickYourPoison"
+import pickYourPoison from "./pickYourPoison";
+import acceleration from "./speed/acceleration";
+import redLightGreenLight from "./speed/redLightGreenLight";
 
 const actions = [
   // speed
   createProbability(halvedStrokes, 5),
   createProbability(doubleStrokes, 15),
-  createProbability(randomBeat, 15),
+  createProbability(randomBeat, 20),
   createProbability(randomStrokeSpeed, 20),
-  //ACCELERATION_CYCLES
-  //SLOW_THEN_FAST
-  //TRIPLETS
+  createProbability(acceleration, 10),
+  createProbability(redLightGreenLight, 10),
   // cbt
   createProbability(randomGripAdjustment, 20),
   createProbability(addRubberBand, 3),
