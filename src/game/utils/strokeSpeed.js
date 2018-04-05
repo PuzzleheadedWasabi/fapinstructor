@@ -40,3 +40,6 @@ export const setStrokeSpeed = newSpeed => {
   }
   store.game.strokeSpeed = speed;
 };
+
+export const getAverageStrokeSpeed = () =>
+  (store.config.fastestStrokeSpeed + store.config.slowestStrokeSpeed) / 2;

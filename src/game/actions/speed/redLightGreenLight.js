@@ -1,5 +1,9 @@
 import store from "store";
-import { setStrokeSpeed, randomStrokeSpeed } from "game/utils/strokeSpeed";
+import {
+  setStrokeSpeed,
+  randomStrokeSpeed,
+  getAverageStrokeSpeed
+} from "game/utils/strokeSpeed";
 import createNotification, {
   dismissNotification
 } from "engine/createNotification";
@@ -7,20 +11,21 @@ import delay from "utils/delay";
 import { getRandomInclusiveInteger, getRandomArbitrary } from "utils/math";
 
 const redLightGreenLight = async () => {
-  const { config: { fastestStrokeSpeed, slowestStrokeSpeed } } = store;
+  const { config: { fastestStrokeSpeed } } = store;
 
   const nid = createNotification(`Red Light/Green Light`, {
     autoDismiss: false
   });
-
-  const averageSpeed = (fastestStrokeSpeed + slowestStrokeSpeed) / 2;
 
   let timeLeft = getRandomInclusiveInteger(30, 60);
   let isGreen = false;
 
   while (timeLeft > 0) {
     if (isGreen) {
-      const fastSpeed = getRandomArbitrary(averageSpeed, fastestStrokeSpeed);
+      const fastSpeed = getRandomArbitrary(
+        getAverageStrokeSpeed(),
+        fastestStrokeSpeed
+      );
 
       setStrokeSpeed(fastSpeed);
       createNotification(`Green!`);

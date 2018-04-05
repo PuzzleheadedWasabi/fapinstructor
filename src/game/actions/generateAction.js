@@ -6,6 +6,8 @@ import ruin, { shouldRuin } from "./orgasm/ruin";
 import orgasm, { shouldOrgasm } from "./orgasm/orgasm";
 import _ from "lodash";
 
+import headPalming from "./cbt/headPalming"
+
 export const getRandomActions = (count = 0) => {
   // applies the probability to each action
   let chosenActions = [];
@@ -33,6 +35,7 @@ export const getRandomActions = (count = 0) => {
 const generateAction = () => {
   let action = null;
 
+  return headPalming;
   if (shouldOrgasm()) {
     action = orgasm;
   } else if (shouldEdge()) {

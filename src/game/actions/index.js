@@ -3,11 +3,13 @@ import doubleStrokes from "./speed/doubleStrokes";
 import halvedStrokes from "./speed/halvedStrokes";
 import randomStrokeSpeed from "./speed/randomStrokeSpeed";
 import randomBeat from "./speed/randomBeat";
+import redLightGreenLight from "./speed/redLightGreenLight";
 import randomGripAdjustment from "./grip";
 import { addRubberBand, removeRubberBand } from "./cbt/rubberband";
 import { addClothespin, removeClothespin } from "./cbt/clothespin";
 import applyIcyHot from "./cbt/icyhot";
 import ballslaps from "./cbt/ballslaps";
+import headPalming from "./cbt/headPalming";
 import {
   setStrokeStyleDominant,
   setStrokeStyleNondominant,
@@ -19,7 +21,6 @@ import eatPrecum from "./cei/eatPrecum";
 import { insertButtPlug, removeButtPlug } from "./anal/buttPlug";
 import pickYourPoison from "./pickYourPoison";
 import acceleration from "./speed/acceleration";
-import redLightGreenLight from "./speed/redLightGreenLight";
 
 const actions = [
   // speed
@@ -37,7 +38,7 @@ const actions = [
   createProbability(removeClothespin, 1),
   createProbability(applyIcyHot, 1),
   createProbability(ballslaps, 4),
-  // createCommand(COMMANDS.CBT.HEAD_PALMING, actions.headPalming, 1),
+  createProbability(headPalming, 1),
   // stroke style
   createProbability(setStrokeStyleDominant, 7),
   createProbability(setStrokeStyleNondominant, 5),
