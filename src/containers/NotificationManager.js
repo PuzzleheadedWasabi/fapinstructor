@@ -1,4 +1,5 @@
 import React from "react";
+import { withStyles } from "material-ui/styles";
 import Notification from "components/Notification";
 import store from "store";
 import connect from "hoc/connect";
@@ -6,16 +7,22 @@ import connect from "hoc/connect";
 // add the notification system to the engine
 store.engine.notifications = [];
 
+const styles = theme => ({
+  root: {
+    pointerEvents: "auto"
+  }
+});
+
 class NotificationManager extends React.Component {
   handleDismiss = index => notification => {
     store.engine.notifications[index].expired = true;
   };
 
   render() {
-    const { engine: { notifications } } = this.props;
+    const { classes, engine: { notifications } } = this.props;
 
     return (
-      <div>
+      <div className={classes.root}>
         {notifications.map(
           (notification, index) =>
             !notification.expired && (
@@ -34,4 +41,4 @@ class NotificationManager extends React.Component {
   }
 }
 
-export default connect(NotificationManager);
+export default withStyles(styles)(connect(NotificationManager));

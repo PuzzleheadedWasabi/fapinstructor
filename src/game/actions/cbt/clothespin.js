@@ -5,8 +5,8 @@ import createNotification, {
 import { strokerRemoteControl } from "game/loops/strokerLoop";
 
 export const addClothespin = async () => {
-  strokerRemoteControl.pause();
   if (store.game.clothespins < 2) {
+    strokerRemoteControl.pause();
     const clothespins = store.game.clothespins + 1;
     const notificationId = createNotification(
       `Attach a clothespin to a free nipple`,
@@ -28,8 +28,8 @@ export const addClothespin = async () => {
 addClothespin.label = "Add Clothespin";
 
 export const removeClothespin = async () => {
-  strokerRemoteControl.pause();
   if (store.game.clothespins !== 0) {
+    strokerRemoteControl.pause();
     const clothespins = store.game.clothespins - 1;
     const notificationId = createNotification(`Remove a clothespin`, {
       autoDismiss: false

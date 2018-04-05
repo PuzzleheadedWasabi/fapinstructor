@@ -44,10 +44,10 @@ export const addRubberBand = async () => {
 addRubberBand.label = "Add Rubberband";
 
 export const removeRubberBand = async () => {
-  strokerRemoteControl.pause();
   const currentRubberBands = store.game.rubberBands;
 
   if (currentRubberBands !== 0) {
+    strokerRemoteControl.pause();
     const newRubberBands = store.game.rubberBands - 1;
     const notificationId = createNotification(`Remove a rubberband`, {
       autoDismiss: false

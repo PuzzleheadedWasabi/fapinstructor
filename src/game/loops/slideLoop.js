@@ -2,22 +2,11 @@ import shuffle from "lodash.shuffle";
 import uniq from "lodash.uniq";
 import store from "store";
 import fetchManyPics from "api/fetchTumblrPics";
+import remoteControl from "./remoteControl";
 
-let lastSlideChange;
-let isPaused;
+export const slideRemoteControl = Object.create(remoteControl);
 
-const onSubscribe = () => {
-  isPaused = false;
-  lastSlideChange = -1;
-};
-
-const pauseSlides = () => {
-  isPaused = true;
-};
-
-const playSlides = () => {
-  isPaused = false;
-};
+let lastSlideChange = -1;
 
 const nextSlide = async () => {
   const { pictures } = store.game;
@@ -56,7 +45,8 @@ const fetchPictures = () => {
 };
 
 const slideLoop = progress => {
-  if (!isPaused) {
+  console.log(slideRemoteControl.paused);
+  if (!slideRemoteControl.paused) {
     if (
       lastSlideChange >= store.config.slideDuration * 1000 ||
       lastSlideChange === -1
@@ -68,7 +58,5 @@ const slideLoop = progress => {
     }
   }
 };
-slideLoop.onSubscribe = onSubscribe;
 
 export default slideLoop;
-export { onSubscribe, playSlides, pauseSlides, nextSlide };

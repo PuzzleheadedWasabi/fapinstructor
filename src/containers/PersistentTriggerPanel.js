@@ -1,7 +1,14 @@
 import React from "react";
+import { withStyles } from "material-ui/styles";
 import Button from "material-ui/Button";
 import executeAction from "engine/executeAction";
 import { ruinedOrgasm } from "game/actions/orgasm/ruin";
+
+const styles = theme => ({
+  root: {
+    pointerEvents: "auto"
+  }
+});
 
 class PersistentTriggerPanel extends React.Component {
   state = {
@@ -9,8 +16,10 @@ class PersistentTriggerPanel extends React.Component {
   };
 
   render() {
+    const { classes } = this.props;
+
     return (
-      <div>
+      <div className={classes.root}>
         <Button
           variant="raised"
           color="primary"
@@ -31,4 +40,4 @@ class PersistentTriggerPanel extends React.Component {
   }
 }
 
-export default PersistentTriggerPanel;
+export default withStyles(styles)(PersistentTriggerPanel);

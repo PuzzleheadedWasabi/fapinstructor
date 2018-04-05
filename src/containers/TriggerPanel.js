@@ -5,16 +5,17 @@ import connect from "hoc/connect";
 import executeAction from "engine/executeAction";
 
 const styles = theme => ({
-  triggers: {
+  root: {
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "center",
-    width: "100vw"
+    width: "100vw",
+    pointerEvents: "auto"
   }
 });
 
 const TriggerPanel = ({ classes, engine: { actionTriggers } }) => (
-  <div className={classes.triggers}>
+  <div className={classes.root}>
     {actionTriggers &&
       actionTriggers.map((trigger, index) => (
         <Button

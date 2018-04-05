@@ -14,7 +14,8 @@ import UpIcon from "material-ui-icons/ArrowDropUp";
 const styles = theme => ({
   root: {
     padding: 5,
-    background: "rgba(0, 0, 0, 0.6)"
+    background: "rgba(0, 0, 0, 0.6)",
+    pointerEvents: "auto"
   },
   header: {
     display: "flex",
@@ -63,6 +64,7 @@ class StatusPanel extends React.Component {
         buttPlugInserted,
         rubberBands,
         clothespins,
+        cockAndBallsBound,
         edges,
         ruins,
         orgasms
@@ -100,6 +102,7 @@ class StatusPanel extends React.Component {
               {buttPlugInserted && <Label value="Butt Plug" />}
               {rubberBands > 0 && <Label value="Rubberbands" />}
               {clothespins > 0 && <Label value="Clothepins" />}
+              {cockAndBallsBound && <Label value="Cock & Balls" />}
               {edges > 0 && <Label value="Edges" />}
               {ruins > 0 && <Label value="Ruins" />}
               {orgasms > 0 && <Label value="Orgasms" />}
@@ -121,6 +124,7 @@ class StatusPanel extends React.Component {
               {buttPlugInserted && <Label value="Inserted" />}
               {rubberBands > 0 && <Label value={rubberBands} />}
               {clothespins > 0 && <Label value={clothespins} />}
+              {cockAndBallsBound && <Label value="Bound" />}
               {edges > 0 && <Label value={edges} />}
               {ruins > 0 && <Label value={ruins} />}
               {orgasms > 0 && <Label value={orgasms} />}

@@ -46,6 +46,7 @@ export const shouldRuin = () => {
 
 export const ruinedOrgasm = async () => {
   store.game.ruins++;
+  store.game.video = null;
   play(audioLibrary.Ruined);
   const { config: { ruinCooldown } } = store;
 

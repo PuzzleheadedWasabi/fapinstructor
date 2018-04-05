@@ -11,7 +11,8 @@ const styles = theme => ({
     height: "100vh",
     width: "100vw",
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
+    pointerEvents: "none"
   },
   middle: {
     display: "flex",

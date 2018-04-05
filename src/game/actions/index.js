@@ -10,6 +10,7 @@ import { addClothespin, removeClothespin } from "./cbt/clothespin";
 import applyIcyHot from "./cbt/icyhot";
 import ballslaps from "./cbt/ballslaps";
 import headPalming from "./cbt/headPalming";
+import bindCockAndBalls from "./cbt/bindCockAndBalls";
 import {
   setStrokeStyleDominant,
   setStrokeStyleNondominant,
@@ -39,6 +40,7 @@ const actions = [
   createProbability(applyIcyHot, 1),
   createProbability(ballslaps, 4),
   createProbability(headPalming, 1),
+  createProbability(bindCockAndBalls, 1),
   // stroke style
   createProbability(setStrokeStyleDominant, 7),
   createProbability(setStrokeStyleNondominant, 5),

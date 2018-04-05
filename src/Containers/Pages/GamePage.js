@@ -6,6 +6,7 @@ import { startGame, stopGame } from "game";
 import store from "store";
 import CustomError from "utils/CustomError";
 import ImagePlayer from "components/ImagePlayer";
+import VideoPlayer from "components/VideoPlayer";
 import { CircularProgress } from "material-ui/Progress";
 import HUD from "containers/HUD";
 import EndPage from "containers/Pages/EndPage";
@@ -54,7 +55,7 @@ class GamePage extends React.Component {
     }
 
     const {
-      game: { pictures, pictureIndex, orgasms },
+      game: { pictures, pictureIndex, orgasms, video },
       config: { maximumOrgasms }
     } = this.props;
 
@@ -65,7 +66,11 @@ class GamePage extends React.Component {
         ) : (
           [
             <HUD key="hud" />,
-            <ImagePlayer key="imageplayer" url={pictures[pictureIndex]} />
+            video ? (
+              <VideoPlayer key="videoplayer" video={video} />
+            ) : (
+              <ImagePlayer key="imageplayer" url={pictures[pictureIndex]} />
+            )
           ]
         )}
       </div>
