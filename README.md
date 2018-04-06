@@ -24,9 +24,7 @@ cei
 cbt
 -toothpaste
 -ice
--ball punches
 -flicking head with finger
--rubberband, snaps
 -scratching
 -breathplay
 

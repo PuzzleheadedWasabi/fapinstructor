@@ -5,7 +5,7 @@ import randomStrokeSpeed from "./speed/randomStrokeSpeed";
 import randomBeat from "./speed/randomBeat";
 import redLightGreenLight from "./speed/redLightGreenLight";
 import randomGripAdjustment from "./grip";
-import { addRubberBand, removeRubberBand } from "./cbt/rubberband";
+import { addRubberBand, removeRubberBand, snapRubberBand } from "./cbt/rubberband";
 import { addClothespin, removeClothespin } from "./cbt/clothespin";
 import applyIcyHot from "./cbt/icyhot";
 import ballslaps from "./cbt/ballslaps";
@@ -41,6 +41,7 @@ const actions = [
   createProbability(ballslaps, 4),
   createProbability(headPalming, 1),
   createProbability(bindCockAndBalls, 1),
+  createProbability(snapRubberBand, 1),
   // stroke style
   createProbability(setStrokeStyleDominant, 7),
   createProbability(setStrokeStyleNondominant, 5),
