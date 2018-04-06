@@ -55,7 +55,7 @@ class GamePage extends React.Component {
     }
 
     const {
-      game: { pictures, pictureIndex, orgasms, video },
+      game: { orgasms, activeVideo, activePicture },
       config: { maximumOrgasms }
     } = this.props;
 
@@ -66,10 +66,12 @@ class GamePage extends React.Component {
         ) : (
           [
             <HUD key="hud" />,
-            video ? (
-              <VideoPlayer key="videoplayer" video={video} />
+            activeVideo ? (
+              <VideoPlayer key="videoplayer" video={activeVideo} />
             ) : (
-              <ImagePlayer key="imageplayer" url={pictures[pictureIndex]} />
+              activePicture && (
+                <ImagePlayer key="imageplayer" url={activePicture} />
+              )
             )
           ]
         )}

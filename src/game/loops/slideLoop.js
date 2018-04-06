@@ -9,20 +9,20 @@ export const slideRemoteControl = Object.create(remoteControl);
 let lastSlideChange = -1;
 
 const nextSlide = async () => {
-  const { pictures } = store.game;
+  // load more pictures when close to running out
+  if (5 > store.game.pictures.length - store.game.pictureIndex) {
+    await fetchPictures();
+  }
 
-  store.game.shownSlides++;
   store.game.pictureIndex++;
 
   // cache the next image
-  if (store.game.pictureIndex + 1 < pictures.length) {
-    new Image().src = pictures[store.game.pictureIndex + 1];
+  if (store.game.pictureIndex + 1 < store.game.pictures.length) {
+    new Image().src = store.game.pictures[store.game.pictureIndex + 1];
   }
 
-  // load more pictures when close to running out
-  if (5 > pictures.length - store.game.pictureIndex) {
-    await fetchPictures();
-  }
+  // set the active picture to a fetched image
+  store.game.activePicture = store.game.pictures[store.game.pictureIndex];
 };
 
 const fetchPictures = () => {
@@ -45,7 +45,6 @@ const fetchPictures = () => {
 };
 
 const slideLoop = progress => {
-  console.log(slideRemoteControl.paused);
   if (!slideRemoteControl.paused) {
     if (
       lastSlideChange >= store.config.slideDuration * 1000 ||

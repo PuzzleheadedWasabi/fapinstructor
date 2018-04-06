@@ -6,10 +6,10 @@ import { StrokeStyleEnum } from "game/enums/StrokeStyle";
 export default () => {
   store.game = {
     startTime: new moment(),
-    shownSlides: 0,
     pictures: [],
     pictureIndex: -1,
-    video: null,
+    activePicture: null,
+    activeVideo: null,
     strokeSpeed: randomStrokeSpeed(),
     gripStrength: store.config.initialGripStrength,
     rubberBands: 0,

@@ -20,13 +20,13 @@ const bindCockAndBalls = async () => {
     ];
 
     const video = videos[getRandomInclusiveInteger(0, videos.length - 1)];
-    store.game.video = video;
+    store.game.activeVideo = video;
 
     const done = async () => {
       strokerRemoteControl.play();
       slideRemoteControl.play();
       store.game.cockAndBallsBound = true;
-      store.game.video = null;
+      store.game.activeVideo = null;
     };
     done.label = "Bound";
 
