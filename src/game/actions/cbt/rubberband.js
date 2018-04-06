@@ -96,6 +96,7 @@ export const snapRubberBand = async () => {
     setStrokeSpeed(randomStrokeSpeed());
   }
 };
+snapRubberBand.label = "Rubberband Snaps"
 
 const randomRubberBandAdjustment = async () => {
   if (getRandomBoolean()) {

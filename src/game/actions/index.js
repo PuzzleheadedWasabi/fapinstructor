@@ -11,6 +11,7 @@ import applyIcyHot from "./cbt/icyhot";
 import ballslaps from "./cbt/ballslaps";
 import headPalming from "./cbt/headPalming";
 import bindCockAndBalls from "./cbt/bindCockAndBalls";
+import holdBreath from "./cbt/holdBreath";
 import {
   setStrokeStyleDominant,
   setStrokeStyleNondominant,
@@ -42,6 +43,7 @@ const actions = [
   createProbability(headPalming, 1),
   createProbability(bindCockAndBalls, 1),
   createProbability(snapRubberBand, 1),
+  createProbability(holdBreath, 1),
   // stroke style
   createProbability(setStrokeStyleDominant, 7),
   createProbability(setStrokeStyleNondominant, 5),

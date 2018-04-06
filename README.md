@@ -26,7 +26,6 @@ cbt
 -ice
 -flicking head with finger
 -scratching
--breathplay
 
 sissy
 -gagging/deepthroat
