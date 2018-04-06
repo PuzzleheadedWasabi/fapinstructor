@@ -1,4 +1,7 @@
+
 This project was created by TheFapInstructor
+
+### TODO (move to issues on GitHub)
 
 misc
 -keyboard shortcuts
@@ -26,6 +29,10 @@ cbt
 -ice
 -flicking head with finger
 -scratching
+
+****forced intox
+-shots
+-poppers
 
 sissy
 -gagging/deepthroat
