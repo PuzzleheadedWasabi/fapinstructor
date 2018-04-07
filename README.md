@@ -28,7 +28,6 @@ cbt
 -toothpaste
 -ice
 -flicking head with finger
--scratching
 
 ****forced intox
 -shots
