@@ -10,7 +10,7 @@ const ballslaps = async () => {
   const ballSlapTime = ballSlapCount / ballSlapSpeed;
   const totalTime = ballSlapTime + delayTime;
 
-  createNotification(`Slap your balls ${ballSlapCount} times to the beat`, {
+  createNotification(`Slap your balls ${ballSlapCount}`, {
     time: totalTime * 1000
   });
 

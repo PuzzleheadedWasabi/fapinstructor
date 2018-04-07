@@ -27,7 +27,6 @@ cei
 cbt
 -toothpaste
 -ice
--flicking head with finger
 
 ****forced intox
 -shots

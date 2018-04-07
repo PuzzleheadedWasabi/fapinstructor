@@ -13,6 +13,7 @@ import headPalming from "./cbt/headPalming";
 import bindCockAndBalls from "./cbt/bindCockAndBalls";
 import holdBreath from "./cbt/holdBreath";
 import { scratchChest, scratchThighs, scratchShoulders } from "./cbt/scratching";
+import { flickCockHead, flickNipples } from "./cbt/flicking";
 import {
   setStrokeStyleDominant,
   setStrokeStyleNondominant,
@@ -48,6 +49,8 @@ const actions = [
   createProbability(scratchChest, 1),
   createProbability(scratchThighs, 1),
   createProbability(scratchShoulders, 1),
+  createProbability(flickCockHead, 1),
+  createProbability(flickNipples, 1),
   // stroke style
   createProbability(setStrokeStyleDominant, 7),
   createProbability(setStrokeStyleNondominant, 5),
