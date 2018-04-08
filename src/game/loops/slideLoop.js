@@ -30,6 +30,7 @@ const fetchPictures = () => {
 
   const ids = tumblrId.split(",").map(id => id.trim());
 
+  // make a fetch to tumblr for each tumblr id
   const fetches = ids.map((id, index) =>
     fetchManyPics(
       id,
@@ -38,10 +39,11 @@ const fetchPictures = () => {
     )
   );
 
+  // execute the array of promises and append the randomized pictures to the global array
   return Promise.all(fetches).then(results => {
     let newImages = [];
 
-    results.map(({ images, offset }, index) => {
+    results.forEach(({ images, offset }, index) => {
       newImages = newImages.concat(images);
       store.config.tumblrOffset[index] = offset;
     });
@@ -52,21 +54,6 @@ const fetchPictures = () => {
       store.game.pictureIndex = 0;
     }
   });
-
-  // return fetchManyPics(
-  //   tumblrId,
-  //   { pictures: store.config.pictures, gifs: store.config.gifs },
-  //   tumblrOffset
-  // ).then(({ images, offset }) => {
-  //   let shuffledPictures = uniq(shuffle(images));
-
-  //   store.game.pictures = [...store.game.pictures, ...shuffledPictures];
-  //   store.config.tumblrOffset = offset;
-
-  //   if (images.length === 0) {
-  //     store.game.pictureIndex = 0;
-  //   }
-  // });
 };
 
 const slideLoop = progress => {
