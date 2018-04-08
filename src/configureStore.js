@@ -15,11 +15,13 @@ const defaultConfig = {
   finalOrgasmRandom: false,
   minimumGameTime: 5, // min
   maximumGameTime: 20, // min
-  minimumEdges: 3,
+  minimumEdges: 0,
   minimumRuinedOrgasms: 0,
   maximumRuinedOrgasms: 0,
   maximumOrgasms: 1,
-  ruinedOrgasmProbability: 50, // %
+  postOrgasmTorture: true,
+  postOrgasmTortureMinimumTime: 10,
+  postOrgasmTortureMaximumTime: 90,
   edgeCooldown: 5, // sec
   ruinCooldown: 20, // sec
   slowestStrokeSpeed: 0.25, // sec

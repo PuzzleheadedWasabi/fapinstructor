@@ -277,6 +277,41 @@ class ConfigPage extends React.Component {
                   </FormControl>
                 </Grid>
                 <Grid item xs={12} md={4}>
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        checked={store.config.postOrgasmTorture}
+                        onChange={this.handleCheckChange("postOrgasmTorture")}
+                        value="postOrgasmTorture"
+                      />
+                    }
+                    label="Post Orgasm Torure"
+                  />
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <TextField
+                    id="postOrgasmTortureMinimumTime"
+                    label="Post Orgasm Torture Minimum Time"
+                    value={store.config.postOrgasmTortureMinimumTime}
+                    onChange={this.handleChange("postOrgasmTortureMinimumTime")}
+                    fullWidth
+                    type="number"
+                    inputProps={{ step: "1", min: "3" }}
+                  />
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <TextField
+                    id="postOrgasmTortureMaximumTime"
+                    label="Post Orgasm Torture Maximum Time"
+                    value={store.config.postOrgasmTortureMaximumTime}
+                    onChange={this.handleChange("postOrgasmTortureMaximumTime")}
+                    fullWidth
+                    type="number"
+                    inputProps={{ step: "1", min: "5" }}
+                  />
+                </Grid>
+                <Grid xs />
+                <Grid item xs={12} md={4}>
                   <TextField
                     id="minimumEdges"
                     label="Minimum Edges"
@@ -338,21 +373,6 @@ class ConfigPage extends React.Component {
                       inputProps={{ step: "1", min: "0" }}
                       endAdornment={
                         <InputAdornment position="end">seconds</InputAdornment>
-                      }
-                    />
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12} md={4}>
-                  <FormControl className={classes.control}>
-                    <InputLabel>Ruined Orgasm Probability</InputLabel>
-                    <Input
-                      id="ruinedOrgasmProbability"
-                      value={store.config.ruinedOrgasmProbability}
-                      onChange={this.handleChange("ruinedOrgasmProbability")}
-                      type="number"
-                      inputProps={{ step: "10", min: "0", max: "100" }}
-                      endAdornment={
-                        <InputAdornment position="end">%</InputAdornment>
                       }
                     />
                   </FormControl>
