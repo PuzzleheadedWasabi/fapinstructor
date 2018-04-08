@@ -276,6 +276,17 @@ class ConfigPage extends React.Component {
                     </FormGroup>
                   </FormControl>
                 </Grid>
+                <Grid item xs={12} md={12}>
+                  <TextField
+                    id="maximumOrgasms"
+                    label="Maximum Number of Orgasms"
+                    value={store.config.maximumOrgasms}
+                    onChange={this.handleChange("maximumOrgasms")}
+                    fullWidth
+                    type="number"
+                    inputProps={{ step: "1", min: "1" }}
+                  />
+                </Grid>
                 <Grid item xs={12} md={4}>
                   <FormControlLabel
                     control={

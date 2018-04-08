@@ -12,6 +12,7 @@ import {
 } from "./cbt/rubberband";
 import { addClothespin, removeClothespin } from "./cbt/clothespin";
 import applyIcyHot from "./cbt/icyhot";
+import applyToothpaste from "./cbt/applyToothpaste";
 import ballslaps from "./cbt/ballslaps";
 import headPalming from "./cbt/headPalming";
 import bindCockAndBalls from "./cbt/bindCockAndBalls";
@@ -50,6 +51,7 @@ const actions = [
   createProbability(addClothespin, 3),
   createProbability(removeClothespin, 1),
   createProbability(applyIcyHot, 1),
+  createProbability(applyToothpaste, 1),
   createProbability(ballslaps, 4),
   createProbability(headPalming, 1),
   createProbability(bindCockAndBalls, 1),
