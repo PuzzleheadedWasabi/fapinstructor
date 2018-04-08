@@ -36,46 +36,48 @@ import { insertButtPlug, removeButtPlug } from "./anal/buttPlug";
 import pickYourPoison from "./pickYourPoison";
 import acceleration from "./speed/acceleration";
 
-const actions = [
-  // speed
-  createProbability(halvedStrokes, 5),
-  createProbability(doubleStrokes, 15),
-  createProbability(randomBeat, 20),
-  createProbability(randomStrokeSpeed, 20),
-  createProbability(acceleration, 10),
-  createProbability(redLightGreenLight, 10),
-  // cbt
-  createProbability(randomGripAdjustment, 20),
-  createProbability(addRubberBand, 3),
-  createProbability(removeRubberBand, 1),
-  createProbability(addClothespin, 3),
-  createProbability(removeClothespin, 1),
-  createProbability(applyIcyHot, 1),
-  createProbability(applyToothpaste, 1),
-  createProbability(ballslaps, 4),
-  createProbability(headPalming, 1),
-  createProbability(bindCockAndBalls, 1),
-  createProbability(snapRubberBand, 1),
-  createProbability(holdBreath, 1),
-  createProbability(scratchChest, 1),
-  createProbability(scratchThighs, 1),
-  createProbability(scratchShoulders, 1),
-  createProbability(flickCockHead, 1),
-  createProbability(flickNipples, 1),
-  createProbability(rubIceOnBalls, 1),
-  // stroke style
-  createProbability(setStrokeStyleDominant, 7),
-  createProbability(setStrokeStyleNondominant, 5),
-  createProbability(setStrokeStyleHeadOnly, 1),
-  createProbability(setStrokeStyleShaftOnly, 5),
-  createProbability(setStrokeStyleOverhandGrip, 1),
-  // anal
-  createProbability(insertButtPlug, 1),
-  createProbability(removeButtPlug, 1),
-  // cei
-  createProbability(eatPrecum, 3),
-  // misc.
-  createProbability(pickYourPoison, 15)
-];
+const initializeActions = taskConfigs =>
+  [
+    // speed
+    taskConfigs.halvedStrokes && createProbability(halvedStrokes, 5),
+    taskConfigs.doubleStrokes && createProbability(doubleStrokes, 15),
+    taskConfigs.randomBeat && createProbability(randomBeat, 20),
+    taskConfigs.randomStrokeSpeed && createProbability(randomStrokeSpeed, 20),
+    taskConfigs.accelerationCycles && createProbability(acceleration, 10),
+    taskConfigs.redLightGreenLight && createProbability(redLightGreenLight, 10),
+    // cbt
+    taskConfigs.rubberBands && createProbability(addRubberBand, 3),
+    taskConfigs.rubberBands && createProbability(removeRubberBand, 1),
+    taskConfigs.clothespins && createProbability(addClothespin, 3),
+    taskConfigs.clothespins && createProbability(removeClothespin, 1),
+    taskConfigs.icyHot && createProbability(applyIcyHot, 1),
+    taskConfigs.toothpaste && createProbability(applyToothpaste, 1),
+    taskConfigs.ballSlaps && createProbability(ballslaps, 4),
+    taskConfigs.headPalming && createProbability(headPalming, 1),
+    taskConfigs.bindCockBalls && createProbability(bindCockAndBalls, 1),
+    taskConfigs.rubberBands && createProbability(snapRubberBand, 1),
+    taskConfigs.breathPlay && createProbability(holdBreath, 1),
+    taskConfigs.scratching && createProbability(scratchChest, 1),
+    taskConfigs.scratching && createProbability(scratchThighs, 1),
+    taskConfigs.scratching && createProbability(scratchShoulders, 1),
+    taskConfigs.flicking && createProbability(flickCockHead, 1),
+    taskConfigs.flicking && createProbability(flickNipples, 1),
+    taskConfigs.cbtIce && createProbability(rubIceOnBalls, 1),
+    // stroke style
+    taskConfigs.gripAdjustments && createProbability(randomGripAdjustment, 20),
+    taskConfigs.dominant && createProbability(setStrokeStyleDominant, 7),
+    taskConfigs.nondominant && createProbability(setStrokeStyleNondominant, 5),
+    taskConfigs.headOnly && createProbability(setStrokeStyleHeadOnly, 1),
+    taskConfigs.shaftOnly && createProbability(setStrokeStyleShaftOnly, 5),
+    taskConfigs.overhandGrip &&
+      createProbability(setStrokeStyleOverhandGrip, 1),
+    // anal
+    taskConfigs.buttplug && createProbability(insertButtPlug, 1),
+    taskConfigs.buttplug && createProbability(removeButtPlug, 1),
+    // cei
+    taskConfigs.precum && createProbability(eatPrecum, 3),
+    // misc.
+    taskConfigs.pickYourPoison && createProbability(pickYourPoison, 15)
+  ].filter(action => action !== null);
 
-export default actions;
+export default initializeActions;

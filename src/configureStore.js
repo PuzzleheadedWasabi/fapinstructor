@@ -32,9 +32,11 @@ const defaultConfig = {
     doubleStrokes: true,
     halvedStrokes: true,
     accelerationCycles: true,
-    slowAndFast: true,
-    clusterStrokes: true,
-    handSwapping: true,
+    randomBeat: true,
+    randomStrokeSpeed: true,
+    redLightGreenLight: true,
+    dominant: true,
+    nondominant: true,
     headOnly: true,
     shaftOnly: true,
     overhandGrip: true,
@@ -42,11 +44,17 @@ const defaultConfig = {
     bindCockBalls: true,
     rubberBands: true,
     clothespins: true,
-    ballBeats: true,
+    ballSlaps: true,
     headPalming: true,
     icyHot: true,
+    toothpaste: true,
+    breathPlay: true,
+    scratching: true,
+    flicking: true,
+    cbtIce: true,
     precum: true,
-    buttplug: true
+    buttplug: true,
+    pickYourPoison: true
   }
 };
 

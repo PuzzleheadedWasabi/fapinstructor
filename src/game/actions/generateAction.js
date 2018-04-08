@@ -1,12 +1,15 @@
+import store from "store";
 import actionIterator from "engine/actionIterator";
 import { getRandomInclusiveInteger } from "utils/math";
-import actions from "./index";
+import initializeActions from "./index";
 import edge, { shouldEdge } from "./orgasm/edge";
 import ruin, { shouldRuin } from "./orgasm/ruin";
 import orgasm, { shouldOrgasm } from "./orgasm/orgasm";
 import _ from "lodash";
 
 export const getRandomActions = (count = 0) => {
+  const actions = initializeActions(store.config.tasks);
+
   // applies the probability to each action
   let chosenActions = [];
   do {

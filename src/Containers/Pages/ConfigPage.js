@@ -455,8 +455,9 @@ class ConfigPage extends React.Component {
                           doubleStrokes: "Double Strokes",
                           halvedStrokes: "Halved Strokes",
                           accelerationCycles: "Acceleration Cycles",
-                          slowAndFast: "Slow & Fast",
-                          clusterStrokes: "Cluster Strokes"
+                          randomBeat: "Random Beats",
+                          randomStrokeSpeed: "Random Stroke Speed",
+                          redLightGreenLight: "Red Light Green Light"
                         }}
                       />
                     </Grid>
@@ -464,7 +465,8 @@ class ConfigPage extends React.Component {
                       <TaskList
                         title="Style"
                         tasks={{
-                          handSwapping: "Hand Swapping",
+                          dominant: "Dominant",
+                          nondominant: "Nondominant",
                           headOnly: "Head Only",
                           shaftOnly: "Shaft Only",
                           gripAdjustments: "Grip Adjustments",
@@ -479,9 +481,14 @@ class ConfigPage extends React.Component {
                           bindCockBalls: "Bind Cock and Balls",
                           rubberBands: "Rubber Bands",
                           clothespins: "Clothespins",
-                          ballBeats: "Ball Beats",
                           headPalming: "Head Palming",
-                          icyHot: "Icy Hot"
+                          icyHot: "Icy Hot",
+                          toothpaste: "Toothpaste",
+                          ballSlaps: "Ball Slaps",
+                          breathPlay: "Breath Play",
+                          scratching: "Scratching",
+                          flicking: "Flicking",
+                          cbtIce: "Icecubes"
                         }}
                       />
                     </Grid>
@@ -498,6 +505,14 @@ class ConfigPage extends React.Component {
                         title="Anal"
                         tasks={{
                           buttplug: "Butt Plug"
+                        }}
+                      />
+                    </Grid>
+                    <Grid item xs={4}>
+                      <TaskList
+                        title="Misc."
+                        tasks={{
+                          pickYourPoison: "Pick your Poison"
                         }}
                       />
                     </Grid>
