@@ -26,7 +26,6 @@ cei
 
 cbt
 -toothpaste
--ice
 
 ****forced intox
 -shots

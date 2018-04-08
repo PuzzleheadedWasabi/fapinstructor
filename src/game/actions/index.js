@@ -5,15 +5,24 @@ import randomStrokeSpeed from "./speed/randomStrokeSpeed";
 import randomBeat from "./speed/randomBeat";
 import redLightGreenLight from "./speed/redLightGreenLight";
 import randomGripAdjustment from "./grip";
-import { addRubberBand, removeRubberBand, snapRubberBand } from "./cbt/rubberband";
+import {
+  addRubberBand,
+  removeRubberBand,
+  snapRubberBand
+} from "./cbt/rubberband";
 import { addClothespin, removeClothespin } from "./cbt/clothespin";
 import applyIcyHot from "./cbt/icyhot";
 import ballslaps from "./cbt/ballslaps";
 import headPalming from "./cbt/headPalming";
 import bindCockAndBalls from "./cbt/bindCockAndBalls";
 import holdBreath from "./cbt/holdBreath";
-import { scratchChest, scratchThighs, scratchShoulders } from "./cbt/scratching";
+import {
+  scratchChest,
+  scratchThighs,
+  scratchShoulders
+} from "./cbt/scratching";
 import { flickCockHead, flickNipples } from "./cbt/flicking";
+import { rubIceOnBalls } from "./cbt/ice";
 import {
   setStrokeStyleDominant,
   setStrokeStyleNondominant,
@@ -51,6 +60,7 @@ const actions = [
   createProbability(scratchShoulders, 1),
   createProbability(flickCockHead, 1),
   createProbability(flickNipples, 1),
+  createProbability(rubIceOnBalls, 1),
   // stroke style
   createProbability(setStrokeStyleDominant, 7),
   createProbability(setStrokeStyleNondominant, 5),
