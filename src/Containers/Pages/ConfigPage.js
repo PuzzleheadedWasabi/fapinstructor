@@ -31,6 +31,8 @@ import ExpansionPanel, {
   ExpansionPanelDetails
 } from "material-ui/ExpansionPanel";
 import ExpandMoreIcon from "material-ui-icons/ExpandMore";
+import ForkMe from "components/ForkMe";
+import BackgroundImage from "images/background.jpg";
 
 const styles = theme => ({
   control: {
@@ -38,6 +40,30 @@ const styles = theme => ({
   },
   button: {
     marginRight: theme.spacing.unit
+  },
+  background: {
+    background: `url(${BackgroundImage})`,
+    backgroundSize: "cover",
+    backgroundAttachment: "fixed"
+  },
+  title: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    color: "#222",
+    padding: 80
+  },
+  formContainer: {
+    display: "flex",
+    justifyContent: "center",
+    padding: "0px 5vw 5vh 5vw"
+  },
+  form: {
+    padding: 20,
+    marginBottom: 20,
+    width: "90vw",
+    backgroundColor: "rgba(255, 255, 255, 0.9)"
   }
 });
 
@@ -90,20 +116,9 @@ class ConfigPage extends React.Component {
     const { copyToolTipOpen } = this.state;
 
     return (
-      <div
-        style={{
-          background: "linear-gradient(#D02558,black 40%)"
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "flex-end",
-            color: "#FFF",
-            padding: 20
-          }}
-        >
+      <div className={classes.background}>
+        <ForkMe />
+        <div className={classes.title}>
           <Typography
             variant="display3"
             color="inherit"
@@ -111,9 +126,12 @@ class ConfigPage extends React.Component {
           >
             Fap Instructor
           </Typography>
+          <Typography variant="body2" color="inherit">
+            Make each fap session a unique and challenging experience
+          </Typography>
         </div>
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <Paper style={{ padding: 20, marginBottom: 20, width: "90vw" }}>
+        <div className={classes.formContainer}>
+          <Paper className={classes.form}>
             <Group title="Tumblr">
               <Grid container>
                 <Grid item xs={12}>

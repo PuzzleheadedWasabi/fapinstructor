@@ -17,7 +17,6 @@ const styles = theme => ({
     color: "white",
     display: "flex",
     alignItems: "center",
-    cursor: "pointer",
     userSelect: "none",
     overflow: "hidden"
   },
@@ -61,8 +60,10 @@ class Notification extends React.Component {
   }
 
   render() {
-    const { classes, id, title, onDismiss, time } = this.props;
+    const { classes, id, title, onDismiss, time, autoDismiss } = this.props;
     const { progress } = this.state;
+
+    const clickable = autoDismiss && time === 0;
 
     return (
       <Slide in={true} direction="right">
@@ -75,7 +76,12 @@ class Notification extends React.Component {
               color="secondary"
             />
           )}
-          <div key={id} className={classes.notification} onClick={onDismiss}>
+          <div
+            key={id}
+            className={classes.notification}
+            style={clickable ? { cursor: "pointer" } : null}
+            onClick={clickable ? onDismiss : null}
+          >
             <Icon className={classes.icon} />
             <Typography variant="body2" color="inherit" noWrap>
               {title}
@@ -89,7 +95,7 @@ class Notification extends React.Component {
 
 Notification.defaultProps = {
   autoDismiss: true
-}
+};
 
 Notification.propTypes = {
   title: PropTypes.string.isRequired,
