@@ -53,7 +53,11 @@ export const doRuin = async () => {
   const { config: { fastestStrokeSpeed } } = store;
 
   setStrokeSpeed(fastestStrokeSpeed);
-  play(audioLibrary.RuinItForMe);
+
+  if (store.config.enableVoice) {
+    play(audioLibrary.RuinItForMe);
+  }
+
   const nid = createNotification("Ruin it");
 
   const done = async () => {
@@ -77,7 +81,11 @@ export const doOrgasm = async () => {
   } = store;
 
   setStrokeSpeed(fastestStrokeSpeed);
-  play(audioLibrary.Cum);
+
+  if (store.config.enableVoice) {
+    play(audioLibrary.Cum);
+  }
+
   const nid = createNotification("You have permission to have a full orgasm");
 
   const done = async () => {
@@ -104,7 +112,11 @@ export const doDenied = async () => {
   const { config: { fastestStrokeSpeed } } = store;
 
   setStrokeSpeed(fastestStrokeSpeed);
-  play(audioLibrary.Cum);
+
+  if (store.config.enableVoice) {
+    play(audioLibrary.Denied);
+  }
+
   const nid = createNotification("Denied an orgasm");
 
   const done = async () => {

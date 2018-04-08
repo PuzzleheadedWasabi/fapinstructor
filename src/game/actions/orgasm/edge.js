@@ -37,7 +37,10 @@ export const rideTheEdge = async (time = getRandomInclusiveInteger(5, 30)) => {
   const notificationId = createNotification("Ride the edge", {
     autoDismiss: false
   });
-  play(audioLibrary.KeepStroking);
+
+  if (store.config.enableVoice) {
+    play(audioLibrary.KeepStroking);
+  }
 
   await delay(time * 1000);
   dismissNotification(notificationId);
@@ -65,14 +68,21 @@ export const stopEdging = async () => {
 
   setStrokeSpeed(randomStrokeSpeed());
   createNotification("Start stroking again");
-  play(audioLibrary.StartStrokingAgain);
+
+  if (store.config.enableVoice) {
+    play(audioLibrary.StartStrokingAgain);
+  }
 
   await delay(3000);
 };
 
 export const getToTheEdge = async () => {
   const { config: { fastestStrokeSpeed } } = store;
-  play(audioLibrary.Edge);
+
+  if (store.config.enableVoice) {
+    play(audioLibrary.Edge);
+  }
+
   setStrokeSpeed(fastestStrokeSpeed);
 
   setDefaultGrip();

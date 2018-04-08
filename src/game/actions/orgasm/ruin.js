@@ -47,7 +47,11 @@ export const shouldRuin = () => {
 export const ruinedOrgasm = async () => {
   store.game.ruins++;
   store.game.activeVideo = null;
-  play(audioLibrary.Ruined);
+
+  if (store.config.enableVoice) {
+    play(audioLibrary.Ruined);
+  }
+
   const { config: { ruinCooldown } } = store;
 
   strokerRemoteControl.pause();
@@ -57,7 +61,10 @@ export const ruinedOrgasm = async () => {
   setStrokeSpeed(randomStrokeSpeed());
   strokerRemoteControl.play();
   createNotification("Start stroking again");
-  play(audioLibrary.StartStrokingAgain);
+
+  if (store.config.enableVoice) {
+    play(audioLibrary.StartStrokingAgain);
+  }
 
   await delay(3000);
 };
@@ -65,7 +72,11 @@ export const ruinedOrgasm = async () => {
 const ruinOrgasm = async () => {
   const { config: { fastestStrokeSpeed } } = store;
   const notificationId = createNotification("Ruin it");
-  play(audioLibrary.RuinItForMe);
+
+  if (store.config.enableVoice) {
+    play(audioLibrary.RuinItForMe);
+  }
+
   setStrokeSpeed(fastestStrokeSpeed);
 
   const trigger = async () => {
