@@ -12,7 +12,7 @@ import {
 } from "./cbt/rubberband";
 import { addClothespin, removeClothespin } from "./cbt/clothespin";
 import applyIcyHot from "./cbt/icyhot";
-import applyToothpaste from "./cbt/applyToothpaste";
+import applyToothpaste from "./cbt/toothpaste";
 import ballslaps from "./cbt/ballslaps";
 import headPalming from "./cbt/headPalming";
 import bindCockAndBalls from "./cbt/bindCockAndBalls";

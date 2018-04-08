@@ -28,20 +28,45 @@ const nextSlide = async () => {
 const fetchPictures = () => {
   const { tumblrId, tumblrOffset } = store.config;
 
-  return fetchManyPics(
-    tumblrId,
-    { pictures: store.config.pictures, gifs: store.config.gifs },
-    tumblrOffset
-  ).then(({ images, offset }) => {
-    let shuffledPictures = uniq(shuffle(images));
+  const ids = tumblrId.split(",").map(id => id.trim());
 
-    store.game.pictures = [...store.game.pictures, ...shuffledPictures];
-    store.config.tumblrOffset = offset;
+  const fetches = ids.map((id, index) =>
+    fetchManyPics(
+      id,
+      { pictures: store.config.pictures, gifs: store.config.gifs },
+      tumblrOffset[index]
+    )
+  );
 
-    if (images.length === 0) {
+  return Promise.all(fetches).then(results => {
+    let newImages = [];
+
+    results.map(({ images, offset }, index) => {
+      newImages = newImages.concat(images);
+      store.config.tumblrOffset[index] = offset;
+    });
+
+    store.game.pictures = [...store.game.pictures, ...uniq(shuffle(newImages))];
+
+    if (newImages.length === 0) {
       store.game.pictureIndex = 0;
     }
   });
+
+  // return fetchManyPics(
+  //   tumblrId,
+  //   { pictures: store.config.pictures, gifs: store.config.gifs },
+  //   tumblrOffset
+  // ).then(({ images, offset }) => {
+  //   let shuffledPictures = uniq(shuffle(images));
+
+  //   store.game.pictures = [...store.game.pictures, ...shuffledPictures];
+  //   store.config.tumblrOffset = offset;
+
+  //   if (images.length === 0) {
+  //     store.game.pictureIndex = 0;
+  //   }
+  // });
 };
 
 const slideLoop = progress => {

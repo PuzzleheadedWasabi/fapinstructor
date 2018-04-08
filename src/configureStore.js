@@ -3,10 +3,10 @@ import { GripStrengthEnum } from "game/enums/GripStrength";
 
 const defaultConfig = {
   version: 2.0,
-  tumblrId: "fapstergifs",
+  tumblrId: "fapstergifs, allcowgirl, mar-cuss-blowjob-gifs",
   gifs: true,
   pictures: false,
-  tumblrOffset: 0,
+  tumblrOffset: [],
   slideDuration: 10, // sec
   enableVoice: true,
   finalOrgasmAllowed: true,

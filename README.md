@@ -23,9 +23,6 @@ cei
 -cum play
 -self facial
 
-cbt
--toothpaste
-
 forced intox
 -shots
 -poppers
@@ -54,4 +51,3 @@ DEEP Throat Cards
     Hold dildo in throat for 20 seconds, keep spit in mouth.
     Rotate dildo 2 times then hold 10 seconds in, keep spit in mouth.
 
-* multiple tumblr blogs

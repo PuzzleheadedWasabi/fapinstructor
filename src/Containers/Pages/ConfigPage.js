@@ -117,27 +117,19 @@ class ConfigPage extends React.Component {
             <Group title="Tumblr">
               <Grid container>
                 <Grid item xs={12}>
-                  <TextField
-                    id="tumblrId"
-                    label="Tumblr"
-                    value={store.config.tumblrId}
-                    onChange={this.handleChange("tumblrId")}
-                    fullWidth
-                  />
+                  <FormControl className={classes.control}>
+                    <InputLabel>Tumblrs</InputLabel>
+                    <Input
+                      id="tumblrId"
+                      value={store.config.tumblrId}
+                      onChange={this.handleChange("tumblrId")}
+                    />
+                    <FormHelperText>
+                      You can add multiple tumblrs each seperated by a comma
+                    </FormHelperText>
+                  </FormControl>
                 </Grid>
-                <Grid item xs={12} md={6}>
-                  <TextField
-                    id="tumblrOffset"
-                    label="Offset"
-                    value={store.config.tumblrOffset}
-                    onChange={this.handleChange("tumblrOffset")}
-                    helperText="The number of tumblr posts to skip"
-                    fullWidth
-                    type="number"
-                    inputProps={{ step: "50", min: "0" }}
-                  />
-                </Grid>
-                <Grid item xs={12} md={6}>
+                <Grid item xs={12}>
                   <FormControl className={classes.control}>
                     <InputLabel>Slide Duration</InputLabel>
                     <Input
@@ -321,7 +313,6 @@ class ConfigPage extends React.Component {
                     inputProps={{ step: "1", min: "5" }}
                   />
                 </Grid>
-                <Grid xs />
                 <Grid item xs={12} md={4}>
                   <TextField
                     id="minimumEdges"
