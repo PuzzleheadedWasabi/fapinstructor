@@ -4,6 +4,8 @@ import createNotification, {
   dismissNotification
 } from "engine/createNotification";
 import delay from "utils/delay";
+import play from "engine/audio";
+import audioLibrary from "audio";
 
 const acceleration = async () => {
   const { config: { slowestStrokeSpeed, fastestStrokeSpeed } } = store;
@@ -14,9 +16,16 @@ const acceleration = async () => {
 
   setStrokeSpeed(slowestStrokeSpeed);
 
+  let audioPlayed = false;
+
   while (store.game.strokeSpeed < fastestStrokeSpeed) {
     setStrokeSpeed(store.game.strokeSpeed * 1.05);
     await delay(1000);
+
+    if (!audioPlayed && store.game.strokeSpeed > fastestStrokeSpeed / 3) {
+      play(audioLibrary.LongMoan);
+      audioPlayed = true;
+    }
   }
   await delay(2 * 1000);
 

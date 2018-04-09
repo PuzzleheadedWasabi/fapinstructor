@@ -1,6 +1,10 @@
 import { getRandomInclusiveInteger } from "utils/math";
 import { fetchAudioFile } from "engine/audio";
 
+// cei
+import cei1 from "../audio/cei/1.mp3";
+import cei2 from "../audio/cei/2.mp3";
+import cei3 from "../audio/cei/3.mp3";
 // denied
 import denied1 from "../audio/denied/1.mp3";
 // faster
@@ -62,7 +66,8 @@ export const audioVariations = {
   Faster: 2,
   Denied: 1,
   Orgasm: 3,
-  Ruined: 3
+  Ruined: 3,
+  CEI: 3
 };
 
 export const getRandomAudioVariation = key => {
@@ -75,6 +80,10 @@ export const getRandomAudioVariation = key => {
 };
 
 const audioLibrary = {
+  // cei
+  CEI1: fetchAudioFile(cei1),
+  CEI2: fetchAudioFile(cei2),
+  CEI3: fetchAudioFile(cei3),
   // denied
   Denied1: fetchAudioFile(denied1),
   // faster

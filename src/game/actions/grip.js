@@ -2,6 +2,8 @@ import store from "store";
 import createNotification from "engine/createNotification";
 import { getRandomBoolean } from "utils/math";
 import { GripStrengthEnum, GripStrengthString } from "game/enums/GripStrength";
+import play from "engine/audio";
+import audioLibrary from "audio";
 
 export const setDefaultGrip = () => {
   const currentGrip = store.game.gripStrength;
@@ -24,6 +26,10 @@ export const tightenGrip = () => {
     createNotification(
       `Tighten your grip - ${GripStrengthString[store.game.gripStrength]}`
     );
+
+    if (store.config.enableVoice) {
+      play(audioLibrary.Tighter);
+    }
   }
 };
 

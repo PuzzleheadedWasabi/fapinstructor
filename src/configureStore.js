@@ -45,6 +45,7 @@ const defaultConfig = {
     rubberBands: true,
     clothespins: true,
     ballSlaps: true,
+    squeezeBalls: true,
     headPalming: true,
     icyHot: true,
     toothpaste: true,

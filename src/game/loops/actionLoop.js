@@ -1,11 +1,20 @@
 import store from "store";
 import generateAction from "../actions/generateAction";
 import executeAction from "engine/executeAction";
+import play from "engine/audio";
+import audioLibrary from "audio";
 
-let lastGeneratedAction = 0;
+let lastGeneratedAction = -5000;
+let playedStartAudio = false;
 
 const actionLoop = progress => {
-  const { actionFrequency } = store.config;
+  const { actionFrequency, enableVoice } = store.config;
+
+  if (enableVoice && !playedStartAudio) {
+    playedStartAudio = true;
+    play(audioLibrary.StartGame);
+    play(audioLibrary.CardShuffle);
+  }
 
   if (lastGeneratedAction >= actionFrequency * 1000) {
     const { executing, actionTriggers } = store.engine;
@@ -25,7 +34,8 @@ const actionLoop = progress => {
 };
 
 actionLoop.onSubscribe = () => {
-  lastGeneratedAction = 0;
+  lastGeneratedAction = -5000;
+  playedStartAudio = false;
 };
 
 export default actionLoop;

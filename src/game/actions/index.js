@@ -14,6 +14,7 @@ import { addClothespin, removeClothespin } from "./cbt/clothespin";
 import applyIcyHot from "./cbt/icyhot";
 import applyToothpaste from "./cbt/toothpaste";
 import ballslaps from "./cbt/ballslaps";
+import squeezeBalls from "./cbt/squeezeBalls";
 import headPalming from "./cbt/headPalming";
 import bindCockAndBalls from "./cbt/bindCockAndBalls";
 import holdBreath from "./cbt/holdBreath";
@@ -53,6 +54,7 @@ const initializeActions = taskConfigs =>
     taskConfigs.icyHot && createProbability(applyIcyHot, 1),
     taskConfigs.toothpaste && createProbability(applyToothpaste, 1),
     taskConfigs.ballSlaps && createProbability(ballslaps, 4),
+    taskConfigs.squeezeBalls && createProbability(squeezeBalls, 4),
     taskConfigs.headPalming && createProbability(headPalming, 1),
     taskConfigs.bindCockBalls && createProbability(bindCockAndBalls, 1),
     taskConfigs.rubberBands && createProbability(snapRubberBand, 1),

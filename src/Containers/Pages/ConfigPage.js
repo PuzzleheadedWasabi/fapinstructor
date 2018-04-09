@@ -503,6 +503,7 @@ class ConfigPage extends React.Component {
                           icyHot: "Icy Hot",
                           toothpaste: "Toothpaste",
                           ballSlaps: "Ball Slaps",
+                          squeezeBalls: "Squeeze Balls",
                           breathPlay: "Breath Play",
                           scratching: "Scratching",
                           flicking: "Flicking",
