@@ -37,7 +37,7 @@ export const flickNipples = async () => {
   const flickTime = flickCount / flickSpeed;
   const totalTime = flickTime + delayTime;
 
-  createNotification(`Flick the head of your cock ${flickCount} times`, {
+  createNotification(`Flick your nipples ${flickCount} times`, {
     time: totalTime * 1000
   });
 

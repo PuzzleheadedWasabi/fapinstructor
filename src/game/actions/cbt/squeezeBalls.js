@@ -7,7 +7,7 @@ import play from "engine/audio";
 import audioLibrary from "audio";
 
 const squeezeBalls = async () => {
-  const time = getRandomInclusiveInteger(5, 30);
+  const time = getRandomInclusiveInteger(15, 40);
 
   createNotification(`Squeeze your balls`, {
     time: time * 1000
