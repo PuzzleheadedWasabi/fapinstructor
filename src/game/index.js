@@ -2,6 +2,7 @@
  * The entry point to kick start and configure the game
  */
 import { subscribe, unsubscribe } from "engine/loop";
+import interrupt from "engine/interrupt";
 import configureStore from "./configureStore";
 import actionLoop from "./loops/actionLoop";
 import strokerLoop from "./loops/strokerLoop";
@@ -21,6 +22,7 @@ const startGame = () => {
 };
 
 const stopGame = () => {
+  interrupt();
   loops.forEach(loop => {
     unsubscribe(loop);
   });

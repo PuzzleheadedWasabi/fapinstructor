@@ -6,8 +6,6 @@ import remoteControl from "./remoteControl";
 
 export const slideRemoteControl = Object.create(remoteControl);
 
-let lastSlideChange = -1;
-
 const nextSlide = async () => {
   // load more pictures when close to running out
   if (5 > store.game.pictures.length - store.game.pictureIndex) {
@@ -56,6 +54,7 @@ const fetchPictures = () => {
   });
 };
 
+let lastSlideChange = -1;
 const slideLoop = progress => {
   if (!slideRemoteControl.paused) {
     if (
@@ -69,5 +68,9 @@ const slideLoop = progress => {
     }
   }
 };
+
+slideLoop.onSubscribe = () => {
+  lastSlideChange = -1;
+}
 
 export default slideLoop;

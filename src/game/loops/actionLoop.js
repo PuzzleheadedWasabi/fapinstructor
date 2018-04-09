@@ -4,7 +4,7 @@ import executeAction from "engine/executeAction";
 
 let lastGeneratedAction = 0;
 
-export default progress => {
+const actionLoop = progress => {
   const { actionFrequency } = store.config;
 
   if (lastGeneratedAction >= actionFrequency * 1000) {
@@ -23,3 +23,9 @@ export default progress => {
     lastGeneratedAction += progress;
   }
 };
+
+actionLoop.onSubscribe = () => {
+  lastGeneratedAction = 0;
+};
+
+export default actionLoop;

@@ -7,7 +7,7 @@ let lastStroke = 0;
 
 export const strokerRemoteControl = Object.create(remoteControl);
 
-export default progress => {
+const strokerLoop = progress => {
   if (!strokerRemoteControl.paused) {
     const { strokeSpeed } = store.game;
 
@@ -21,3 +21,9 @@ export default progress => {
     }
   }
 };
+
+strokerLoop.onSubscribe = () => {
+  lastStroke = 0;
+};
+
+export default strokerLoop;

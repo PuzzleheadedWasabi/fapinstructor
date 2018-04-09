@@ -69,7 +69,9 @@ export const getRandomAudioVariation = key => {
   if (!audioVariations.hasOwnProperty(key)) {
     throw new Error(`No audio variation found for ${key}`);
   }
-  return `${key}${getRandomInclusiveInteger(1, audioVariations[key])}`;
+  return audioLibrary[
+    `${key}${getRandomInclusiveInteger(1, audioVariations[key])}`
+  ];
 };
 
 const audioLibrary = {
