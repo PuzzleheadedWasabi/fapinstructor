@@ -5,7 +5,7 @@ import createNotification, {
 import { setStrokeSpeed, randomStrokeSpeed } from "game/utils/strokeSpeed";
 import delay from "utils/delay";
 import play from "engine/audio";
-import audioLibrary from "audio";
+import audioLibrary, { getRandomAudioVariation } from "audio";
 import { strokerRemoteControl } from "game/loops/strokerLoop";
 import { getToTheEdge, edging } from "./edge";
 import { getRandomInclusiveInteger } from "utils/math";
@@ -83,7 +83,7 @@ export const doOrgasm = async () => {
   setStrokeSpeed(fastestStrokeSpeed);
 
   if (store.config.enableVoice) {
-    play(audioLibrary.Cum);
+    play(getRandomAudioVariation("Orgasm"));
   }
 
   const nid = createNotification("You have permission to have a full orgasm");
@@ -114,7 +114,7 @@ export const doDenied = async () => {
   setStrokeSpeed(fastestStrokeSpeed);
 
   if (store.config.enableVoice) {
-    play(audioLibrary.Denied);
+    play(getRandomAudioVariation("Denied"));
   }
 
   const nid = createNotification("Denied an orgasm");

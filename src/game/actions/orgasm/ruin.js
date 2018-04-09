@@ -5,7 +5,7 @@ import createNotification, {
 import { setStrokeSpeed, randomStrokeSpeed } from "game/utils/strokeSpeed";
 import delay from "utils/delay";
 import play from "engine/audio";
-import audioLibrary from "audio";
+import audioLibrary, { getRandomAudioVariation } from "audio";
 import { strokerRemoteControl } from "game/loops/strokerLoop";
 import elapsedGameTime from "game/utils/elapsedGameTime";
 
@@ -49,7 +49,7 @@ export const ruinedOrgasm = async () => {
   store.game.activeVideo = null;
 
   if (store.config.enableVoice) {
-    play(audioLibrary.Ruined);
+    play(getRandomAudioVariation("Ruined"));
   }
 
   const { config: { ruinCooldown } } = store;
