@@ -7,7 +7,7 @@ if (window.AudioContext) {
 const fetchAudioFile = async url => {
   let buffer;
 
-  if (context) {
+  if (context && context.decodeAudioData) {
     buffer = await new Promise((resolve, reject) => {
       const request = new XMLHttpRequest();
       request.open("GET", url, true);
