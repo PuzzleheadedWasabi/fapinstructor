@@ -10,7 +10,7 @@ import delay from "utils/delay";
 
 const randomBeat = async () => {
   // set count
-  const setCount = getRandomInclusiveInteger(5, 10);
+  const setCount = getRandomInclusiveInteger(3, 6);
 
   // stroke speed of sets
   const fastSpeed = getRandomArbitrary(
@@ -23,7 +23,7 @@ const randomBeat = async () => {
   );
 
   // rep count
-  const fastReps = getRandomInclusiveInteger(3, 7);
+  const fastReps = getRandomInclusiveInteger(2, 10);
   const slowReps = getRandomInclusiveInteger(1, 5);
 
   // time to complete set
