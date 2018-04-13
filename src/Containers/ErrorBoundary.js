@@ -9,7 +9,7 @@ class ErrorBoundary extends React.Component {
     this.state = { error: null, info: null };
 
     Raven.config("https://75a8117570924a2eb142da7e40a17968@sentry.io/204785", {
-      release: "2.0.1",
+      release: "2.0.2",
       maxUrlLength: 4000
     }).install();
   }

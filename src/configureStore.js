@@ -35,6 +35,7 @@ const defaultConfig = {
     randomBeat: true,
     randomStrokeSpeed: true,
     redLightGreenLight: true,
+    clusterStrokes: true,
     dominant: true,
     nondominant: true,
     headOnly: true,

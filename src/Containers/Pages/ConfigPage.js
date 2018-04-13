@@ -141,6 +141,7 @@ class ConfigPage extends React.Component {
                     <InputLabel>Tumblrs</InputLabel>
                     <Input
                       id="tumblrId"
+                      required
                       value={store.config.tumblrId}
                       onChange={this.handleChange("tumblrId")}
                     />
@@ -154,6 +155,7 @@ class ConfigPage extends React.Component {
                     <InputLabel>Slide Duration</InputLabel>
                     <Input
                       id="slideDuration"
+                      required
                       value={store.config.slideDuration}
                       onChange={this.handleChange("slideDuration")}
                       type="number"
@@ -201,6 +203,7 @@ class ConfigPage extends React.Component {
                     <Input
                       id="minimumGameTime"
                       value={store.config.minimumGameTime}
+                      required
                       onChange={this.handleChange("minimumGameTime")}
                       type="number"
                       inputProps={{ step: "1", min: "1" }}
@@ -216,6 +219,7 @@ class ConfigPage extends React.Component {
                     <Input
                       id="maximumGameTime"
                       value={store.config.maximumGameTime}
+                      required
                       onChange={this.handleChange("maximumGameTime")}
                       type="number"
                       inputProps={{ step: "1", min: "5" }}
@@ -299,7 +303,7 @@ class ConfigPage extends React.Component {
                     inputProps={{ step: "1", min: "1" }}
                   />
                 </Grid>
-                <Grid item xs={12} md={4}>
+                <Grid item xs={12}>
                   <FormControlLabel
                     control={
                       <Switch
@@ -312,27 +316,42 @@ class ConfigPage extends React.Component {
                   />
                 </Grid>
                 <Grid item xs={12} md={4}>
-                  <TextField
-                    id="postOrgasmTortureMinimumTime"
-                    label="Post Orgasm Torture Minimum Time"
-                    value={store.config.postOrgasmTortureMinimumTime}
-                    onChange={this.handleChange("postOrgasmTortureMinimumTime")}
-                    fullWidth
-                    type="number"
-                    inputProps={{ step: "1", min: "3" }}
-                  />
+                  <FormControl className={classes.control}>
+                    <InputLabel>Post Orgasm Torture Minimum Time</InputLabel>
+                    <Input
+                      id="postOrgasmTortureMinimumTime"
+                      value={store.config.postOrgasmTortureMinimumTime}
+                      onChange={this.handleChange(
+                        "postOrgasmTortureMinimumTime"
+                      )}
+                      fullWidth
+                      type="number"
+                      inputProps={{ step: "1", min: "3" }}
+                      endAdornment={
+                        <InputAdornment position="end">seconds</InputAdornment>
+                      }
+                    />
+                  </FormControl>
                 </Grid>
                 <Grid item xs={12} md={4}>
-                  <TextField
-                    id="postOrgasmTortureMaximumTime"
-                    label="Post Orgasm Torture Maximum Time"
-                    value={store.config.postOrgasmTortureMaximumTime}
-                    onChange={this.handleChange("postOrgasmTortureMaximumTime")}
-                    fullWidth
-                    type="number"
-                    inputProps={{ step: "1", min: "5" }}
-                  />
+                  <FormControl className={classes.control}>
+                    <InputLabel>Post Orgasm Torture Maximum Time</InputLabel>
+                    <Input
+                      id="postOrgasmTortureMaximumTime"
+                      value={store.config.postOrgasmTortureMaximumTime}
+                      onChange={this.handleChange(
+                        "postOrgasmTortureMaximumTime"
+                      )}
+                      fullWidth
+                      type="number"
+                      inputProps={{ step: "1", min: "5" }}
+                      endAdornment={
+                        <InputAdornment position="end">seconds</InputAdornment>
+                      }
+                    />
+                  </FormControl>
                 </Grid>
+                <Grid item xs />
                 <Grid item xs={12} md={4}>
                   <TextField
                     id="minimumEdges"
@@ -468,7 +487,7 @@ class ConfigPage extends React.Component {
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                   <Grid container>
-                    <Grid item xs={4}>
+                    <Grid item xs={12} sm={6} md={4}>
                       <TaskList
                         title="Speed"
                         tasks={{
@@ -477,11 +496,12 @@ class ConfigPage extends React.Component {
                           accelerationCycles: "Acceleration Cycles",
                           randomBeat: "Random Beats",
                           randomStrokeSpeed: "Random Stroke Speed",
-                          redLightGreenLight: "Red Light Green Light"
+                          redLightGreenLight: "Red Light Green Light",
+                          clusterStrokes: "Cluster Strokes"
                         }}
                       />
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={12} sm={6} md={4}>
                       <TaskList
                         title="Style"
                         tasks={{
@@ -494,7 +514,7 @@ class ConfigPage extends React.Component {
                         }}
                       />
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={12} sm={6} md={4}>
                       <TaskList
                         title="Cock & Ball Torture"
                         tasks={{
@@ -513,7 +533,7 @@ class ConfigPage extends React.Component {
                         }}
                       />
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={12} sm={6} md={4}>
                       <TaskList
                         title="Cum Eating"
                         tasks={{
@@ -521,7 +541,7 @@ class ConfigPage extends React.Component {
                         }}
                       />
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={12} sm={6} md={4}>
                       <TaskList
                         title="Anal"
                         tasks={{
@@ -529,7 +549,7 @@ class ConfigPage extends React.Component {
                         }}
                       />
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={12} sm={6} md={4}>
                       <TaskList
                         title="Misc."
                         tasks={{

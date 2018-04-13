@@ -27,7 +27,7 @@ const EndPage = ({ classes }) => (
     The End
     </Typography>
     <Typography variant="body2" gutterBottom>
-      I hope you have enjoyed the game. If you have any feedback or feature
+      I hope you enjoyed the game. If you have any feedback or feature
       requests please let me know on reddit or open an issue on GitHub!
     </Typography>
     <Feedback />

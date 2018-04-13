@@ -92,14 +92,20 @@ export const doOrgasm = async () => {
     dismissNotification(nid);
 
     if (postOrgasmTorture) {
-      const nid = createNotification("DO NOT STOP STROKING");
+      const nid = createNotification("Time for a little post-orgasm torture, don't you dare stop!");
+
       await delay(
         getRandomInclusiveInteger(
           postOrgasmTortureMinimumTime,
           postOrgasmTortureMaximumTime
         ) * 1000
       );
+
       dismissNotification(nid);
+
+      createNotification("I guess you've had enough.  You may stop.")
+      setStrokeSpeed(0);
+      await delay(3 * 1000);
     }
     end();
   };

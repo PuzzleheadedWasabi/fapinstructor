@@ -25,8 +25,8 @@ export const shouldEdge = () => {
     const gameCompletionPercent =
       elapsedGameTime("seconds") / (maximumGameTime * 60);
 
-    // Probability Graph: https://www.desmos.com/calculator/6w5r74malh
-    result = gameCompletionPercent ** 2 / actionFrequency > rand;
+    // Probability Graph: https://www.desmos.com/calculator/atc32p8kof
+    result = gameCompletionPercent / actionFrequency > rand;
   }
 
   return result;

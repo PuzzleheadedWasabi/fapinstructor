@@ -4,6 +4,7 @@ import halvedStrokes from "./speed/halvedStrokes";
 import randomStrokeSpeed from "./speed/randomStrokeSpeed";
 import randomBeat from "./speed/randomBeat";
 import redLightGreenLight from "./speed/redLightGreenLight";
+import clusterStrokes from "./speed/clusterStrokes";
 import randomGripAdjustment from "./grip";
 import {
   addRubberBand,
@@ -46,6 +47,7 @@ const initializeActions = taskConfigs =>
     taskConfigs.randomStrokeSpeed && createProbability(randomStrokeSpeed, 20),
     taskConfigs.accelerationCycles && createProbability(acceleration, 10),
     taskConfigs.redLightGreenLight && createProbability(redLightGreenLight, 10),
+    taskConfigs.clusterStrokes && createProbability(clusterStrokes, 10),
     // cbt
     taskConfigs.rubberBands && createProbability(addRubberBand, 3),
     taskConfigs.rubberBands && createProbability(removeRubberBand, 1),
