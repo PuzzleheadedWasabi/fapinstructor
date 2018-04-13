@@ -33,6 +33,7 @@ import ExpansionPanel, {
 import ExpandMoreIcon from "material-ui-icons/ExpandMore";
 import ForkMe from "components/ForkMe";
 import BackgroundImage from "images/background.jpg";
+import Feedback from "components/Feedback";
 
 const styles = theme => ({
   control: {
@@ -122,13 +123,14 @@ class ConfigPage extends React.Component {
           <Typography
             variant="display3"
             color="inherit"
-            style={{ fontFamily: "'Damion', cursive" }}
+            style={{ fontFamily: "'Damion', cursive", whiteSpace: "nowrap" }}
           >
             Fap Instructor
           </Typography>
-          <Typography variant="body2" color="inherit">
+          <Typography variant="body2" color="inherit" gutterBottom>
             Make each fap session a unique and challenging experience
           </Typography>
+          <Feedback iconWidth={20} />
         </div>
         <div className={classes.formContainer}>
           <Paper className={classes.form}>
