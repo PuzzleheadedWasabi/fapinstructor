@@ -472,6 +472,16 @@ class ConfigPage extends React.Component {
                 }
                 label="Enable Voice"
               />
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={store.config.enableMoans}
+                    onChange={this.handleCheckChange("enableMoans")}
+                    value="enableMoans"
+                  />
+                }
+                label="Enable Moans"
+              />
             </Group>
             <Group title="Tasks">
               <ExpansionPanel defaultExpanded>

@@ -9,6 +9,7 @@ const defaultConfig = {
   tumblrOffset: [],
   slideDuration: 10, // sec
   enableVoice: true,
+  enableMoans: true,
   finalOrgasmAllowed: true,
   finalOrgasmDenied: false,
   finalOrgasmRuined: false,

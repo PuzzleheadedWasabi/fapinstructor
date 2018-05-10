@@ -22,7 +22,7 @@ const startGame = () => {
   configureStore();
   addLoops(actionLoop, strokerLoop, slideLoop);
 
-  if (store.config.enableVoice) {
+  if (store.config.enableMoans) {
     addLoops(moanLoop);
   }
 };
