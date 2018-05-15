@@ -18,6 +18,8 @@ export default () => {
     ruins: 0,
     edges: 0,
     orgasms: 0,
+    strokes: 0,
+    strokeWave: [],
     strokeStyle: StrokeStyleEnum.Dominant,
     buttPlugInserted: false
   };

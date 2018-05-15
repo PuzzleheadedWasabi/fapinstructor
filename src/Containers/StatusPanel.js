@@ -1,15 +1,19 @@
 import React from "react";
+// mui
+import { Switch, Button } from "material-ui";
+import { FormControlLabel } from "material-ui/Form";
 import { withStyles } from "material-ui/styles";
 import Typography from "material-ui/Typography";
-import Button from "material-ui/Button";
+import DownIcon from "material-ui-icons/ArrowDropDown";
+import UpIcon from "material-ui-icons/ArrowDropUp";
+// internal
 import connect from "hoc/connect";
 import elapsedGameTime from "game/utils/elapsedGameTime";
 import { round } from "utils/math";
 import { GripStrengthString } from "game/enums/GripStrength";
 import { StrokeStyleString } from "game/enums/StrokeStyle";
 import logo from "images/logo.svg";
-import DownIcon from "material-ui-icons/ArrowDropDown";
-import UpIcon from "material-ui-icons/ArrowDropUp";
+import store from "store";
 
 const styles = theme => ({
   root: {
@@ -24,6 +28,9 @@ const styles = theme => ({
   },
   labels: {
     display: "flex"
+  },
+  toggle: {
+    color: "white"
   }
 });
 
@@ -37,6 +44,11 @@ class StatusPanel extends React.Component {
   state = {
     open: true,
     strokeSpeedUnit: "seconds"
+  };
+
+  handleCheckChange = name => (event, checked) => {
+    localStorage.setItem(name, checked);
+    store.config[name] = checked;
   };
 
   handleSwitchStrokeSpeedUnit = () => {
@@ -87,47 +99,77 @@ class StatusPanel extends React.Component {
           </Button>
         </div>
         {open && (
-          <div className={classes.labels}>
-            <div style={{ marginRight: 10 }}>
-              <Label value="Elapsed Time (min)" />
-              <div onClick={this.handleSwitchStrokeSpeedUnit}>
-                <Label
-                  value={`Stroke Speed (${
-                    strokeSpeedUnit === "minutes" ? "min" : "sec"
-                  })`}
-                />
+          <div>
+            <div className={classes.labels}>
+              <div style={{ marginRight: 10 }}>
+                <Label value="Elapsed Time (min)" />
+                <div onClick={this.handleSwitchStrokeSpeedUnit}>
+                  <Label
+                    value={`Stroke Speed (${
+                      strokeSpeedUnit === "minutes" ? "min" : "sec"
+                    })`}
+                  />
+                </div>
+                <Label value="Stroke Grip" />
+                <Label value="Stroke Style" />
+                {buttPlugInserted && <Label value="Butt Plug" />}
+                {rubberBands > 0 && <Label value="Rubberbands" />}
+                {clothespins > 0 && <Label value="Clothepins" />}
+                {cockAndBallsBound && <Label value="Cock & Balls" />}
+                {edges > 0 && <Label value="Edges" />}
+                {ruins > 0 && <Label value="Ruins" />}
+                {orgasms > 0 && <Label value="Orgasms" />}
               </div>
-              <Label value="Stroke Grip" />
-              <Label value="Stroke Style" />
-              {buttPlugInserted && <Label value="Butt Plug" />}
-              {rubberBands > 0 && <Label value="Rubberbands" />}
-              {clothespins > 0 && <Label value="Clothepins" />}
-              {cockAndBallsBound && <Label value="Cock & Balls" />}
-              {edges > 0 && <Label value="Edges" />}
-              {ruins > 0 && <Label value="Ruins" />}
-              {orgasms > 0 && <Label value="Orgasms" />}
+              <div>
+                <Label value={elapsedGameTime("minutes")} />
+                <div onClick={this.handleSwitchStrokeSpeedUnit}>
+                  <Label
+                    value={round(
+                      strokeSpeedUnit === "minutes"
+                        ? strokeSpeed * 60
+                        : strokeSpeed,
+                      2
+                    )}
+                  />
+                </div>
+                <Label value={GripStrengthString[gripStrength]} />
+                <Label value={StrokeStyleString[strokeStyle]} />
+                {buttPlugInserted && <Label value="Inserted" />}
+                {rubberBands > 0 && <Label value={rubberBands} />}
+                {clothespins > 0 && <Label value={clothespins} />}
+                {cockAndBallsBound && <Label value="Bound" />}
+                {edges > 0 && <Label value={edges} />}
+                {ruins > 0 && <Label value={ruins} />}
+                {orgasms > 0 && <Label value={orgasms} />}
+              </div>
             </div>
             <div>
-              <Label value={elapsedGameTime("minutes")} />
-              <div onClick={this.handleSwitchStrokeSpeedUnit}>
-                <Label
-                  value={round(
-                    strokeSpeedUnit === "minutes"
-                      ? strokeSpeed * 60
-                      : strokeSpeed,
-                    2
-                  )}
-                />
-              </div>
-              <Label value={GripStrengthString[gripStrength]} />
-              <Label value={StrokeStyleString[strokeStyle]} />
-              {buttPlugInserted && <Label value="Inserted" />}
-              {rubberBands > 0 && <Label value={rubberBands} />}
-              {clothespins > 0 && <Label value={clothespins} />}
-              {cockAndBallsBound && <Label value="Bound" />}
-              {edges > 0 && <Label value={edges} />}
-              {ruins > 0 && <Label value={ruins} />}
-              {orgasms > 0 && <Label value={orgasms} />}
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={store.config.enableVoice}
+                    onChange={this.handleCheckChange("enableVoice")}
+                    value="enableVoice"
+                  />
+                }
+                classes={{
+                  label: classes.toggle
+                }}
+                label="Voice"
+              />
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={store.config.enableMoans}
+                    onChange={this.handleCheckChange("enableMoans")}
+                    value="enableMoans"
+                  />
+                }
+                classes={{
+                  label: classes.toggle
+                }}
+                label="Moans"
+              />
             </div>
           </div>
         )}

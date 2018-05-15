@@ -16,12 +16,11 @@ if (typeof document.hidden !== "undefined") {
   visibilityChange = "webkitvisibilitychange";
 }
 
-window.visible = true;
-
-document.addEventListener(
-  visibilityChange,
-  () => {
-    window.visible = !document[hidden];
-  },
-  false
-);
+export default cb =>
+  document.addEventListener(
+    visibilityChange,
+    () => {
+      cb(!document[hidden]);
+    },
+    false
+  );

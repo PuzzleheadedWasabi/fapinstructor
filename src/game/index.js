@@ -1,7 +1,6 @@
 /**
  * The entry point to kick start and configure the game
  */
-import store from "store";
 import { subscribe, unsubscribe } from "engine/loop";
 import interrupt from "engine/interrupt";
 import configureStore from "./configureStore";
@@ -20,11 +19,7 @@ const addLoops = (...newLoops) => {
 
 const startGame = () => {
   configureStore();
-  addLoops(actionLoop, strokerLoop, slideLoop);
-
-  if (store.config.enableMoans) {
-    addLoops(moanLoop);
-  }
+  addLoops(actionLoop, strokerLoop, slideLoop, moanLoop);
 };
 
 const stopGame = () => {

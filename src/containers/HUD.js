@@ -1,9 +1,11 @@
 import React from "react";
 import { withStyles } from "material-ui/styles";
+// internal
 import StatusPanel from "containers/StatusPanel";
 import TriggerPanel from "containers/TriggerPanel";
 import PersistentTriggerPanel from "containers/PersistentTriggerPanel";
 import NotificationManager from "containers/NotificationManager";
+// import SineWave from "containers/SineWave";
 
 const styles = theme => ({
   root: {
@@ -42,6 +44,7 @@ const HUD = ({ classes }) => (
       </div>
     </div>
     <div className={classes.middle} />
+    {/*<SineWave />*/}
     <div>
       <TriggerPanel />
     </div>

@@ -1,10 +1,18 @@
 import React from "react";
 import { Base64 } from "js-base64";
 import { withRouter } from "react-router-dom";
+// mui
+import {
+  TextField,
+  Switch,
+  Grid,
+  Select,
+  Button,
+  Paper,
+  Tooltip
+} from "material-ui";
 import Typography from "material-ui/Typography";
 import { withStyles } from "material-ui/styles";
-import Button from "material-ui/Button";
-import Paper from "material-ui/Paper";
 import Input, { InputLabel, InputAdornment } from "material-ui/Input";
 import {
   FormControl,
@@ -13,27 +21,23 @@ import {
   FormGroup,
   FormHelperText
 } from "material-ui/Form";
-import TextField from "material-ui/TextField";
-import Switch from "material-ui/Switch";
-import Grid from "material-ui/Grid";
-import Select from "material-ui/Select";
 import { MenuItem } from "material-ui/Menu";
-import Tooltip from "material-ui/Tooltip";
-import store from "store";
-import connect from "hoc/connect";
-import copyToClipboard from "utils/copyToClipboard";
-import { GripStrengthString, GripStrengthEnum } from "game/enums/GripStrength";
-import TaskList from "containers/TaskList";
-import Group from "components/Group";
-import { getRandomBoolean } from "utils/math";
 import ExpansionPanel, {
   ExpansionPanelSummary,
   ExpansionPanelDetails
 } from "material-ui/ExpansionPanel";
 import ExpandMoreIcon from "material-ui-icons/ExpandMore";
-import ForkMe from "components/ForkMe";
-import BackgroundImage from "images/background.jpg";
+// internal
+import store from "store";
 import Feedback from "components/Feedback";
+import BackgroundImage from "images/background.jpg";
+import ForkMe from "components/ForkMe";
+import { getRandomBoolean } from "utils/math";
+import Group from "components/Group";
+import TaskList from "containers/TaskList";
+import { GripStrengthString, GripStrengthEnum } from "game/enums/GripStrength";
+import copyToClipboard from "utils/copyToClipboard";
+import connect from "hoc/connect";
 
 const styles = theme => ({
   control: {
@@ -70,15 +74,160 @@ const styles = theme => ({
 
 class ConfigPage extends React.Component {
   state = {
-    copyToolTipOpen: false
+    copyToolTipOpen: false,
+    errors: {}
+  };
+
+  validateConfig = () => {
+    const errors = {};
+
+    for (let name in store.config) {
+      let value = store.config[name];
+      switch (name) {
+        case "tumblrId": {
+          delete errors[name];
+          if (!value) {
+            errors[name] = "Tumblrs is a required field";
+          }
+          break;
+        }
+        case "gifs":
+        case "pictures": {
+          delete errors.imageType;
+          if (!store.config.gifs && !store.config.pictures) {
+            errors.imageType = "Must select at least one value";
+          }
+          break;
+        }
+        case "slideDuration": {
+          delete errors[name];
+          if (!value || value < 3) {
+            errors[name] = "Slide Duration is less than 3 seconds";
+          }
+          break;
+        }
+        case "minimumGameTime": {
+          delete errors[name];
+          if (!value || value < 3) {
+            errors[name] = "Minimum Game Time is less than 3 minutes";
+          }
+          break;
+        }
+        case "maximumGameTime": {
+          delete errors[name];
+          if (value <= store.config.minimumGameTime) {
+            errors[name] = "Maximum Game Time is less than Minimum Game Time";
+          }
+          if (!value || value < 5) {
+            errors[name] = "Maximum Game Time is less than 5 minutes";
+          }
+          break;
+        }
+        case "finalOrgasmAllowed":
+        case "finalOrgasmDenied":
+        case "finalOrgasmRuined": {
+          delete errors.finialOrgasm;
+          if (
+            !store.config.finalOrgasmAllowed &&
+            !store.config.finalOrgasmDenied &&
+            !store.config.finalOrgasmRuined
+          ) {
+            errors.finialOrgasm = "Must select at least one value";
+          }
+          break;
+        }
+        case "postOrgasmTortureMinimumTime": {
+          delete errors[name];
+          if (value < 1) {
+            errors[name] = "Cannot be less than 3";
+          }
+          break;
+        }
+        case "postOrgasmTortureMaximumTime": {
+          delete errors[name];
+          if (value <= store.config.postOrgasmTortureMinimumTime) {
+            errors[name] = "Must be greater than the minimum";
+          }
+          if (!value || value < 5) {
+            errors[name] = "Must be greater than 5 seconds";
+          }
+          break;
+        }
+        case "minimumEdges": {
+          delete errors[name];
+          value = parseInt(value, 10);
+          if (isNaN(value) || value < 0) {
+            errors[name] = "Cannot be less than 0";
+          }
+          break;
+        }
+        case "edgeCooldown": {
+          delete errors[name];
+          value = parseInt(value, 10);
+          if (isNaN(value) || value < 0) {
+            errors[name] = "Cannot be less than 0";
+          }
+          break;
+        }
+        case "minimumRuinedOrgasms": {
+          delete errors[name];
+          value = parseInt(value, 10);
+          if (isNaN(value) || value < 0) {
+            errors[name] = "Cannot be less than 0";
+          }
+          break;
+        }
+        case "maximumRuinedOrgasms": {
+          delete errors[name];
+          if (value < store.config.minimumRuinedOrgasms) {
+            errors[name] = "Maximum Game Time is less than Minimum Game Time";
+          }
+          break;
+        }
+        case "ruinCooldown": {
+          delete errors[name];
+          value = parseInt(value, 10);
+          if (isNaN(value) || value < 0) {
+            errors[name] = "Cannot be less than 0";
+          }
+          break;
+        }
+        case "slowestStrokeSpeed": {
+          delete errors[name];
+          if (isNaN(value) || value < 0.25) {
+            errors[name] = "Cannot be less than 0.25";
+          }
+          if (value > 6) {
+            errors[name] = "Cannot be greater than 6";
+          }
+          break;
+        }
+        case "fastestStrokeSpeed": {
+          delete errors[name];
+          if (isNaN(value) || value < store.config.slowestStrokeSpeed) {
+            errors[name] = "Cannot be less than the slowest stroke speed";
+          }
+          if (value > 6) {
+            errors[name] = "Cannot be greater than 6";
+          }
+          break;
+        }
+        default: {
+        }
+      }
+    }
+
+    return errors;
   };
 
   handleChange = name => event => {
     store.config[name] = event.target.value;
+    this.setState({ errors: this.validateConfig() });
   };
 
   handleCheckChange = name => (event, checked) => {
     store.config[name] = checked;
+    this.setState({ errors: this.validateConfig() });
   };
 
   handleTaskRandomize = event => {
@@ -114,7 +263,7 @@ class ConfigPage extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { copyToolTipOpen } = this.state;
+    const { copyToolTipOpen, errors } = this.state;
 
     return (
       <div className={classes.background}>
@@ -137,7 +286,11 @@ class ConfigPage extends React.Component {
             <Group title="Tumblr">
               <Grid container>
                 <Grid item xs={12}>
-                  <FormControl className={classes.control}>
+                  <FormControl
+                    className={classes.control}
+                    required
+                    error={!!errors.tumblrId}
+                  >
                     <InputLabel>Tumblrs</InputLabel>
                     <Input
                       id="tumblrId"
@@ -145,29 +298,41 @@ class ConfigPage extends React.Component {
                       value={store.config.tumblrId}
                       onChange={this.handleChange("tumblrId")}
                     />
-                    <FormHelperText>
-                      You can add multiple tumblrs each seperated by a comma
-                    </FormHelperText>
+                    {errors.tumblrId ? (
+                      <FormHelperText>{errors.tumblrId}</FormHelperText>
+                    ) : (
+                      <FormHelperText>
+                        You can add multiple tumblrs each seperated by a comma
+                      </FormHelperText>
+                    )}
                   </FormControl>
                 </Grid>
                 <Grid item xs={12}>
-                  <FormControl className={classes.control}>
+                  <FormControl
+                    className={classes.control}
+                    required
+                    error={!!errors.slideDuration}
+                  >
                     <InputLabel>Slide Duration</InputLabel>
                     <Input
                       id="slideDuration"
-                      required
                       value={store.config.slideDuration}
                       onChange={this.handleChange("slideDuration")}
                       type="number"
-                      inputProps={{ step: "1", min: "1" }}
+                      inputProps={{ step: "1", min: "3" }}
                       endAdornment={
                         <InputAdornment position="end">seconds</InputAdornment>
                       }
                     />
+                    <FormHelperText>{errors.slideDuration}</FormHelperText>
                   </FormControl>
                 </Grid>
                 <Grid item xs={12}>
-                  <FormControl component="fieldset">
+                  <FormControl
+                    component="fieldset"
+                    required
+                    error={!!errors.imageType}
+                  >
                     <FormLabel component="legend">Image Type</FormLabel>
                     <FormGroup>
                       <FormControlLabel
@@ -191,6 +356,7 @@ class ConfigPage extends React.Component {
                         label="Pictures"
                       />
                     </FormGroup>
+                    <FormHelperText>{errors.imageType}</FormHelperText>
                   </FormControl>
                 </Grid>
               </Grid>
@@ -198,7 +364,11 @@ class ConfigPage extends React.Component {
             <Group title="Time">
               <Grid container>
                 <Grid item xs={12} md={6}>
-                  <FormControl className={classes.control}>
+                  <FormControl
+                    className={classes.control}
+                    required
+                    error={!!errors.minimumGameTime}
+                  >
                     <InputLabel>Minimum Game Time</InputLabel>
                     <Input
                       id="minimumGameTime"
@@ -206,15 +376,20 @@ class ConfigPage extends React.Component {
                       required
                       onChange={this.handleChange("minimumGameTime")}
                       type="number"
-                      inputProps={{ step: "1", min: "1" }}
+                      inputProps={{ step: "1", min: "3" }}
                       endAdornment={
                         <InputAdornment position="end">minutes</InputAdornment>
                       }
                     />
+                    <FormHelperText>{errors.minimumGameTime}</FormHelperText>
                   </FormControl>
                 </Grid>
                 <Grid item xs={12} md={6}>
-                  <FormControl className={classes.control}>
+                  <FormControl
+                    className={classes.control}
+                    required
+                    error={!!errors.maximumGameTime}
+                  >
                     <InputLabel>Maximum Game Time</InputLabel>
                     <Input
                       id="maximumGameTime"
@@ -227,10 +402,14 @@ class ConfigPage extends React.Component {
                         <InputAdornment position="end">minutes</InputAdornment>
                       }
                     />
-                    <FormHelperText>
-                      Just an estimate, other config options may impact this
-                      setting
-                    </FormHelperText>
+                    {errors.maximumGameTime ? (
+                      <FormHelperText>{errors.maximumGameTime}</FormHelperText>
+                    ) : (
+                      <FormHelperText>
+                        Just an estimate, other config options may impact this
+                        setting
+                      </FormHelperText>
+                    )}
                   </FormControl>
                 </Grid>
               </Grid>
@@ -238,7 +417,11 @@ class ConfigPage extends React.Component {
             <Group title="Orgasm">
               <Grid container>
                 <Grid item xs={12}>
-                  <FormControl component="fieldset">
+                  <FormControl
+                    component="fieldset"
+                    required
+                    error={!!errors.finialOrgasm}
+                  >
                     <FormLabel component="legend">Final Orgasm</FormLabel>
                     <FormGroup>
                       <FormControlLabel
@@ -290,6 +473,7 @@ class ConfigPage extends React.Component {
                         label="Random (applies to selected)"
                       />
                     </FormGroup>
+                    <FormHelperText>{errors.finialOrgasm}</FormHelperText>
                   </FormControl>
                 </Grid>
                 <Grid item xs={12} md={12}>
@@ -316,7 +500,11 @@ class ConfigPage extends React.Component {
                   />
                 </Grid>
                 <Grid item xs={12} md={4}>
-                  <FormControl className={classes.control}>
+                  <FormControl
+                    className={classes.control}
+                    disabled={!store.config.postOrgasmTorture}
+                    error={!!errors.postOrgasmTortureMinimumTime}
+                  >
                     <InputLabel>Post Orgasm Torture Minimum Time</InputLabel>
                     <Input
                       id="postOrgasmTortureMinimumTime"
@@ -331,10 +519,17 @@ class ConfigPage extends React.Component {
                         <InputAdornment position="end">seconds</InputAdornment>
                       }
                     />
+                    <FormHelperText>
+                      {errors.postOrgasmTortureMinimumTime}
+                    </FormHelperText>
                   </FormControl>
                 </Grid>
                 <Grid item xs={12} md={4}>
-                  <FormControl className={classes.control}>
+                  <FormControl
+                    className={classes.control}
+                    disabled={!store.config.postOrgasmTorture}
+                    error={!!errors.postOrgasmTortureMaximumTime}
+                  >
                     <InputLabel>Post Orgasm Torture Maximum Time</InputLabel>
                     <Input
                       id="postOrgasmTortureMaximumTime"
@@ -349,22 +544,34 @@ class ConfigPage extends React.Component {
                         <InputAdornment position="end">seconds</InputAdornment>
                       }
                     />
+                    <FormHelperText>
+                      {errors.postOrgasmTortureMaximumTime}
+                    </FormHelperText>
                   </FormControl>
                 </Grid>
                 <Grid item xs />
                 <Grid item xs={12} md={4}>
-                  <TextField
-                    id="minimumEdges"
-                    label="Minimum Edges"
-                    value={store.config.minimumEdges}
-                    onChange={this.handleChange("minimumEdges")}
-                    fullWidth
-                    type="number"
-                    inputProps={{ step: "1", min: "0" }}
-                  />
+                  <FormControl
+                    className={classes.control}
+                    error={!!errors.minimumEdges}
+                  >
+                    <InputLabel>Minimum Edges</InputLabel>
+                    <Input
+                      id="minimumEdges"
+                      value={store.config.minimumEdges}
+                      onChange={this.handleChange("minimumEdges")}
+                      fullWidth
+                      type="number"
+                      inputProps={{ step: "1", min: "0" }}
+                    />
+                    <FormHelperText>{errors.minimumEdges}</FormHelperText>
+                  </FormControl>
                 </Grid>
                 <Grid item xs={12} md={4}>
-                  <FormControl className={classes.control}>
+                  <FormControl
+                    className={classes.control}
+                    error={!!errors.edgeCooldown}
+                  >
                     <InputLabel>Edge Cooldown</InputLabel>
                     <Input
                       id="edgeCooldown"
@@ -377,33 +584,53 @@ class ConfigPage extends React.Component {
                         <InputAdornment position="end">seconds</InputAdornment>
                       }
                     />
+                    <FormHelperText>{errors.edgeCooldown}</FormHelperText>
                   </FormControl>
                 </Grid>
                 <Grid item xs />
                 <Grid item xs={12} md={4}>
-                  <TextField
-                    id="minimumRuinedOrgasms"
-                    label="Minimum Ruined Orgasms"
-                    value={store.config.minimumRuinedOrgasms}
-                    onChange={this.handleChange("minimumRuinedOrgasms")}
-                    fullWidth
-                    type="number"
-                    inputProps={{ step: "1", min: "0" }}
-                  />
+                  <FormControl
+                    className={classes.control}
+                    error={!!errors.minimumRuinedOrgasms}
+                  >
+                    <InputLabel>Minimum Ruined Orgasms</InputLabel>
+                    <Input
+                      id="minimumRuinedOrgasms"
+                      value={store.config.minimumRuinedOrgasms}
+                      onChange={this.handleChange("minimumRuinedOrgasms")}
+                      fullWidth
+                      type="number"
+                      inputProps={{ step: "1", min: "0" }}
+                    />
+                    <FormHelperText>
+                      {errors.minimumRuinedOrgasms}
+                    </FormHelperText>
+                  </FormControl>
                 </Grid>
                 <Grid item xs={12} md={4}>
-                  <TextField
-                    id="maximumRuinedOrgasms"
-                    label="Maximum Ruined Orgasms"
-                    value={store.config.maximumRuinedOrgasms}
-                    onChange={this.handleChange("maximumRuinedOrgasms")}
-                    fullWidth
-                    type="number"
-                    inputProps={{ step: "1", min: "0" }}
-                  />
+                  <FormControl
+                    className={classes.control}
+                    error={!!errors.maximumRuinedOrgasms}
+                  >
+                    <InputLabel>Maximum Ruined Orgasms</InputLabel>
+                    <Input
+                      id="maximumRuinedOrgasms"
+                      value={store.config.maximumRuinedOrgasms}
+                      onChange={this.handleChange("maximumRuinedOrgasms")}
+                      fullWidth
+                      type="number"
+                      inputProps={{ step: "1", min: "0" }}
+                    />
+                    <FormHelperText>
+                      {errors.maximumRuinedOrgasms}
+                    </FormHelperText>
+                  </FormControl>
                 </Grid>
                 <Grid item xs={12} md={4}>
-                  <FormControl className={classes.control}>
+                  <FormControl
+                    className={classes.control}
+                    error={!!errors.ruinCooldown}
+                  >
                     <InputLabel>Ruin Cooldown</InputLabel>
                     <Input
                       id="ruinCooldown"
@@ -416,6 +643,7 @@ class ConfigPage extends React.Component {
                         <InputAdornment position="end">seconds</InputAdornment>
                       }
                     />
+                    <FormHelperText>{errors.ruinCooldown}</FormHelperText>
                   </FormControl>
                 </Grid>
               </Grid>
@@ -423,26 +651,44 @@ class ConfigPage extends React.Component {
             <Group title="Stroke">
               <Grid container>
                 <Grid item xs={12} md={4}>
-                  <TextField
-                    id="slowestStrokeSpeed"
-                    label="Slowest Stroke Speed"
-                    value={store.config.slowestStrokeSpeed}
-                    onChange={this.handleChange("slowestStrokeSpeed")}
-                    fullWidth
-                    type="number"
-                    inputProps={{ step: "0.25", min: "0", max: "6" }}
-                  />
+                  <FormControl
+                    className={classes.control}
+                    error={!!errors.slowestStrokeSpeed}
+                  >
+                    <InputLabel>Slowest Stroke Speed</InputLabel>
+                    <Input
+                      id="slowestStrokeSpeed"
+                      value={store.config.slowestStrokeSpeed}
+                      onChange={this.handleChange("slowestStrokeSpeed")}
+                      fullWidth
+                      type="number"
+                      inputProps={{ step: "0.25", min: "0.25", max: "6" }}
+                      endAdornment={
+                        <InputAdornment position="end">seconds</InputAdornment>
+                      }
+                    />
+                    <FormHelperText>{errors.slowestStrokeSpeed}</FormHelperText>
+                  </FormControl>
                 </Grid>
                 <Grid item xs={12} md={4}>
-                  <TextField
-                    id="fastestStrokeSpeed"
-                    label="Fastest Stroke Speed"
-                    value={store.config.fastestStrokeSpeed}
-                    onChange={this.handleChange("fastestStrokeSpeed")}
-                    fullWidth
-                    type="number"
-                    inputProps={{ step: "0.25", min: "0.5", max: "6" }}
-                  />
+                  <FormControl
+                    className={classes.control}
+                    error={!!errors.fastestStrokeSpeed}
+                  >
+                    <InputLabel>Fastest Stroke Speed</InputLabel>
+                    <Input
+                      id="fastestStrokeSpeed"
+                      value={store.config.fastestStrokeSpeed}
+                      onChange={this.handleChange("fastestStrokeSpeed")}
+                      fullWidth
+                      type="number"
+                      inputProps={{ step: "0.25", min: "0.25", max: "6" }}
+                      endAdornment={
+                        <InputAdornment position="end">seconds</InputAdornment>
+                      }
+                    />
+                    <FormHelperText>{errors.fastestStrokeSpeed}</FormHelperText>
+                  </FormControl>
                 </Grid>
                 <Grid item xs={12} md={4}>
                   <FormControl className={classes.control}>
@@ -460,28 +706,6 @@ class ConfigPage extends React.Component {
                   </FormControl>
                 </Grid>
               </Grid>
-            </Group>
-            <Group title="Misc.">
-              <FormControlLabel
-                control={
-                  <Switch
-                    checked={store.config.enableVoice}
-                    onChange={this.handleCheckChange("enableVoice")}
-                    value="enableVoice"
-                  />
-                }
-                label="Enable Voice"
-              />
-              <FormControlLabel
-                control={
-                  <Switch
-                    checked={store.config.enableMoans}
-                    onChange={this.handleCheckChange("enableMoans")}
-                    value="enableMoans"
-                  />
-                }
-                label="Enable Moans"
-              />
             </Group>
             <Group title="Tasks">
               <ExpansionPanel defaultExpanded>
@@ -577,6 +801,7 @@ class ConfigPage extends React.Component {
                 color="primary"
                 className={classes.button}
                 onClick={this.handleStart}
+                disabled={Object.keys(errors).length > 0}
               >
                 Start
               </Button>
@@ -597,6 +822,7 @@ class ConfigPage extends React.Component {
                   color="secondary"
                   className={classes.button}
                   onClick={this.handleGenerateLink}
+                  disabled={Object.keys(errors).length > 0}
                 >
                   Generate Link
                 </Button>

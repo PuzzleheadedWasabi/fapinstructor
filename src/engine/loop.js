@@ -1,6 +1,16 @@
+import visibilityChange from "utils/visibility";
 /**
  * The game loop will automatically start when this file is imported
  */
+let visible = true;
+
+visibilityChange(visibility => {
+  visible = visibility;
+  if (!visible) {
+    setTimeout(() => update(window.performance.now()), 0);
+  }
+});
+
 let subscribers = [];
 let lastRender = 0;
 
@@ -12,7 +22,8 @@ const update = timestamp => {
   });
 
   lastRender = timestamp;
-  if (!window.visible) {
+
+  if (visible) {
     requestAnimationFrame(update);
   } else {
     setTimeout(() => update(window.performance.now()), 0);

@@ -27,8 +27,19 @@ class GamePage extends React.Component {
     super(props);
 
     const config = Base64.decode(props.match.params.config);
+
+    // merge local storage config into main config
+    const enableVoice = localStorage.getItem("enableVoice")
+      ? localStorage.getItem("enableVoice") === "true"
+      : true;
+    const enableMoans = localStorage.getItem("enableMoans")
+      ? localStorage.getItem("enableMoans") === "true"
+      : true;
+
     try {
       store.config = JSON.parse(config);
+      store.config.enableVoice = enableVoice;
+      store.config.enableMoans = enableMoans;
     } catch (error) {
       throw new CustomError(
         `Unable to decode URL configuration paramaters, ${config}`,
@@ -64,16 +75,14 @@ class GamePage extends React.Component {
         {maximumOrgasms === orgasms ? (
           <EndPage />
         ) : (
-          [
-            <HUD key="hud" />,
-            activeVideo ? (
-              <VideoPlayer key="videoplayer" video={activeVideo} />
+          <React.Fragment>
+            <HUD />
+            {activeVideo ? (
+              <VideoPlayer video={activeVideo} />
             ) : (
-              activePicture && (
-                <ImagePlayer key="imageplayer" url={activePicture} />
-              )
-            )
-          ]
+              activePicture && <ImagePlayer url={activePicture} />
+            )}
+          </React.Fragment>
         )}
       </div>
     );
