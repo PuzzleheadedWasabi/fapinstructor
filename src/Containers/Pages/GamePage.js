@@ -28,23 +28,26 @@ class GamePage extends React.Component {
 
     const config = Base64.decode(props.match.params.config);
 
-    // merge local storage config into main config
-    const enableVoice = localStorage.getItem("enableVoice")
-      ? localStorage.getItem("enableVoice") === "true"
-      : true;
-    const enableMoans = localStorage.getItem("enableMoans")
-      ? localStorage.getItem("enableMoans") === "true"
-      : true;
-
     try {
       store.config = JSON.parse(config);
-      store.config.enableVoice = enableVoice;
-      store.config.enableMoans = enableMoans;
     } catch (error) {
       throw new CustomError(
         `Unable to decode URL configuration paramaters, ${config}`,
         error
       );
+    }
+
+    // merge local storage config into main config
+    store.config.enableVoice = localStorage.getItem("enableVoice")
+      ? localStorage.getItem("enableVoice") === "true"
+      : true;
+    store.config.enableMoans = localStorage.getItem("enableMoans")
+      ? localStorage.getItem("enableMoans") === "true"
+      : true;
+
+    if (!store.config.version || store.config.version < 2) {
+      debugger;
+      throw new CustomError("Sorry but version 1 links are incompatible.");
     }
   }
 

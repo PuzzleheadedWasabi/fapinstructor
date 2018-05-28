@@ -2,7 +2,7 @@ import store from "store";
 import { GripStrengthEnum } from "game/enums/GripStrength";
 
 const defaultConfig = {
-  version: 2.0,
+  version: 2,
   tumblrId: "fapstergifs, allcowgirl, mar-cuss-blowjob-gifs",
   gifs: true,
   pictures: false,

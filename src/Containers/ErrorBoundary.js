@@ -40,6 +40,17 @@ class ErrorBoundary extends React.Component {
               The error has been logged and we've dispatched the code monkeys
             </Typography>
             <img src={monkey} alt="code monkey" />
+            <div
+              style={{
+                maxWidth: "90vw",
+                wordWrap: "break-word",
+                marginTop: 50
+              }}
+            >
+              <Typography color="secondary" variant="subheading">
+                {error.message}
+              </Typography>
+            </div>
           </div>
         </div>
       );
