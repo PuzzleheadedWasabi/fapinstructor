@@ -1,6 +1,7 @@
 import createProbability from "../utils/createProbability";
 import doubleStrokes from "./speed/doubleStrokes";
 import halvedStrokes from "./speed/halvedStrokes";
+import teasingStrokes from "./speed/teasingStrokes";
 import randomStrokeSpeed from "./speed/randomStrokeSpeed";
 import randomBeat from "./speed/randomBeat";
 import redLightGreenLight from "./speed/redLightGreenLight";
@@ -43,6 +44,7 @@ const initializeActions = taskConfigs =>
     // speed
     taskConfigs.halvedStrokes && createProbability(halvedStrokes, 5),
     taskConfigs.doubleStrokes && createProbability(doubleStrokes, 15),
+    taskConfigs.teasingStrokes && createProbability(teasingStrokes, 100),
     taskConfigs.randomBeat && createProbability(randomBeat, 10),
     taskConfigs.randomStrokeSpeed && createProbability(randomStrokeSpeed, 20),
     taskConfigs.accelerationCycles && createProbability(acceleration, 10),

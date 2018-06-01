@@ -32,6 +32,7 @@ const defaultConfig = {
   tasks: {
     doubleStrokes: true,
     halvedStrokes: true,
+    teasingStrokes: true,
     accelerationCycles: true,
     randomBeat: true,
     randomStrokeSpeed: true,

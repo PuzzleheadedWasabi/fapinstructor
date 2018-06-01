@@ -727,6 +727,7 @@ class ConfigPage extends React.Component {
                         tasks={{
                           doubleStrokes: "Double Strokes",
                           halvedStrokes: "Halved Strokes",
+                          teasingStrokes: "Teasing Strokes",
                           accelerationCycles: "Acceleration Cycles",
                           randomBeat: "Random Beats",
                           randomStrokeSpeed: "Random Stroke Speed",
