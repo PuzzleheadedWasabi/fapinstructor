@@ -44,7 +44,7 @@ const initializeActions = taskConfigs =>
     // speed
     taskConfigs.halvedStrokes && createProbability(halvedStrokes, 5),
     taskConfigs.doubleStrokes && createProbability(doubleStrokes, 15),
-    taskConfigs.teasingStrokes && createProbability(teasingStrokes, 100),
+    taskConfigs.teasingStrokes && createProbability(teasingStrokes, 10),
     taskConfigs.randomBeat && createProbability(randomBeat, 10),
     taskConfigs.randomStrokeSpeed && createProbability(randomStrokeSpeed, 20),
     taskConfigs.accelerationCycles && createProbability(acceleration, 10),

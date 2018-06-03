@@ -47,7 +47,11 @@ class StatusPanel extends React.Component {
   };
 
   handleCheckChange = name => (event, checked) => {
-    localStorage.setItem(name, checked);
+    try {
+      localStorage.setItem(name, checked);
+    } catch (e) {
+      // local storage may not be supported on some devices
+    }
     store.config[name] = checked;
   };
 

@@ -37,13 +37,17 @@ class GamePage extends React.Component {
       );
     }
 
-    // merge local storage config into main config
-    store.config.enableVoice = localStorage.getItem("enableVoice")
-      ? localStorage.getItem("enableVoice") === "true"
-      : true;
-    store.config.enableMoans = localStorage.getItem("enableMoans")
-      ? localStorage.getItem("enableMoans") === "true"
-      : true;
+    try {
+      // merge local storage config into main config
+      store.config.enableVoice = localStorage.getItem("enableVoice")
+        ? localStorage.getItem("enableVoice") === "true"
+        : true;
+      store.config.enableMoans = localStorage.getItem("enableMoans")
+        ? localStorage.getItem("enableMoans") === "true"
+        : true;
+    } catch (e) {
+      // local storage may not be supported on some devices
+    }
 
     if (!store.config.version || store.config.version < 2) {
       debugger;
