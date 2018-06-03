@@ -6,6 +6,8 @@ import { withStyles } from "material-ui/styles";
 import Typography from "material-ui/Typography";
 import DownIcon from "material-ui-icons/ArrowDropDown";
 import UpIcon from "material-ui-icons/ArrowDropUp";
+import VolumeOffIcon from "material-ui-icons/VolumeOff";
+import VolumeOnIcon from "material-ui-icons/VolumeUp";
 // internal
 import connect from "hoc/connect";
 import elapsedGameTime from "game/utils/elapsedGameTime";
@@ -174,6 +176,37 @@ class StatusPanel extends React.Component {
                 }}
                 label="Moans"
               />
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  padding: 10
+                }}
+              >
+                <Button
+                  style={{ marginRight: 10 }}
+                  mini
+                  variant="fab"
+                  color="secondary"
+                  disabled={window.context.state === "running"}
+                  onClick={() => {
+                    window.context.resume();
+                  }}
+                >
+                  <VolumeOnIcon />
+                </Button>
+                <Button
+                  mini
+                  variant="fab"
+                  color="secondary"
+                  disabled={window.context.state !== "running"}
+                  onClick={() => {
+                    window.context.suspend();
+                  }}
+                >
+                  <VolumeOffIcon />
+                </Button>
+              </div>
             </div>
           </div>
         )}

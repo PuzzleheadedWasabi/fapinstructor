@@ -3,6 +3,7 @@ const AudioContext = window.AudioContext || window.webkitAudioContext;
 if (window.AudioContext) {
   context = new AudioContext();
 }
+window.context = context;
 
 const fetchAudioFile = async url => {
   let buffer;
