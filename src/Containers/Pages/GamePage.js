@@ -42,6 +42,10 @@ class GamePage extends React.Component {
       store.config.enableVoice = localStorage.getItem("enableVoice")
         ? localStorage.getItem("enableVoice") === "true"
         : true;
+    } catch (e) {
+      // local storage may not be supported on some devices
+    }
+    try {
       store.config.enableMoans = localStorage.getItem("enableMoans")
         ? localStorage.getItem("enableMoans") === "true"
         : true;
