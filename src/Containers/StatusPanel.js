@@ -176,37 +176,39 @@ class StatusPanel extends React.Component {
                 }}
                 label="Moans"
               />
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  padding: 10
-                }}
-              >
-                <Button
-                  style={{ marginRight: 10 }}
-                  mini
-                  variant="fab"
-                  color="secondary"
-                  disabled={window.context.state === "running"}
-                  onClick={() => {
-                    window.context.resume();
+              {window.context && (
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    padding: 10
                   }}
                 >
-                  <VolumeOnIcon />
-                </Button>
-                <Button
-                  mini
-                  variant="fab"
-                  color="secondary"
-                  disabled={window.context.state !== "running"}
-                  onClick={() => {
-                    window.context.suspend();
-                  }}
-                >
-                  <VolumeOffIcon />
-                </Button>
-              </div>
+                  <Button
+                    style={{ marginRight: 10 }}
+                    mini
+                    variant="fab"
+                    color="secondary"
+                    disabled={window.context.state === "running"}
+                    onClick={() => {
+                      window.context.resume();
+                    }}
+                  >
+                    <VolumeOnIcon />
+                  </Button>
+                  <Button
+                    mini
+                    variant="fab"
+                    color="secondary"
+                    disabled={window.context.state !== "running"}
+                    onClick={() => {
+                      window.context.suspend();
+                    }}
+                  >
+                    <VolumeOffIcon />
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         )}
