@@ -6,8 +6,8 @@ import { withStyles } from "material-ui/styles";
 import Typography from "material-ui/Typography";
 import DownIcon from "material-ui-icons/ArrowDropDown";
 import UpIcon from "material-ui-icons/ArrowDropUp";
-import VolumeOffIcon from "material-ui-icons/VolumeOff";
-import VolumeOnIcon from "material-ui-icons/VolumeUp";
+// import VolumeOffIcon from "material-ui-icons/VolumeOff";
+// import VolumeOnIcon from "material-ui-icons/VolumeUp";
 // internal
 import connect from "hoc/connect";
 import elapsedGameTime from "game/utils/elapsedGameTime";
@@ -176,7 +176,7 @@ class StatusPanel extends React.Component {
                 }}
                 label="Moans"
               />
-              {window.context && (
+              {/**window.context && (
                 <div
                   style={{
                     display: "flex",
@@ -208,7 +208,7 @@ class StatusPanel extends React.Component {
                     <VolumeOffIcon />
                   </Button>
                 </div>
-              )}
+              )*/}
             </div>
           </div>
         )}

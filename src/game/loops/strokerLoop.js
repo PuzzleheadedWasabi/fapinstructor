@@ -1,5 +1,5 @@
 import store from "store";
-import play from "engine/audio";
+import play, { playTick } from "engine/audio";
 import audioLibrary from "audio";
 import remoteControl from "./remoteControl";
 
@@ -13,7 +13,9 @@ const strokerLoop = progress => {
 
     if (strokeSpeed > 0) {
       if (lastStroke > 1 / strokeSpeed * 1000) {
-        play(audioLibrary.Tick);
+        if (!playTick()) {
+          // play(audioLibrary.Tick);
+        }
         store.game.strokeWave.push(lastStroke);
         store.game.strokes++;
         lastStroke = 0;

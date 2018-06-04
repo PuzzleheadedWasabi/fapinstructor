@@ -23,7 +23,9 @@ const acceleration = async () => {
     await delay(1000);
 
     if (!audioPlayed && store.game.strokeSpeed > fastestStrokeSpeed / 3) {
-      play(audioLibrary.LongMoan);
+      if (store.config.enableVoice) {
+        play(audioLibrary.LongMoan);
+      }
       audioPlayed = true;
     }
   }
