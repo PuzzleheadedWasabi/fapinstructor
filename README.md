@@ -86,6 +86,8 @@ const defaultConfig = {
 
 6. To test your new action, I like to set it's probability to 100 within the `actions/index.js` file, disable all other actions on the `ConfigPage` after launching the application.  Your action should be triggered within a few seconds.
 
+# Other Stuff
+
 ### TODO (move to issues on GitHub)
 
 misc
