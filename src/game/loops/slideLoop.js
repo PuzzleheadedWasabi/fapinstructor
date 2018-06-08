@@ -1,7 +1,7 @@
 import shuffle from "lodash.shuffle";
 import uniq from "lodash.uniq";
 import store from "store";
-import fetchManyPics from "api/fetchTumblrPics";
+import fetchManyPics from "api/fetchRedditPics";
 import remoteControl from "./remoteControl";
 
 export const slideRemoteControl = Object.create(remoteControl);
@@ -57,8 +57,14 @@ const fetchPictures = () => {
 let lastSlideChange = -1;
 const slideLoop = progress => {
   if (!slideRemoteControl.paused) {
+
+    let el = document.querySelector('video');
+    let videolength = el ? (el.duration || 5000) : 5000;
+
+    // console.log('Video length is ' + videolength);
+
     if (
-      lastSlideChange >= store.config.slideDuration * 1000 ||
+      lastSlideChange >= (videolength) * 1000 ||
       lastSlideChange === -1
     ) {
       nextSlide();

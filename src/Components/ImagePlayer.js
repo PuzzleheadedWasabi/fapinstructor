@@ -5,7 +5,7 @@ import { withStyles } from 'material-ui/styles'
 const styles = theme => ({
   player: {
     width: "100%",
-    height: "100%",
+    height: "99%",
     backgroundSize: "contain",
     backgroundPosition: "top center",
     backgroundRepeat: "no-repeat"
@@ -13,12 +13,23 @@ const styles = theme => ({
 })
 
 const ImagePlayer = ({ classes, url }) => (
-  <div
+  <video
     className={classes.player}
+
+    // <source src="https://giant.gfycat.com/GratefulForkedEuropeanfiresalamander.webm" type="video/webm">
+
+    src={url}
+
+
     style={{
-      backgroundImage: `url(${url})`
+      pointerEvents: `none`
     }}
+
+    // controls
+    autoPlay
+    name="media"
   />
+
 );
 
 ImagePlayer.propTypes = {
