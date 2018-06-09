@@ -35,7 +35,8 @@ const fetchPics = (id, imageType, offset = 0, limit) => {
   console.info('Fetchpics called for ' + id + ', after: ' + (after || 'None (First API call)'))
 
   return fetch(
-    `https://old.reddit.com/r/${encodeURIComponent(id)}/.json?after=${after}`
+    // `https://old.reddit.com/r/${encodeURIComponent(id)}/.json?after=${after}`
+    `https://old.reddit.com/r/${encodeURIComponent(id)}/top/.json?after=${after}&sort=top&t=year`
     // `https://${encodeURIComponent(id)}.tumblr.com/api/read/json?num=${limit}&type=photo&start=${offset}`
   )
     .then(response => response.json())
@@ -45,7 +46,7 @@ const fetchPics = (id, imageType, offset = 0, limit) => {
 
       // debugger;
 
-      let minScore = 1000;
+      let minScore = 100;
       let lowestScoreFound = 10000;
 
       let urls = [];
@@ -54,7 +55,7 @@ const fetchPics = (id, imageType, offset = 0, limit) => {
 
         // Just to prevent going infinite
         if(minScore <= 10){
-          alert('Giving up')
+          console.warn('Giving up')
           break;
         }
 
@@ -72,7 +73,7 @@ const fetchPics = (id, imageType, offset = 0, limit) => {
           }
 
           if(post.data.score <= minScore) {
-            // console.log('Ignoring low scoring link')
+            // console.log(`Ignoring low scoring link (Score ${post.data.score})`)
             continue;
           }
 

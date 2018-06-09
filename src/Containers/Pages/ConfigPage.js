@@ -283,6 +283,7 @@ class ConfigPage extends React.Component {
         </div>
         <div className={classes.formContainer}>
           <Paper className={classes.form}>
+
             <Group title="Tumblr">
               <Grid container>
                 <Grid item xs={12}>
@@ -361,6 +362,54 @@ class ConfigPage extends React.Component {
                 </Grid>
               </Grid>
             </Group>
+
+
+            <Group title="Reddit">
+              <Grid container>
+                <Grid item xs={12}>
+                  <FormControl
+                    className={classes.control}
+                    required
+                    error={!!errors.subreddits}
+                  >
+                    <InputLabel>Subreddits</InputLabel>
+                    <Input
+                      id="subreddits"
+                      required
+                      value={store.config.subreddits}
+                      onChange={this.handleChange("subreddits")}
+                    />
+                    {errors.subreddits ? (
+                      <FormHelperText>{errors.subreddits}</FormHelperText>
+                    ) : (
+                      <FormHelperText>
+                        You can add multiple subreddits each seperated by a comma
+                      </FormHelperText>
+                    )}
+                  </FormControl>
+
+
+                  <FormControl
+                    className={classes.control}
+                  >
+                    <InputLabel>Play State</InputLabel>
+                    <Input
+                      id="subredditState"
+                      required
+                      value={store.config.subredditState}
+                      onChange={this.handleChange("subredditState")}
+                    />
+                      <FormHelperText>
+                        To prevent looping over the same videos! After your game, press p to copy your state to the clipboard. Paste it here next game. This helps us to fetch videos you haven't seen yet.
+                      </FormHelperText>
+                  </FormControl>
+
+
+                </Grid>
+              </Grid>
+            </Group>
+
+
             <Group title="Time">
               <Grid container>
                 <Grid item xs={12} md={6}>
